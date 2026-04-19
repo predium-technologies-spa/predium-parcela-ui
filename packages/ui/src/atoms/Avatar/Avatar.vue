@@ -1,17 +1,17 @@
 <script setup lang="ts">
 /**
- * Avatar with initials. Sizes: 22, 28, 36px.
+ * Avatar with initials. Sizes: 24, 32, 40px.
  *
  * @example
  * <PAvatar initials="ER" size="md" />
- * <PAvatar initials="DO" size="lg" color="#2E3A2A" />
+ * <PAvatar initials="DO" size="lg" color="#C75B39" />
  */
 export interface AvatarProps {
   /** 1–2 character initials */
   initials: string
   /** Predefined size */
   size?: 'sm' | 'md' | 'lg'
-  /** Background color override (hex) */
+  /** Background color override */
   color?: string
 }
 
@@ -21,9 +21,9 @@ withDefaults(defineProps<AvatarProps>(), {
 })
 
 const sizeClasses = {
-  sm: 'w-[22px] h-[22px] text-[9px]',
-  md: 'w-[28px] h-[28px] text-[10px]',
-  lg: 'w-[36px] h-[36px] text-sm',
+  sm: 'w-6 h-6 text-[10px]',
+  md: 'w-8 h-8 text-xs',
+  lg: 'w-10 h-10 text-sm',
 } as const
 </script>
 

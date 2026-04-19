@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * Styled text input with optional icon and suffix.
+ * Styled text input — Tailwind Forms aesthetic.
  *
  * @example
  * <PInput v-model="name" placeholder="Property name" />
@@ -26,6 +26,8 @@ export interface InputProps {
   error?: boolean
   /** Input type */
   type?: 'text' | 'number' | 'email' | 'password'
+  /** Size variant */
+  size?: 'sm' | 'md' | 'lg'
 }
 
 withDefaults(defineProps<InputProps>(), {
@@ -35,6 +37,7 @@ withDefaults(defineProps<InputProps>(), {
   disabled: false,
   error: false,
   type: 'text',
+  size: 'md',
 })
 
 defineEmits<{
@@ -45,17 +48,22 @@ defineEmits<{
 <template>
   <div
     :class="[
-      'group flex items-center gap-2 bg-surface border rounded-lg px-2.5 h-[34px] text-md transition-all duration-150',
+      'group flex items-center bg-surface border rounded-xl shadow-sm transition-all duration-150',
+      // Size
+      size === 'sm' && 'gap-1.5 px-2.5 h-8 text-sm',
+      size === 'md' && 'gap-2 px-3 h-10 text-base',
+      size === 'lg' && 'gap-2.5 px-3.5 h-12 text-md',
+      // State
       error
-        ? 'border-danger focus-within:border-danger'
-        : 'border-line focus-within:border-ink3',
-      disabled ? 'opacity-40 cursor-not-allowed bg-chip-bg' : 'hover:border-ink4',
+        ? 'border-danger focus-within:border-danger focus-within:ring-2 focus-within:ring-danger/10'
+        : 'border-line focus-within:border-ink3 focus-within:ring-2 focus-within:ring-ink/5',
+      disabled ? 'opacity-50 cursor-not-allowed bg-chip-bg' : 'hover:border-ink4',
     ]"
   >
     <component
       v-if="icon"
       :is="icon"
-      :size="14"
+      :size="size === 'sm' ? 14 : size === 'lg' ? 18 : 16"
       :stroke-width="1.5"
       class="text-ink4 group-focus-within:text-ink3 shrink-0 transition-colors"
       aria-hidden="true"
@@ -71,7 +79,7 @@ defineEmits<{
       ]"
       @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
     />
-    <span v-if="suffix" class="text-ink4 font-mono text-base shrink-0">
+    <span v-if="suffix" class="text-ink4 font-mono text-sm shrink-0">
       {{ suffix }}
     </span>
   </div>

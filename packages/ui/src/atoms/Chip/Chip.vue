@@ -4,7 +4,6 @@
  *
  * @example
  * <PChip removable @remove="handleRemove">core</PChip>
- * <PChip>section8-eligible</PChip>
  */
 import { X } from 'lucide-vue-next'
 
@@ -28,7 +27,7 @@ defineEmits<{
 <template>
   <span
     :class="[
-      'inline-flex items-center gap-1 bg-chip-bg text-ink2 px-2 py-0.5 rounded-md text-sm',
+      'inline-flex items-center gap-1.5 bg-chip-bg text-ink2 px-2.5 py-1 rounded-lg text-sm',
       disabled && 'opacity-40 pointer-events-none',
     ]"
   >
@@ -37,10 +36,10 @@ defineEmits<{
       v-if="removable"
       type="button"
       aria-label="Remove"
-      class="text-ink4 hover:text-ink2 transition-colors"
+      class="text-ink4 hover:text-ink2 transition-colors cursor-pointer"
       @click="$emit('remove')"
     >
-      <X :size="10" :stroke-width="1.5" />
+      <X :size="12" :stroke-width="1.5" />
     </button>
   </span>
 </template>

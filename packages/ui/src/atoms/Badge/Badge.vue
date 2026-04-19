@@ -19,7 +19,7 @@ withDefaults(defineProps<BadgeProps>(), {
 <template>
   <span
     :class="[
-      'inline-flex items-center gap-1.5 px-2 py-0.5 rounded-sm text-sm font-medium whitespace-nowrap',
+      'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-sm font-medium whitespace-nowrap',
       tone === 'neutral' && 'bg-chip-bg text-ink2',
       tone === 'good' && 'bg-good-bg text-good',
       tone === 'warn' && 'bg-warn-bg text-warn',
@@ -29,7 +29,7 @@ withDefaults(defineProps<BadgeProps>(), {
   >
     <span
       :class="[
-        'w-[5px] h-[5px] rounded-full',
+        'w-1.5 h-1.5 rounded-full',
         tone === 'neutral' && 'bg-ink4',
         tone === 'good' && 'bg-good',
         tone === 'warn' && 'bg-warn',

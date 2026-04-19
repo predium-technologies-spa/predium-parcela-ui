@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * Custom styled select dropdown (no native select).
+ * Custom styled select dropdown — Tailwind Forms aesthetic.
  *
  * @example
  * <PSelect v-model="type" placeholder="Select type" :options="['Multifamily', 'Retail']" />
@@ -19,6 +19,8 @@ export interface SelectProps {
   disabled?: boolean
   /** Error state */
   error?: boolean
+  /** Size variant */
+  size?: 'sm' | 'md' | 'lg'
 }
 
 const props = withDefaults(defineProps<SelectProps>(), {
@@ -27,6 +29,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
   disabled: false,
   error: false,
+  size: 'md',
 })
 
 const emit = defineEmits<{
@@ -59,9 +62,7 @@ function handleClickOutside(e: MouseEvent) {
 }
 
 function handleKeydown(e: KeyboardEvent) {
-  if (e.key === 'Escape') {
-    isOpen.value = false
-  }
+  if (e.key === 'Escape') isOpen.value = false
 }
 
 onMounted(() => {
@@ -86,19 +87,28 @@ onBeforeUnmount(() => {
       aria-haspopup="listbox"
       :disabled="disabled"
       :class="[
-        'w-full flex items-center justify-between bg-surface border rounded-lg px-2.5 h-[34px] text-md transition-colors cursor-pointer',
-        error ? 'border-danger' : isOpen ? 'border-ink3' : 'border-line',
-        disabled ? 'opacity-40 pointer-events-none' : 'hover:border-ink4',
+        'w-full flex items-center justify-between bg-surface border rounded-xl shadow-sm cursor-pointer transition-all duration-150',
+        // Size
+        size === 'sm' && 'px-2.5 h-8 text-sm',
+        size === 'md' && 'px-3 h-10 text-base',
+        size === 'lg' && 'px-3.5 h-12 text-md',
+        // State
+        error
+          ? 'border-danger focus:ring-2 focus:ring-danger/10'
+          : isOpen
+            ? 'border-ink3 ring-2 ring-ink/5'
+            : 'border-line hover:border-ink4',
+        disabled && 'opacity-50 cursor-not-allowed bg-chip-bg',
       ]"
       @click="toggle"
     >
-      <span :class="modelValue ? 'text-ink' : 'text-ink4'">
+      <span :class="modelValue ? 'text-ink' : 'text-ink4'" class="truncate">
         {{ modelValue || placeholder }}
       </span>
       <ChevronDown
-        :size="14"
+        :size="size === 'sm' ? 14 : 16"
         :class="[
-          'text-ink4 transition-transform duration-200 shrink-0',
+          'text-ink4 transition-transform duration-200 shrink-0 ml-2',
           isOpen && 'rotate-180',
         ]"
         aria-hidden="true"
@@ -119,7 +129,7 @@ onBeforeUnmount(() => {
         ref="listRef"
         role="listbox"
         :aria-label="placeholder"
-        class="absolute z-50 mt-1 w-full bg-surface border border-line rounded-lg shadow-modal overflow-auto max-h-[240px] py-1"
+        class="absolute z-50 mt-1.5 w-full bg-surface border border-line rounded-xl shadow-lg overflow-auto max-h-[280px] py-1"
       >
         <li
           v-for="opt in options"
@@ -127,7 +137,7 @@ onBeforeUnmount(() => {
           role="option"
           :aria-selected="modelValue === opt"
           :class="[
-            'flex items-center justify-between px-2.5 py-2 text-md cursor-pointer transition-colors',
+            'flex items-center justify-between px-3 py-2 text-base cursor-pointer transition-colors',
             modelValue === opt
               ? 'bg-accent-bg text-accent font-medium'
               : 'text-ink2 hover:bg-hover',
@@ -142,7 +152,7 @@ onBeforeUnmount(() => {
             aria-hidden="true"
           />
         </li>
-        <li v-if="options.length === 0" class="px-2.5 py-2 text-md text-ink4">
+        <li v-if="options.length === 0" class="px-3 py-2 text-base text-ink4">
           No options
         </li>
       </ul>
