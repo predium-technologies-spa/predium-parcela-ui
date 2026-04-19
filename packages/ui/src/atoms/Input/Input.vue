@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * Text input with optional icon and suffix.
+ * Styled text input with optional icon and suffix.
  *
  * @example
  * <PInput v-model="name" placeholder="Property name" />
@@ -45,10 +45,11 @@ defineEmits<{
 <template>
   <div
     :class="[
-      'flex items-center gap-2 bg-surface border rounded-lg px-2.5 h-[34px] text-md transition-colors',
-      error ? 'border-danger' : 'border-line',
-      disabled ? 'opacity-40 pointer-events-none' : 'hover:border-ink4',
-      'focus-within:border-ink focus-within:ring-1 focus-within:ring-ink',
+      'group flex items-center gap-2 bg-surface border rounded-lg px-2.5 h-[34px] text-md transition-all duration-150',
+      error
+        ? 'border-danger focus-within:border-danger focus-within:ring-1 focus-within:ring-danger/30'
+        : 'border-line focus-within:border-accent focus-within:ring-1 focus-within:ring-accent/20',
+      disabled ? 'opacity-40 cursor-not-allowed bg-chip-bg' : 'hover:border-ink4',
     ]"
   >
     <component
@@ -56,7 +57,7 @@ defineEmits<{
       :is="icon"
       :size="14"
       :stroke-width="1.5"
-      class="text-ink4 shrink-0"
+      class="text-ink4 group-focus-within:text-ink3 shrink-0 transition-colors"
       aria-hidden="true"
     />
     <input

@@ -52,7 +52,7 @@ defineEmits<{
         <tr>
           <th
             v-if="selectable"
-            class="w-7 px-3.5 py-2.5 text-left text-sm font-medium text-ink3 uppercase tracking-wide border-b border-line bg-[#FCFBF8] sticky top-0 z-10"
+            class="w-7 px-3.5 py-2.5 text-left text-sm font-medium text-ink3 uppercase tracking-wide border-b border-line bg-table-header sticky top-0 z-10"
           >
             <input type="checkbox" class="accent-ink" aria-label="Select all" />
           </th>
@@ -61,7 +61,7 @@ defineEmits<{
             :key="col.key"
             :class="[
               'px-3.5 py-2.5 text-sm font-medium text-ink3 uppercase tracking-wide whitespace-nowrap',
-              'border-b border-line bg-[#FCFBF8] sticky top-0 z-10',
+              'border-b border-line bg-table-header sticky top-0 z-10',
               col.align === 'right' ? 'text-right' : 'text-left',
             ]"
             :style="col.width ? { width: col.width } : undefined"
@@ -83,8 +83,8 @@ defineEmits<{
           v-for="(row, i) in rows"
           :key="i"
           :class="[
-            selectedRows.includes(i) ? 'bg-[#FAF8F2]' : 'bg-surface',
-            'hover:bg-[#FAF8F2] transition-colors',
+            selectedRows.includes(i) ? 'bg-hover' : 'bg-surface',
+            'hover:bg-hover transition-colors',
           ]"
         >
           <td
@@ -115,7 +115,7 @@ defineEmits<{
         </tr>
       </tbody>
       <tfoot v-if="$slots.footer">
-        <tr class="bg-[#FCFBF8]">
+        <tr class="bg-table-header">
           <td
             :colspan="columns.length + (selectable ? 1 : 0)"
             class="px-3.5 py-3 text-base text-ink3 border-t border-line"

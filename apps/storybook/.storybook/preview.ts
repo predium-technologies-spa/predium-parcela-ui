@@ -13,9 +13,9 @@ const preview: Preview = {
     backgrounds: {
       default: 'parcela',
       values: [
-        { name: 'parcela', value: '#FAFAF7' },
+        { name: 'parcela', value: '#FAF9F7' },
         { name: 'surface', value: '#FFFFFF' },
-        { name: 'dark', value: '#141210' },
+        { name: 'dark', value: '#171411' },
       ],
     },
     viewport: {

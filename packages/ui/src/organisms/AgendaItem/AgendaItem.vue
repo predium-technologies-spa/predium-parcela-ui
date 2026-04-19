@@ -31,7 +31,7 @@ withDefaults(defineProps<AgendaItemProps>(), {
 </script>
 
 <template>
-  <div class="flex items-stretch gap-3.5 px-4 py-3 border-b border-line-soft hover:bg-[#FAF8F2] transition-colors">
+  <div class="flex items-stretch gap-3.5 px-4 py-3 border-b border-line-soft hover:bg-hover transition-colors">
     <!-- Time -->
     <div class="w-[52px] shrink-0">
       <div class="font-mono text-md text-ink font-medium">{{ time }}</div>

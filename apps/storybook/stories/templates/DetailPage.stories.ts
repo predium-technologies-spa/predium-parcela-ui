@@ -84,39 +84,39 @@ export const Default: Story = {
       }
     },
     template: `
-      <div style="width: 1280px; height: 820px; display: flex; font-family: var(--font-sans);">
+      <div class="w-full max-w-[1280px] min-h-screen lg:h-[820px] flex font-sans">
         <PSidebar active="property" :sections="sidebarSections" />
 
-        <div style="flex: 1; display: flex; flex-direction: column; min-width: 0;">
+        <div class="flex-1 flex flex-col min-w-0">
           <PTopNav :breadcrumb="['Portfolio', 'Properties', 'Harper Hall']" />
 
           <!-- Header section -->
           <div style="background: var(--color-surface); border-bottom: 1px solid var(--color-line); padding: 20px 24px 0;">
-            <div style="display: flex; gap: 20px; margin-bottom: 16px;">
+            <div class="flex flex-col sm:flex-row gap-4 sm:gap-5 mb-4">
               <!-- Property thumbnail placeholder -->
-              <div style="width: 80px; height: 80px; border-radius: 12px; background: var(--color-bg); border: 1px solid var(--color-line); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center flex-shrink-0" style="background: var(--color-bg); border: 1px solid var(--color-line);">
                 <div style="width: 32px; height: 32px; border-radius: 6px; background: var(--color-line);"></div>
               </div>
               <div style="flex: 1;">
-                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                <div class="flex flex-wrap items-center gap-2 mb-1">
                   <span style="font-size: 12px; font-family: var(--font-mono); color: var(--color-text-secondary);">PRP-0126</span>
                   <PBadge tone="good">Active</PBadge>
                   <PBadge tone="neutral">Mixed-use</PBadge>
                 </div>
-                <h1 style="font-size: 28px; font-weight: 600; margin: 0 0 4px 0; color: var(--color-text);">Harper Hall</h1>
+                <h1 class="text-xl sm:text-[28px] font-semibold m-0 mb-1" style="color: var(--color-text);">Harper Hall</h1>
                 <div style="font-size: 13px; color: var(--color-text-secondary); display: flex; align-items: center; gap: 4px;">
                   402 Harper St, Bronx NY 10451
                 </div>
               </div>
-              <div style="display: flex; gap: 8px; align-self: flex-start;">
-                <PButton variant="ghost" :icon="Download">Export</PButton>
+              <div class="flex gap-2 self-start">
+                <PButton variant="ghost" :icon="Download" class="hidden sm:inline-flex">Export</PButton>
                 <PButton variant="ghost" :icon="MoreVertical" />
                 <PButton variant="primary">Edit property</PButton>
               </div>
             </div>
 
             <!-- Tab bar -->
-            <div style="display: flex; gap: 0; border-bottom: none; margin: 0 -24px; padding: 0 24px;">
+            <div class="flex overflow-x-auto flex-nowrap -mx-6 px-6" style="border-bottom: none;">
               <button
                 v-for="(tab, i) in tabs"
                 :key="tab"
@@ -141,7 +141,7 @@ export const Default: Story = {
             <div style="margin-bottom: 24px;">
               <h2 style="font-size: 16px; font-weight: 600; margin: 0 0 12px 0; color: var(--color-text);">Overview</h2>
               <div style="background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 12px; padding: 20px;">
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px 32px;">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-5">
                   <div>
                     <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px;">Property ID</div>
                     <div style="font-size: 14px; font-weight: 500; font-family: var(--font-mono); color: var(--color-text);">PRP-0126</div>
@@ -181,7 +181,7 @@ export const Default: Story = {
             <!-- Financial snapshot -->
             <div style="margin-bottom: 24px;">
               <h2 style="font-size: 16px; font-weight: 600; margin: 0 0 12px 0; color: var(--color-text);">Financial snapshot</h2>
-              <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div style="background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 12px; padding: 16px;">
                   <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px;">Gross rent</div>
                   <div style="font-size: 20px; font-weight: 600; font-family: var(--font-mono); color: var(--color-text);">$68,100</div>

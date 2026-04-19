@@ -62,7 +62,7 @@ export const Default: Story = {
       return { sidebarSections, AlertTriangle, X, Trash2, showModal, sidebarExpanded }
     },
     template: `
-      <div class="relative font-sans text-ink" style="width: 1280px; height: 820px; overflow: hidden;">
+      <div class="relative font-sans text-ink w-full max-w-[1280px] min-h-screen lg:h-[820px] overflow-hidden">
         <!-- Background -->
         <div class="flex w-full h-full" :style="showModal ? 'filter: saturate(0.7)' : ''">
           <PSidebar :sections="sidebarSections" active="property" v-model:expanded="sidebarExpanded" />
@@ -74,7 +74,7 @@ export const Default: Story = {
                 <PButton variant="danger" :icon="Trash2" @click="showModal = true">Archive property</PButton>
               </div>
               <div class="bg-surface border border-line rounded-xl p-5">
-                <div class="grid grid-cols-4 gap-4">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div v-for="[k, v] in [['Units', '36'], ['Occupancy', '78%'], ['Rent roll', '$68,100'], ['NOI', '$41,210']]" :key="k">
                     <div class="text-sm text-ink3">{{ k }}</div>
                     <div class="text-xl font-mono text-ink mt-0.5">{{ v }}</div>
@@ -89,7 +89,7 @@ export const Default: Story = {
         <Transition name="modal-fade">
           <div v-if="showModal" class="absolute inset-0 z-50" style="background: rgba(23, 20, 15, 0.35); backdrop-filter: blur(1px);">
             <Transition name="modal-scale" appear>
-              <div class="absolute bg-surface rounded-2xl shadow-modal overflow-hidden" style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 480px;">
+              <div class="absolute bg-surface rounded-2xl shadow-modal overflow-hidden w-[calc(100%-32px)] sm:w-[480px]" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
                 <!-- Header -->
                 <div class="px-5 pt-5 pb-4 flex gap-3.5 border-b border-line-soft">
                   <div class="w-8 h-8 rounded-xl bg-danger-bg text-danger grid place-items-center shrink-0">

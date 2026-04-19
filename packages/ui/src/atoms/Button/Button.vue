@@ -38,7 +38,7 @@ withDefaults(defineProps<ButtonProps>(), {
         ? 'px-2.5 py-1 text-base rounded-md'
         : 'px-3 py-1.5 text-md rounded-xl',
       // Variant
-      variant === 'primary' && 'bg-ink text-white border-transparent hover:bg-ink2',
+      variant === 'primary' && 'bg-accent text-white border-transparent hover:bg-accent/90',
       variant === 'ghost' && 'bg-transparent text-ink2 border-line hover:bg-chip-bg',
       variant === 'subtle' && 'bg-chip-bg text-ink2 border-transparent hover:bg-line',
       variant === 'danger' && 'bg-transparent text-danger border-line hover:bg-danger-bg',

@@ -101,16 +101,16 @@ export const Default: Story = {
       }
     },
     template: `
-      <div style="width: 1280px; height: 820px; display: flex; font-family: var(--font-sans);">
+      <div class="w-full max-w-[1280px] min-h-screen lg:h-[820px] flex font-sans">
         <PSidebar active="property" :sections="sidebarSections" />
 
-        <div style="flex: 1; display: flex; flex-direction: column; min-width: 0;">
+        <div class="flex-1 flex flex-col min-w-0">
           <PTopNav :breadcrumb="['Portfolio', 'Properties']" />
 
           <div style="flex: 1; display: flex; overflow: hidden;">
 
             <!-- Left: table list -->
-            <div style="flex: 1; overflow: auto; padding: 20px 24px; background: var(--color-bg);">
+            <div class="hidden lg:block flex-1 overflow-auto p-5 lg:p-6" style="background: var(--color-bg);">
               <PDataTable :columns="columns" :rows="rows" selectable sortable>
                 <template #cell-property="{ row }">
                   <div>
@@ -125,7 +125,7 @@ export const Default: Story = {
             </div>
 
             <!-- Right: detail panel -->
-            <div style="width: 440px; border-left: 1px solid var(--color-line); background: var(--color-surface); display: flex; flex-direction: column; flex-shrink: 0;">
+            <div class="w-full lg:w-[440px] lg:border-l flex flex-col flex-shrink-0" style="border-color: var(--color-line); background: var(--color-surface);">
 
               <!-- Panel header -->
               <div style="padding: 16px 20px; border-bottom: 1px solid var(--color-line);">

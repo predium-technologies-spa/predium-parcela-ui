@@ -6,11 +6,10 @@
 
 /*
  * Parcela Design System — Tokens
- * All custom properties defined via @theme so Tailwind generates utilities.
- * Usage: bg-surface, text-ink, border-line, text-good, etc.
+ * Claude Code–inspired palette: terracotta accent, warm neutrals.
  *
- * Dark mode: use class strategy (.dark on <html> or parent).
- * Colors reference CSS custom properties that swap in dark mode.
+ * Dark mode: toggle with .dark class on <html> or any ancestor.
+ * All colors are CSS custom properties that swap per mode.
  */
 
 @theme {
@@ -41,92 +40,122 @@
   --spacing-right-panel: 440px;
 
   /* ── Colors (reference CSS vars that swap per mode) ── */
-  --color-bg: var(--parcela-bg);
-  --color-surface: var(--parcela-surface);
-  --color-chip-bg: var(--parcela-chip-bg);
+  --color-bg: var(--p-bg);
+  --color-surface: var(--p-surface);
+  --color-chip-bg: var(--p-chip-bg);
+  --color-hover: var(--p-hover);
+  --color-active-bg: var(--p-active-bg);
+  --color-table-header: var(--p-table-header);
 
-  --color-ink: var(--parcela-ink);
-  --color-ink2: var(--parcela-ink2);
-  --color-ink3: var(--parcela-ink3);
-  --color-ink4: var(--parcela-ink4);
+  --color-ink: var(--p-ink);
+  --color-ink2: var(--p-ink2);
+  --color-ink3: var(--p-ink3);
+  --color-ink4: var(--p-ink4);
 
-  --color-line: var(--parcela-line);
-  --color-line-soft: var(--parcela-line-soft);
+  --color-accent: var(--p-accent);
+  --color-accent-bg: var(--p-accent-bg);
 
-  --color-good: var(--parcela-good);
-  --color-warn: var(--parcela-warn);
-  --color-danger: var(--parcela-danger);
-  --color-info: var(--parcela-info);
+  --color-line: var(--p-line);
+  --color-line-soft: var(--p-line-soft);
 
-  --color-good-bg: var(--parcela-good-bg);
-  --color-warn-bg: var(--parcela-warn-bg);
-  --color-danger-bg: var(--parcela-danger-bg);
-  --color-info-bg: var(--parcela-info-bg);
+  --color-good: var(--p-good);
+  --color-warn: var(--p-warn);
+  --color-danger: var(--p-danger);
+  --color-info: var(--p-info);
+
+  --color-good-bg: var(--p-good-bg);
+  --color-warn-bg: var(--p-warn-bg);
+  --color-danger-bg: var(--p-danger-bg);
+  --color-info-bg: var(--p-info-bg);
 
   /* ── Shadows (swap per mode) ── */
-  --shadow-card: var(--parcela-shadow-card);
-  --shadow-modal: var(--parcela-shadow-modal);
-  --shadow-sticky: var(--parcela-shadow-sticky);
+  --shadow-card: var(--p-shadow-card);
+  --shadow-modal: var(--p-shadow-modal);
+  --shadow-sticky: var(--p-shadow-sticky);
 }
 
-/* ══════════════════════════════════════════
-   Light mode (default)
-   ══════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════
+   Light mode — Claude Code inspired (terracotta + warm)
+   ══════════════════════════════════════════════════════ */
 :root {
-  --parcela-bg: #FAFAF7;
-  --parcela-surface: #FFFFFF;
-  --parcela-chip-bg: #F3F1EB;
+  /* Surfaces */
+  --p-bg: #FAF9F7;
+  --p-surface: #FFFFFF;
+  --p-chip-bg: #F0EDE8;
+  --p-hover: #F5F2ED;
+  --p-active-bg: #EDE8E0;
+  --p-table-header: #FAFAF8;
 
-  --parcela-ink: #17140F;
-  --parcela-ink2: #3A3631;
-  --parcela-ink3: #6E6A63;
-  --parcela-ink4: #9C978F;
+  /* Ink */
+  --p-ink: #1A1714;
+  --p-ink2: #3D3833;
+  --p-ink3: #6B655D;
+  --p-ink4: #9A938A;
 
-  --parcela-line: #E8E5DE;
-  --parcela-line-soft: #F0EDE6;
+  /* Accent — terracotta */
+  --p-accent: #C75B39;
+  --p-accent-bg: #FBF0EB;
 
-  --parcela-good: #5A6B3E;
-  --parcela-warn: #8A6A1F;
-  --parcela-danger: #8B3A2E;
-  --parcela-info: #34495E;
+  /* Lines */
+  --p-line: #E5E1DA;
+  --p-line-soft: #EDEBE5;
 
-  --parcela-good-bg: #EEF0E5;
-  --parcela-warn-bg: #F5EDD9;
-  --parcela-danger-bg: #F5E3DE;
-  --parcela-info-bg: #E6EAEE;
+  /* Status */
+  --p-good: #4D7C3A;
+  --p-warn: #9A7B2A;
+  --p-danger: #B8453A;
+  --p-info: #3B7EC7;
 
-  --parcela-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --parcela-shadow-modal: 0 20px 60px rgba(23, 20, 15, 0.25), 0 4px 12px rgba(23, 20, 15, 0.12);
-  --parcela-shadow-sticky: 0 1px 3px rgba(23, 20, 15, 0.06);
+  --p-good-bg: #EBF0E5;
+  --p-warn-bg: #F5EDD6;
+  --p-danger-bg: #FBEAE6;
+  --p-info-bg: #E8F0FA;
+
+  /* Shadows */
+  --p-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --p-shadow-modal: 0 20px 60px rgba(26, 23, 20, 0.22), 0 4px 12px rgba(26, 23, 20, 0.10);
+  --p-shadow-sticky: 0 1px 3px rgba(26, 23, 20, 0.06);
 }
 
-/* ══════════════════════════════════════════
-   Dark mode (.dark class on ancestor or <html>)
-   ══════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════
+   Dark mode — Claude Code dark (.dark class)
+   ══════════════════════════════════════════════════════ */
 .dark {
-  --parcela-bg: #141210;
-  --parcela-surface: #1C1A17;
-  --parcela-chip-bg: #262420;
+  /* Surfaces */
+  --p-bg: #171411;
+  --p-surface: #1E1B18;
+  --p-chip-bg: #292623;
+  --p-hover: #242120;
+  --p-active-bg: #302C28;
+  --p-table-header: #1E1B18;
 
-  --parcela-ink: #F0EDE6;
-  --parcela-ink2: #C8C3BA;
-  --parcela-ink3: #8A8580;
-  --parcela-ink4: #5C5852;
+  /* Ink — warm light tones */
+  --p-ink: #F2EEE8;
+  --p-ink2: #C9C3BB;
+  --p-ink3: #8C877F;
+  --p-ink4: #5E5952;
 
-  --parcela-line: #2E2B27;
-  --parcela-line-soft: #232120;
+  /* Accent — lighter terracotta for dark bg */
+  --p-accent: #DA7756;
+  --p-accent-bg: #2C1F1A;
 
-  --parcela-good: #8FAD6A;
-  --parcela-warn: #C9A44E;
-  --parcela-danger: #C46B5C;
-  --parcela-info: #6B95BD;
+  /* Lines */
+  --p-line: #302C28;
+  --p-line-soft: #262320;
 
-  --parcela-good-bg: #1E2418;
-  --parcela-warn-bg: #262014;
-  --parcela-danger-bg: #261816;
-  --parcela-info-bg: #161D24;
+  /* Status — brighter for dark bg contrast */
+  --p-good: #7CB95E;
+  --p-warn: #D4A84D;
+  --p-danger: #E06B5C;
+  --p-info: #5CA0E0;
 
-  --parcela-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.2);
-  --parcela-shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.6), 0 4px 12px rgba(0, 0, 0, 0.4);
-  --parcela-shadow-sticky: 0 1px 3px rgba(0, 0, 0, 0.15);
+  --p-good-bg: #1C2418;
+  --p-warn-bg: #2A2214;
+  --p-danger-bg: #2C1A18;
+  --p-info-bg: #161F2C;
+
+  /* Shadows */
+  --p-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --p-shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.55), 0 4px 12px rgba(0, 0, 0, 0.35);
+  --p-shadow-sticky: 0 1px 3px rgba(0, 0, 0, 0.15);
 }

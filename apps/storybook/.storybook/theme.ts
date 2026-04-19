@@ -8,31 +8,31 @@ export default create({
   brandUrl: '/',
 
   // Colors
-  colorPrimary: '#17140F',
-  colorSecondary: '#5A6B3E',
+  colorPrimary: '#C75B39',
+  colorSecondary: '#C75B39',
 
   // UI
-  appBg: '#FAFAF7',
+  appBg: '#FAF9F7',
   appContentBg: '#FFFFFF',
-  appPreviewBg: '#FAFAF7',
-  appBorderColor: '#E8E5DE',
+  appPreviewBg: '#FAF9F7',
+  appBorderColor: '#E5E1DA',
   appBorderRadius: 6,
 
   // Text
-  textColor: '#17140F',
+  textColor: '#1A1714',
   textInverseColor: '#FFFFFF',
-  textMutedColor: '#6E6A63',
+  textMutedColor: '#6B655D',
 
   // Toolbar
-  barTextColor: '#6E6A63',
-  barSelectedColor: '#17140F',
-  barHoverColor: '#3A3631',
+  barTextColor: '#6B655D',
+  barSelectedColor: '#C75B39',
+  barHoverColor: '#3D3833',
   barBg: '#FFFFFF',
 
   // Form
   inputBg: '#FFFFFF',
-  inputBorder: '#E8E5DE',
-  inputTextColor: '#17140F',
+  inputBorder: '#E5E1DA',
+  inputTextColor: '#1A1714',
   inputBorderRadius: 5,
 
   // Font

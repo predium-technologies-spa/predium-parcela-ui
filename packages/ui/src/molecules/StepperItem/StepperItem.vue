@@ -27,7 +27,7 @@ withDefaults(defineProps<StepperItemProps>(), {
   <div
     :class="[
       'flex items-center gap-2.5 px-2.5 py-2 rounded-md mb-0.5',
-      status === 'current' && 'bg-[#EDEAE2]',
+      status === 'current' && 'bg-active-bg',
     ]"
   >
     <div

@@ -17,7 +17,7 @@ export interface AvatarProps {
 
 withDefaults(defineProps<AvatarProps>(), {
   size: 'md',
-  color: '#2E3A2A',
+  color: 'var(--color-ink)',
 })
 
 const sizeClasses = {

@@ -38,7 +38,7 @@ withDefaults(defineProps<FormSectionProps>(), {
           <span class="text-lg font-semibold text-ink tracking-tight">{{ title }}</span>
           <span
             v-if="current"
-            class="text-xs text-ink bg-[#EDEAE2] px-1.5 py-px rounded-sm font-medium uppercase tracking-wide"
+            class="text-xs text-ink bg-active-bg px-1.5 py-px rounded-sm font-medium uppercase tracking-wide"
           >
             Current
           </span>

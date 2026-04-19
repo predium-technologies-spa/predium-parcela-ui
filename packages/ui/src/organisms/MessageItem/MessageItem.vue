@@ -29,13 +29,13 @@ withDefaults(defineProps<MessageItemProps>(), {
   <div
     :class="[
       'flex gap-2.5 px-3.5 py-2.5 border-b border-line-soft',
-      unread ? 'bg-[#FAF8F2]' : 'bg-transparent',
+      unread ? 'bg-hover' : 'bg-transparent',
     ]"
   >
     <PAvatar
       :initials="from.split(/[ .]/).filter(Boolean).slice(0, 2).map(s => s[0]).join('')"
       size="md"
-      color="#F3F1EB"
+      color="var(--color-chip-bg)"
     />
     <div class="flex-1 min-w-0">
       <div class="flex justify-between">

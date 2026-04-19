@@ -118,29 +118,29 @@ export const Default: Story = {
       }
     },
     template: `
-      <div style="width: 1280px; height: 820px; display: flex; font-family: var(--font-sans);">
+      <div class="w-full max-w-[1280px] min-h-screen lg:h-[820px] flex font-sans">
         <PSidebar active="property" :sections="sidebarSections" />
 
-        <div style="flex: 1; display: flex; flex-direction: column; min-width: 0;">
+        <div class="flex-1 flex flex-col min-w-0">
           <PTopNav :breadcrumb="['Portfolio', 'Properties']" />
 
           <div style="flex: 1; overflow: auto; padding: 20px 24px; background: var(--color-bg);">
 
             <!-- Page header -->
-            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px;">
+            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-5">
               <div>
                 <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px;">Portfolio</div>
                 <h1 style="font-size: 24px; font-weight: 600; margin: 0; color: var(--color-text);">Properties</h1>
               </div>
-              <div style="display: flex; gap: 8px;">
-                <PButton variant="ghost" :icon="Upload">Import</PButton>
-                <PButton variant="ghost" :icon="Download">Export</PButton>
+              <div class="flex flex-wrap gap-2">
+                <PButton variant="ghost" :icon="Upload" class="hidden sm:inline-flex">Import</PButton>
+                <PButton variant="ghost" :icon="Download" class="hidden sm:inline-flex">Export</PButton>
                 <PButton variant="primary" :icon="Plus">New property</PButton>
               </div>
             </div>
 
             <!-- KPI bar -->
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px;">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-5">
               <PKpiCard label="Properties" value="48" delta="+2 this qtr" tone="good" />
               <PKpiCard label="Units" value="312" delta="0 change" tone="neutral" />
               <PKpiCard label="Monthly rent" value="$612,840" delta="+4.2%" tone="good" mono />
@@ -170,15 +170,15 @@ export const Default: Story = {
             </PDataTable>
 
             <!-- Pagination footer -->
-            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; font-size: 13px; color: var(--color-text-secondary);">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-3 py-3" style="font-size: 13px; color: var(--color-text-secondary);">
               <span>Showing 1\u20139 of 48 properties</span>
               <div style="display: flex; gap: 4px;">
                 <button style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--color-line); background: var(--color-primary); color: white; font-size: 13px; cursor: pointer;">1</button>
                 <button style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--color-line); background: var(--color-surface); color: var(--color-text); font-size: 13px; cursor: pointer;">2</button>
                 <button style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--color-line); background: var(--color-surface); color: var(--color-text); font-size: 13px; cursor: pointer;">3</button>
-                <button style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--color-line); background: var(--color-surface); color: var(--color-text); font-size: 13px; cursor: pointer;">4</button>
-                <button style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--color-line); background: var(--color-surface); color: var(--color-text); font-size: 13px; cursor: pointer;">5</button>
-                <button style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--color-line); background: var(--color-surface); color: var(--color-text); font-size: 13px; cursor: pointer;">6</button>
+                <button class="hidden sm:block" style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--color-line); background: var(--color-surface); color: var(--color-text); font-size: 13px; cursor: pointer;">4</button>
+                <button class="hidden sm:block" style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--color-line); background: var(--color-surface); color: var(--color-text); font-size: 13px; cursor: pointer;">5</button>
+                <button class="hidden sm:block" style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--color-line); background: var(--color-surface); color: var(--color-text); font-size: 13px; cursor: pointer;">6</button>
               </div>
             </div>
 

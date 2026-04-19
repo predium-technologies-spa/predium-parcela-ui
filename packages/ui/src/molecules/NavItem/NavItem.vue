@@ -28,7 +28,7 @@ withDefaults(defineProps<NavItemProps>(), {
     :class="[
       'flex items-center gap-2.5 px-2.5 py-[7px] rounded-md cursor-pointer transition-colors',
       active
-        ? 'bg-[#EDEAE2] text-ink font-medium'
+        ? 'bg-active-bg text-ink font-medium'
         : 'text-ink2 hover:bg-chip-bg',
     ]"
   >

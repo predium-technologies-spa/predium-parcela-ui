@@ -113,31 +113,31 @@ export const Default: Story = {
       }
     },
     template: `
-      <div style="display: flex; width: 1280px; height: 820px; overflow: hidden; background: var(--color-bg);">
+      <div class="flex w-full max-w-[1280px] min-h-screen lg:h-[820px] overflow-hidden" style="background: var(--color-bg);">
         <!-- Sidebar -->
         <PSidebar :sections="sidebarSections" active="payments" />
 
         <!-- Main area -->
-        <div style="flex: 1; display: flex; flex-direction: column; min-width: 0;">
+        <div class="flex-1 flex flex-col min-w-0">
           <PTopNav :breadcrumb="['Operations', 'Payments', 'History']" />
 
           <!-- Content -->
-          <div style="flex: 1; overflow-y: auto; padding: 24px 32px; background: var(--color-bg);">
+          <div class="flex-1 overflow-y-auto px-4 py-6 sm:px-6 md:px-8" style="background: var(--color-bg);">
             <!-- Header -->
-            <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-start;">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 mb-5">
               <div>
                 <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-secondary); margin-bottom: 4px;">Operations</div>
                 <div style="font-size: 22px; font-weight: 600; color: var(--color-text); margin-bottom: 4px;">Payment history</div>
                 <div style="font-size: 13px; color: var(--color-text-secondary);">All ledger entries across your portfolio &middot; last 30 days</div>
               </div>
-              <div style="display: flex; gap: 8px;">
-                <PButton variant="ghost" size="sm" :icon="Download">Export</PButton>
+              <div class="flex gap-2">
+                <PButton variant="ghost" size="sm" :icon="Download" class="hidden sm:inline-flex">Export</PButton>
                 <PButton variant="primary" size="sm">New payment</PButton>
               </div>
             </div>
 
             <!-- KPI row -->
-            <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 20px;">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 mb-5">
               <PKpiCard label="Collected" value="$41,090" tone="good" mono>
                 <template #sparkline>
                   <PSparkline :points="[3,4,3,5,4,6,5]" variant="line" tone="good" :height="28" />
@@ -190,7 +190,7 @@ export const Default: Story = {
             </div>
 
             <!-- Footer totals & pagination -->
-            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-top: 1px solid var(--color-border); margin-top: 0;">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-3 py-3 border-t mt-0" style="border-color: var(--color-border);">
               <div style="font-size: 13px; color: var(--color-text-secondary);">
                 Showing 1&ndash;14 of 214 payments
               </div>

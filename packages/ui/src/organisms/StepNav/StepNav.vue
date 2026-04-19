@@ -29,7 +29,7 @@ withDefaults(defineProps<StepNavProps>(), {
 </script>
 
 <template>
-  <div class="hidden md:flex md:flex-col w-[220px] border-r border-line p-4 shrink-0 bg-[#FCFBF8]">
+  <div class="hidden md:flex md:flex-col w-[220px] border-r border-line p-4 shrink-0 bg-table-header">
     <div class="text-xs text-ink3 uppercase tracking-widest font-medium mb-2.5">Sections</div>
 
     <PStepperItem

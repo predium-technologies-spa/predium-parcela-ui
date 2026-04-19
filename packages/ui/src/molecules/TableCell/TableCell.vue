@@ -38,7 +38,7 @@ withDefaults(defineProps<TableCellProps>(), {
   >
     <!-- Avatar variant -->
     <div v-if="variant === 'avatar'" class="flex items-center gap-2.5">
-      <PAvatar v-if="initials" :initials="initials" size="md" color="#F3F1EB" />
+      <PAvatar v-if="initials" :initials="initials" size="md" color="var(--color-chip-bg)" />
       <div>
         <div class="text-md font-medium text-ink">{{ title }}</div>
         <div v-if="subtitle" class="text-sm text-ink3">{{ subtitle }}</div>

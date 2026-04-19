@@ -89,18 +89,18 @@ export const Default: Story = {
       }
     },
     template: `
-      <div style="display: flex; width: 1280px; height: 820px; overflow: hidden; background: var(--color-bg);">
+      <div class="flex w-full max-w-[1280px] min-h-screen lg:h-[820px] overflow-hidden" style="background: var(--color-bg);">
         <!-- Sidebar -->
         <PSidebar :sections="sidebarSections" active="property" />
 
         <!-- Main area -->
-        <div style="flex: 1; display: flex; flex-direction: column; min-width: 0;">
+        <div class="flex-1 flex flex-col min-w-0">
           <PTopNav :breadcrumb="['Portfolio', 'Properties', 'New property']" />
 
           <!-- Content split -->
           <div style="flex: 1; display: flex; overflow: hidden;">
             <!-- Left: dimmed property list -->
-            <div style="flex: 1; opacity: 0.55; overflow-y: auto; padding: 0;">
+            <div class="hidden lg:block flex-1 opacity-55 overflow-y-auto p-0">
               <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
                 <thead>
                   <tr style="border-bottom: 1px solid var(--color-border); text-align: left;">
@@ -148,7 +148,7 @@ export const Default: Story = {
             </div>
 
             <!-- Right: Drawer -->
-            <div style="width: 460px; border-left: 1px solid var(--color-border); display: flex; flex-direction: column; background: var(--color-bg-surface);">
+            <div class="w-full lg:w-[460px] lg:border-l flex flex-col" style="border-color: var(--color-border); background: var(--color-bg-surface);">
               <!-- Drawer header -->
               <div style="padding: 20px 24px 0; border-bottom: 1px solid var(--color-border);">
                 <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-secondary); margin-bottom: 4px;">New record</div>
@@ -156,22 +156,22 @@ export const Default: Story = {
                 <div style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 16px;">Draft will autosave &middot; 3 of 4 sections complete</div>
 
                 <!-- Stepper bar -->
-                <div style="display: flex; gap: 8px; padding-bottom: 16px;">
-                  <div style="flex: 1; text-align: center;">
+                <div class="flex gap-2 pb-4">
+                  <div class="flex-1 text-center">
                     <div style="height: 3px; background: var(--color-good); border-radius: 2px; margin-bottom: 6px;"></div>
-                    <span style="font-size: 11px; color: var(--color-good);">Identity &#10003;</span>
+                    <span class="hidden sm:inline text-[11px]" style="color: var(--color-good);">Identity &#10003;</span>
                   </div>
-                  <div style="flex: 1; text-align: center;">
+                  <div class="flex-1 text-center">
                     <div style="height: 3px; background: var(--color-good); border-radius: 2px; margin-bottom: 6px;"></div>
-                    <span style="font-size: 11px; color: var(--color-good);">Address &#10003;</span>
+                    <span class="hidden sm:inline text-[11px]" style="color: var(--color-good);">Address &#10003;</span>
                   </div>
-                  <div style="flex: 1; text-align: center;">
+                  <div class="flex-1 text-center">
                     <div style="height: 3px; background: var(--color-primary); border-radius: 2px; margin-bottom: 6px;"></div>
-                    <span style="font-size: 11px; font-weight: 600; color: var(--color-primary);">Financials</span>
+                    <span class="hidden sm:inline text-[11px] font-semibold" style="color: var(--color-primary);">Financials</span>
                   </div>
-                  <div style="flex: 1; text-align: center;">
+                  <div class="flex-1 text-center">
                     <div style="height: 3px; background: var(--color-border); border-radius: 2px; margin-bottom: 6px;"></div>
-                    <span style="font-size: 11px; color: var(--color-text-secondary);">Team</span>
+                    <span class="hidden sm:inline text-[11px]" style="color: var(--color-text-secondary);">Team</span>
                   </div>
                 </div>
               </div>
@@ -201,7 +201,7 @@ export const Default: Story = {
                     <PInput modelValue="38" mono suffix="%" />
                   </PFormField>
 
-                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <PFormField label="Cap rate">
                       <PInput modelValue="5.4" mono suffix="%" />
                     </PFormField>
@@ -239,11 +239,11 @@ export const Default: Story = {
               </div>
 
               <!-- Footer -->
-              <div style="padding: 12px 24px; border-top: 1px solid var(--color-border); display: flex; align-items: center; gap: 8px;">
+              <div class="flex flex-wrap items-center gap-2 p-3 sm:px-6 border-t" style="border-color: var(--color-border);">
                 <PButton variant="ghost">Back</PButton>
-                <div style="flex: 1; text-align: center; font-size: 12px; color: var(--color-text-secondary);">Saved 14s ago</div>
-                <PButton variant="ghost">Save draft</PButton>
-                <PButton variant="primary">Continue &rarr;</PButton>
+                <div class="hidden sm:block flex-1 text-center text-xs" style="color: var(--color-text-secondary);">Saved 14s ago</div>
+                <PButton variant="ghost" class="hidden sm:inline-flex">Save draft</PButton>
+                <PButton variant="primary" class="ml-auto sm:ml-0">Continue &rarr;</PButton>
               </div>
             </div>
           </div>

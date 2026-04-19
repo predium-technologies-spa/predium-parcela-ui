@@ -107,30 +107,33 @@ export const Default: Story = {
       }
     },
     template: `
-      <div style="width: 1280px; height: 820px; display: flex; font-family: var(--font-sans);">
+      <div class="w-full max-w-[1280px] min-h-screen lg:h-[820px] flex font-sans">
         <PSidebar active="dashboard" :sections="sidebarSections" />
 
-        <div style="flex: 1; display: flex; flex-direction: column; min-width: 0;">
+        <div class="flex-1 flex flex-col min-w-0">
           <PTopNav :breadcrumb="['Workspace', 'Dashboard']" />
 
           <div style="flex: 1; overflow: auto; padding: 20px 24px; background: var(--color-bg);">
 
             <!-- Greeting header -->
-            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px;">
+            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-5">
               <div>
                 <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px;">Sunday \u00b7 April 19, 2026</div>
                 <h1 style="font-size: 24px; font-weight: 600; margin: 0 0 4px 0; color: var(--color-text);">Good morning, Elena.</h1>
                 <div style="font-size: 14px; color: var(--color-text-secondary);">You have 6 events today.</div>
               </div>
-              <div style="display: flex; gap: 8px;">
+              <div class="hidden sm:flex gap-2">
                 <PButton variant="ghost" :icon="Calendar">Today</PButton>
                 <PButton variant="ghost">Route</PButton>
                 <PButton variant="primary" :icon="Plus">New activity</PButton>
               </div>
+              <div class="flex sm:hidden">
+                <PButton variant="primary" :icon="Plus" size="sm">New activity</PButton>
+              </div>
             </div>
 
             <!-- KPI strip -->
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px;">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-5">
               <PKpiCard label="Showings today" value="4" tone="neutral" />
               <PKpiCard label="Active leads" value="23" delta="+3 this week" tone="good" />
               <PKpiCard label="Rent collected" value="$118,240" tone="good" mono />
@@ -138,7 +141,7 @@ export const Default: Story = {
             </div>
 
             <!-- Main grid -->
-            <div style="display: grid; grid-template-columns: 1.6fr 1fr; gap: 16px; margin-bottom: 20px;">
+            <div class="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-4 mb-5">
 
               <!-- Today's schedule -->
               <div style="background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 12px; overflow: hidden;">
@@ -194,7 +197,7 @@ export const Default: Story = {
             </div>
 
             <!-- Bottom grid -->
-            <div style="display: grid; grid-template-columns: 1.2fr 1fr 0.8fr; gap: 16px;">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_0.8fr] gap-4">
 
               <!-- Lead pipeline -->
               <div style="background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 12px; overflow: hidden;">

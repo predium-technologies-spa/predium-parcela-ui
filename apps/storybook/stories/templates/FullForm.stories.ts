@@ -94,12 +94,12 @@ export const Default: Story = {
       }
     },
     template: `
-      <div style="display: flex; width: 1280px; height: 820px; overflow: hidden; background: var(--color-bg);">
+      <div class="flex w-full max-w-[1280px] min-h-screen lg:h-[820px] overflow-hidden" style="background: var(--color-bg);">
         <!-- Sidebar -->
         <PSidebar :sections="sidebarSections" active="property" />
 
         <!-- Main area -->
-        <div style="flex: 1; display: flex; flex-direction: column; min-width: 0;">
+        <div class="flex-1 flex flex-col min-w-0">
           <PTopNav :breadcrumb="['Portfolio', 'Properties', 'New property']" />
 
           <!-- Content row -->
@@ -108,7 +108,7 @@ export const Default: Story = {
             <PStepNav :steps="stepNavSteps" :current="3" :completed="[0, 1, 2]" />
 
             <!-- Form body -->
-            <div style="flex: 1; overflow-y: auto; background: var(--color-bg); padding: 24px 32px 120px;">
+            <div class="flex-1 overflow-y-auto px-4 py-6 sm:px-6 md:px-8 pb-[120px]" style="background: var(--color-bg);">
               <!-- Page header -->
               <div style="margin-bottom: 24px;">
                 <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-secondary); margin-bottom: 4px;">New record</div>
@@ -277,13 +277,13 @@ export const Default: Story = {
           </div>
 
           <!-- Sticky footer -->
-          <div style="height: 56px; border-top: 1px solid var(--color-border); display: flex; align-items: center; padding: 0 24px; gap: 12px; background: var(--color-bg-surface); flex-shrink: 0;">
+          <div class="flex flex-wrap items-center gap-3 px-4 py-3 sm:px-6 border-t flex-shrink-0" style="border-color: var(--color-border); background: var(--color-bg-surface);">
             <PButton variant="ghost">Previous</PButton>
-            <span style="font-size: 13px; color: var(--color-text-secondary);">04 of 06 &middot; Financials</span>
-            <div style="flex: 1;"></div>
-            <span style="font-size: 12px; color: var(--color-text-secondary);">Autosaved 12s ago</span>
-            <PButton variant="ghost">Save draft</PButton>
-            <PButton variant="ghost">Preview</PButton>
+            <span class="hidden sm:inline text-[13px]" style="color: var(--color-text-secondary);">04 of 06 &middot; Financials</span>
+            <div class="flex-1"></div>
+            <span class="hidden md:inline text-xs" style="color: var(--color-text-secondary);">Autosaved 12s ago</span>
+            <PButton variant="ghost" class="hidden md:inline-flex">Save draft</PButton>
+            <PButton variant="ghost" class="hidden sm:inline-flex">Preview</PButton>
             <PButton variant="primary">Continue to Team</PButton>
           </div>
         </div>
