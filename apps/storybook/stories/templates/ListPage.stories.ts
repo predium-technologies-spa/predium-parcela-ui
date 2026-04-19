@@ -1,0 +1,190 @@
+import type { Meta, StoryObj } from '@storybook/vue3'
+import {
+  PSidebar,
+  PTopNav,
+  PButton,
+  PKpiCard,
+  PToolbar,
+  PDataTable,
+  PBadge,
+} from '@parcela/ui'
+import {
+  LayoutDashboard,
+  BarChart3,
+  Building,
+  Grid3X3,
+  Users,
+  FileText,
+  CreditCard,
+  Wrench,
+  Search,
+  Settings,
+  Plus,
+  Download,
+  Upload,
+  Filter,
+  ArrowUpDown,
+  MoreVertical,
+} from 'lucide-vue-next'
+
+const sidebarSections = [
+  {
+    label: 'Workspace',
+    items: [
+      { key: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+      { key: 'reports', label: 'Reports', icon: BarChart3 },
+    ],
+  },
+  {
+    label: 'Portfolio',
+    items: [
+      { key: 'property', label: 'Properties', icon: Building, count: 48 },
+      { key: 'units', label: 'Units', icon: Grid3X3, count: 312 },
+      { key: 'tenants', label: 'Tenants', icon: Users, count: 287 },
+      { key: 'leases', label: 'Leases', icon: FileText, count: 287 },
+    ],
+  },
+  {
+    label: 'Operations',
+    items: [
+      { key: 'payments', label: 'Payments', icon: CreditCard },
+      { key: 'work-orders', label: 'Work orders', icon: Wrench, count: 14 },
+      { key: 'inspections', label: 'Inspections', icon: Search },
+    ],
+  },
+  {
+    label: 'System',
+    items: [
+      { key: 'settings', label: 'Settings', icon: Settings },
+    ],
+  },
+]
+
+const columns = [
+  { key: 'property', label: 'Property' },
+  { key: 'id', label: 'ID', mono: true },
+  { key: 'type', label: 'Type' },
+  { key: 'units', label: 'Units', align: 'right' as const, mono: true },
+  { key: 'occupancy', label: 'Occupancy', align: 'right' as const },
+  { key: 'rentRoll', label: 'Rent roll', align: 'right' as const, mono: true },
+  { key: 'manager', label: 'Manager' },
+  { key: 'status', label: 'Status' },
+]
+
+const rows = [
+  { property: 'Ashford Row', address: '214 Ashford St, Brooklyn NY', id: 'PRP-0128', type: 'Multifamily', units: 24, occupancy: '96%', rentRoll: '$52,400', manager: 'L. Moreno', status: 'Active', statusTone: 'good' },
+  { property: 'Linden Court', address: '88 Linden Blvd, Queens NY', id: 'PRP-0127', type: 'Multifamily', units: 18, occupancy: '89%', rentRoll: '$31,200', manager: 'L. Moreno', status: 'Active', statusTone: 'good' },
+  { property: 'Harper Hall', address: '402 Harper St, Bronx NY', id: 'PRP-0126', type: 'Mixed-use', units: 36, occupancy: '78%', rentRoll: '$68,100', manager: 'D. Okafor', status: 'Active', statusTone: 'good' },
+  { property: 'Vine & Third', address: '1290 3rd Ave, Manhattan NY', id: 'PRP-0125', type: 'Retail', units: 6, occupancy: '100%', rentRoll: '$44,800', manager: 'D. Okafor', status: 'Active', statusTone: 'good' },
+  { property: 'North Ridge', address: '55 Ridge Rd, Jersey City NJ', id: 'PRP-0124', type: 'Multifamily', units: 42, occupancy: '93%', rentRoll: '$87,300', manager: 'A. Petrov', status: 'Active', statusTone: 'good' },
+  { property: 'Briarwood 7', address: '7 Briarwood Ln, Yonkers NY', id: 'PRP-0123', type: 'Multifamily', units: 12, occupancy: '100%', rentRoll: '$21,400', manager: 'A. Petrov', status: 'Active', statusTone: 'good' },
+  { property: 'Cedar Lofts', address: '330 Cedar St, Hoboken NJ', id: 'PRP-0122', type: 'Multifamily', units: 28, occupancy: '82%', rentRoll: '$61,800', manager: 'L. Moreno', status: 'Review', statusTone: 'warn' },
+  { property: 'Market Square', address: '12 Market Sq, Newark NJ', id: 'PRP-0121', type: 'Mixed-use', units: 19, occupancy: '68%', rentRoll: '$33,500', manager: 'D. Okafor', status: 'Review', statusTone: 'warn' },
+  { property: 'Oakline', address: '901 Oakline Dr, Flushing NY', id: 'PRP-0120', type: 'Multifamily', units: 15, occupancy: '0%', rentRoll: '$0', manager: '\u2014', status: 'Onboarding', statusTone: 'info' },
+]
+
+const meta: Meta = {
+  title: 'Templates/ListPage',
+  parameters: {
+    layout: 'fullscreen',
+  },
+}
+
+export default meta
+type Story = StoryObj
+
+export const Default: Story = {
+  render: () => ({
+    components: {
+      PSidebar,
+      PTopNav,
+      PButton,
+      PKpiCard,
+      PToolbar,
+      PDataTable,
+      PBadge,
+    },
+    setup() {
+      return {
+        sidebarSections,
+        columns,
+        rows,
+        Plus,
+        Download,
+        Upload,
+        Filter,
+        ArrowUpDown,
+        MoreVertical,
+      }
+    },
+    template: `
+      <div style="width: 1280px; height: 820px; display: flex; font-family: var(--font-sans);">
+        <PSidebar active="property" :sections="sidebarSections" />
+
+        <div style="flex: 1; display: flex; flex-direction: column; min-width: 0;">
+          <PTopNav :breadcrumb="['Portfolio', 'Properties']" />
+
+          <div style="flex: 1; overflow: auto; padding: 20px 24px; background: var(--color-bg);">
+
+            <!-- Page header -->
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px;">
+              <div>
+                <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px;">Portfolio</div>
+                <h1 style="font-size: 24px; font-weight: 600; margin: 0; color: var(--color-text);">Properties</h1>
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <PButton variant="ghost" :icon="Upload">Import</PButton>
+                <PButton variant="ghost" :icon="Download">Export</PButton>
+                <PButton variant="primary" :icon="Plus">New property</PButton>
+              </div>
+            </div>
+
+            <!-- KPI bar -->
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px;">
+              <PKpiCard label="Properties" value="48" delta="+2 this qtr" tone="good" />
+              <PKpiCard label="Units" value="312" delta="0 change" tone="neutral" />
+              <PKpiCard label="Monthly rent" value="$612,840" delta="+4.2%" tone="good" mono />
+              <PKpiCard label="Delinquencies" value="7" delta="3 tenants" tone="warn" mono />
+            </div>
+
+            <!-- Toolbar -->
+            <PToolbar :tabs="['All', 'Active', 'Review', 'Onboarding', 'Archived']" activeTab="All">
+              <template #actions>
+                <PButton variant="ghost" size="sm" :icon="Filter">Filter</PButton>
+                <PButton variant="ghost" size="sm" :icon="ArrowUpDown">Sort</PButton>
+                <PButton variant="ghost" size="sm" :icon="MoreVertical" />
+              </template>
+            </PToolbar>
+
+            <!-- Data table -->
+            <PDataTable :columns="columns" :rows="rows" selectable sortable>
+              <template #cell-property="{ row }">
+                <div>
+                  <div style="font-weight: 500;">{{ row.property }}</div>
+                  <div style="font-size: 12px; color: var(--color-text-secondary);">{{ row.address }}</div>
+                </div>
+              </template>
+              <template #cell-status="{ row }">
+                <PBadge :tone="row.statusTone">{{ row.status }}</PBadge>
+              </template>
+            </PDataTable>
+
+            <!-- Pagination footer -->
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; font-size: 13px; color: var(--color-text-secondary);">
+              <span>Showing 1\u20139 of 48 properties</span>
+              <div style="display: flex; gap: 4px;">
+                <button style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--color-line); background: var(--color-primary); color: white; font-size: 13px; cursor: pointer;">1</button>
+                <button style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--color-line); background: var(--color-surface); color: var(--color-text); font-size: 13px; cursor: pointer;">2</button>
+                <button style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--color-line); background: var(--color-surface); color: var(--color-text); font-size: 13px; cursor: pointer;">3</button>
+                <button style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--color-line); background: var(--color-surface); color: var(--color-text); font-size: 13px; cursor: pointer;">4</button>
+                <button style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--color-line); background: var(--color-surface); color: var(--color-text); font-size: 13px; cursor: pointer;">5</button>
+                <button style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--color-line); background: var(--color-surface); color: var(--color-text); font-size: 13px; cursor: pointer;">6</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    `,
+  }),
+}
