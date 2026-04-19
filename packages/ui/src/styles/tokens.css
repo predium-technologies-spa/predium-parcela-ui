@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+/*
+ * Parcela Design System — Tokens
+ * All custom properties defined via @theme so Tailwind generates utilities.
+ * Usage: bg-surface, text-ink, border-line, text-good, etc.
+ */
+
+@theme {
+  /* ── Surfaces ── */
+  --color-bg: #FAFAF7;
+  --color-surface: #FFFFFF;
+  --color-chip-bg: #F3F1EB;
+
+  /* ── Ink (foreground) ── */
+  --color-ink: #17140F;
+  --color-ink2: #3A3631;
+  --color-ink3: #6E6A63;
+  --color-ink4: #9C978F;
+
+  /* ── Lines ── */
+  --color-line: #E8E5DE;
+  --color-line-soft: #F0EDE6;
+
+  /* ── Status foregrounds ── */
+  --color-good: #5A6B3E;
+  --color-warn: #8A6A1F;
+  --color-danger: #8B3A2E;
+  --color-info: #34495E;
+
+  /* ── Status backgrounds ── */
+  --color-good-bg: #EEF0E5;
+  --color-warn-bg: #F5EDD9;
+  --color-danger-bg: #F5E3DE;
+  --color-info-bg: #E6EAEE;
+
+  /* ── Typography ── */
+  --font-sans: "Inter", -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* ── Font sizes ── */
+  --text-xs: 0.625rem;
+  --text-sm: 0.6875rem;
+  --text-base: 0.75rem;
+  --text-md: 0.8125rem;
+  --text-lg: 0.9375rem;
+  --text-xl: 1.125rem;
+  --text-2xl: 1.375rem;
+  --text-3xl: 1.5rem;
+
+  /* ── Border radii ── */
+  --radius-sm: 3px;
+  --radius-md: 4px;
+  --radius-lg: 5px;
+  --radius-xl: 6px;
+  --radius-2xl: 8px;
+
+  /* ── Shadows ── */
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-modal: 0 20px 60px rgba(23, 20, 15, 0.25), 0 4px 12px rgba(23, 20, 15, 0.12);
+  --shadow-sticky: 0 1px 3px rgba(23, 20, 15, 0.06);
+
+  /* ── Layout ── */
+  --spacing-sidebar: 240px;
+  --spacing-topnav: 56px;
+  --spacing-right-panel: 440px;
+}

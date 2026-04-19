@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Parcela — Property Management System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  html, body { margin: 0; padding: 0; font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0eee9; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  table { border-spacing: 0; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .artboard-root * { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<template id="__bundler_thumbnail" data-bg-color="#f0eee9">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect x="80" y="80" width="1040" height="640" rx="8" fill="#ffffff" stroke="#e8e5de" stroke-width="2"/>
+    <rect x="80" y="80" width="220" height="640" fill="#fafaf7" stroke="#e8e5de" stroke-width="2"/>
+    <rect x="110" y="120" width="28" height="28" rx="4" fill="#17140f"/>
+    <rect x="150" y="128" width="90" height="6" rx="2" fill="#17140f"/>
+    <rect x="150" y="140" width="60" height="4" rx="2" fill="#9c978f"/>
+    <rect x="110" y="190" width="160" height="8" rx="2" fill="#3a3631"/>
+    <rect x="110" y="210" width="120" height="6" rx="2" fill="#6e6a63"/>
+    <rect x="110" y="230" width="140" height="6" rx="2" fill="#6e6a63"/>
+    <rect x="110" y="250" width="100" height="6" rx="2" fill="#6e6a63"/>
+    <rect x="320" y="120" width="400" height="40" rx="6" fill="#fafaf7" stroke="#e8e5de"/>
+    <rect x="320" y="200" width="260" height="18" rx="3" fill="#17140f"/>
+    <rect x="320" y="260" width="760" height="80" rx="6" fill="#ffffff" stroke="#e8e5de"/>
+    <rect x="320" y="360" width="760" height="300" rx="6" fill="#ffffff" stroke="#e8e5de"/>
+    <rect x="320" y="380" width="760" height="1" fill="#e8e5de"/>
+    <rect x="320" y="420" width="760" height="1" fill="#f0ede6"/>
+    <rect x="320" y="460" width="760" height="1" fill="#f0ede6"/>
+    <rect x="320" y="500" width="760" height="1" fill="#f0ede6"/>
+    <rect x="320" y="540" width="760" height="1" fill="#f0ede6"/>
+    <rect x="320" y="580" width="760" height="1" fill="#f0ede6"/>
+    <circle cx="1050" cy="440" r="4" fill="#5a6b3e"/>
+    <circle cx="1050" cy="480" r="4" fill="#5a6b3e"/>
+    <circle cx="1050" cy="520" r="4" fill="#8a6a1f"/>
+  </svg>
+</template>
+
+<div id="root"></div>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="views.jsx"></script>
+<script type="text/babel" src="dashboard.jsx"></script>
+<script type="text/babel" src="extra-views.jsx"></script>
+
+<script type="text/babel">
+const { DesignCanvas, DCSection, DCArtboard, DCPostIt } = window;
+const { ViewList, ViewDetail, ViewDetailSidebar, ViewForm, ViewModal, ViewDashboard, ViewFullForm, ViewPaymentHistory } = window;
+
+const W = 1280, H = 820;
+
+function App() {
+  return (
+    <DesignCanvas>
+      <div style={{ padding: '0 60px 40px' }}>
+        <div style={{ fontSize: 12, letterSpacing: 3, textTransform: 'uppercase', color: 'rgba(60,50,40,0.5)', fontWeight: 500 }}>Design exploration · v2</div>
+        <div style={{ fontSize: 32, fontWeight: 600, color: 'rgba(30,25,20,0.9)', letterSpacing: -0.8, marginTop: 6 }}>Parcela — Property Management</div>
+        <div style={{ fontSize: 15, color: 'rgba(60,50,40,0.65)', maxWidth: 720, marginTop: 8, lineHeight: 1.5 }}>
+          Six views at 1280×820, each as an isolated artboard. Agent dashboard, list, detail page, inline detail, create form, modal.
+          Aesthetic: warm off-white surfaces, graphite ink, olive/wheat/rust status accents, Inter + IBM Plex Mono for data density.
+        </div>
+      </div>
+
+      <DCSection title="Agent dashboard" subtitle="Everything an agent needs for their day — agenda, leads, tasks, messages, work orders">
+        <DCArtboard label="00 · Dashboard — agent's day at a glance" width={W} height={H}>
+          <div className="artboard-root" style={{ width: '100%', height: '100%' }}><ViewDashboard /></div>
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection title="Primary views" subtitle="List → full detail → inline detail → create form → modal">
+        <DCArtboard label="01 · List rows — properties index with KPIs, filters, pagination" width={W} height={H}>
+          <div className="artboard-root" style={{ width: '100%', height: '100%' }}><ViewList /></div>
+        </DCArtboard>
+
+        <DCArtboard label="02 · Detail — full page with tabs and heatmap" width={W} height={H}>
+          <div className="artboard-root" style={{ width: '100%', height: '100%' }}><ViewDetail /></div>
+        </DCArtboard>
+
+        <DCArtboard label="03 · Detail in sidebar — list stays in context" width={W} height={H}>
+          <div className="artboard-root" style={{ width: '100%', height: '100%' }}><ViewDetailSidebar /></div>
+        </DCArtboard>
+
+        <DCArtboard label="04 · Create form — right-side drawer, stepped" width={W} height={H}>
+          <div className="artboard-root" style={{ width: '100%', height: '100%' }}><ViewForm /></div>
+        </DCArtboard>
+
+        <DCArtboard label="05 · Modal — destructive confirmation with impact summary" width={W} height={H}>
+          <div className="artboard-root" style={{ width: '100%', height: '100%' }}><ViewModal /></div>
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection title="Full-page flows" subtitle="Complete create-property form · Payment history table">
+        <DCArtboard label="06 · Full form — stepped, 6 sections, sticky footer" width={W} height={H}>
+          <div className="artboard-root" style={{ width: '100%', height: '100%' }}><ViewFullForm /></div>
+        </DCArtboard>
+
+        <DCArtboard label="07 · Payment history — dense ledger with filters & totals" width={W} height={H}>
+          <div className="artboard-root" style={{ width: '100%', height: '100%' }}><ViewPaymentHistory /></div>
+        </DCArtboard>
+      </DCSection>
+
+      <DCPostIt top={80} left={40} rotate={-3} width={200}>
+        Pan with 2-finger scroll.
+        Zoom with pinch or ⌘+wheel.
+      </DCPostIt>
+    </DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
