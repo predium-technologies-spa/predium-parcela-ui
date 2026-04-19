@@ -1,131 +1,109 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 import { PModal, PButton } from '@parcela/ui'
 import { ref } from 'vue'
+import { Trash2, FileDown } from 'lucide-vue-next'
 
 const meta: Meta<typeof PModal> = {
   title: 'Organisms/Modal',
   component: PModal,
-  argTypes: {
-    variant: {
-      control: 'select',
-      options: ['default', 'destructive'],
-    },
-    title: { control: 'text' },
-    subtitle: { control: 'text' },
-    open: { control: 'boolean' },
-  },
-  args: {
-    variant: 'destructive',
-    title: 'Archive Harper Hall?',
-    subtitle: 'PRP-0126 · 36 units',
-    open: true,
-  },
 }
 
 export default meta
 type Story = StoryObj<typeof PModal>
 
 export const Default: Story = {
-  render: (args) => ({
+  render: () => ({
     components: { PModal, PButton },
-    setup: () => ({ args }),
+    setup() {
+      const open = ref(false)
+      return { open, Trash2 }
+    },
     template: `
-      <PModal v-bind="args">
-        <template #body>
-          <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0;">
-            This property and all associated units, leases, and documents will be moved to the archive.
-            You can restore it later from Settings &gt; Archived properties.
-          </p>
-        </template>
-        <template #footer>
-          <div style="display: flex; gap: 8px; justify-content: flex-end;">
-            <PButton variant="ghost">Cancel</PButton>
-            <PButton variant="danger">Archive</PButton>
-          </div>
-        </template>
-      </PModal>
+      <div class="p-8">
+        <PButton variant="danger" :icon="Trash2" @click="open = true">Archive property</PButton>
+
+        <PModal
+          :open="open"
+          variant="destructive"
+          title="Archive Harper Hall?"
+          subtitle="PRP-0126 · 36 units · 4 active leases"
+          @close="open = false"
+        >
+          <template #body>
+            <p class="text-md text-ink2 leading-relaxed">
+              Archiving will stop rent collection, pause scheduled inspections, and mark the property as read-only.
+              <strong class="text-ink">This cannot be undone without manager approval.</strong>
+            </p>
+          </template>
+          <template #footer>
+            <div class="flex-1" />
+            <PButton variant="ghost" @click="open = false">Cancel</PButton>
+            <PButton variant="danger" @click="open = false">Archive property</PButton>
+          </template>
+        </PModal>
+      </div>
     `,
   }),
 }
 
-export const AllVariants: Story = {
+export const Confirmation: Story = {
   render: () => ({
     components: { PModal, PButton },
     setup() {
-      const openDefault = ref(true)
-      const openDestructive = ref(true)
-      return { openDefault, openDestructive }
+      const open = ref(false)
+      return { open, FileDown }
     },
     template: `
-      <div style="display: flex; gap: 24px;">
-        <div style="flex: 1; position: relative; min-height: 300px;">
-          <PModal
-            variant="default"
-            title="Export report"
-            subtitle="Q1 2026 · Portfolio summary"
-            :open="openDefault"
-            :static="true"
-          >
-            <template #body>
-              <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0;">
-                The report will be generated as a PDF and sent to your email on file.
-              </p>
-            </template>
-            <template #footer>
-              <div style="display: flex; gap: 8px; justify-content: flex-end;">
-                <PButton variant="ghost">Cancel</PButton>
-                <PButton variant="primary">Export</PButton>
-              </div>
-            </template>
-          </PModal>
-        </div>
-        <div style="flex: 1; position: relative; min-height: 300px;">
-          <PModal
-            variant="destructive"
-            title="Archive Harper Hall?"
-            subtitle="PRP-0126 · 36 units"
-            :open="openDestructive"
-            :static="true"
-          >
-            <template #body>
-              <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0;">
-                This property and all associated units, leases, and documents will be moved to the archive.
-              </p>
-            </template>
-            <template #footer>
-              <div style="display: flex; gap: 8px; justify-content: flex-end;">
-                <PButton variant="ghost">Cancel</PButton>
-                <PButton variant="danger">Archive</PButton>
-              </div>
-            </template>
-          </PModal>
-        </div>
+      <div class="p-8">
+        <PButton variant="ghost" :icon="FileDown" @click="open = true">Export report</PButton>
+
+        <PModal
+          :open="open"
+          variant="default"
+          title="Export quarterly report"
+          subtitle="Q1 2026 · Portfolio summary"
+          @close="open = false"
+        >
+          <template #body>
+            <p class="text-md text-ink2 leading-relaxed">
+              The report will be generated as a PDF and sent to your email. This may take a few minutes.
+            </p>
+          </template>
+          <template #footer>
+            <div class="flex-1" />
+            <PButton variant="ghost" @click="open = false">Cancel</PButton>
+            <PButton variant="primary" @click="open = false">Export PDF</PButton>
+          </template>
+        </PModal>
       </div>
     `,
   }),
 }
 
 export const Playground: Story = {
-  render: (args) => ({
+  render: () => ({
     components: { PModal, PButton },
     setup() {
-      const open = ref(args.open)
-      return { args, open }
+      const open = ref(false)
+      return { open }
     },
     template: `
-      <div>
+      <div class="p-8">
         <PButton variant="primary" @click="open = true">Open modal</PButton>
-        <PModal v-bind="args" :open="open" @close="open = false">
+        <PModal
+          :open="open"
+          variant="destructive"
+          title="Confirm action?"
+          subtitle="This requires confirmation"
+          @close="open = false"
+        >
           <template #body>
-            <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0;">
-              Modal body content goes here.
-            </p>
+            <p class="text-md text-ink2">Are you sure you want to proceed?</p>
           </template>
           <template #footer>
-            <div style="display: flex; gap: 8px; justify-content: flex-end;">
-              <PButton variant="ghost" @click="open = false">Cancel</PButton>
-              <PButton :variant="args.variant === 'destructive' ? 'danger' : 'primary'">Confirm</PButton>
-            </div>
+            <div class="flex-1" />
+            <PButton variant="ghost" @click="open = false">Cancel</PButton>
+            <PButton variant="danger" @click="open = false">Confirm</PButton>
           </template>
         </PModal>
       </div>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 /**
- * Right-side drawer panel with header, scrollable body, and footer actions.
+ * Right-side drawer panel with slide-in/slide-out animation.
  *
  * @example
- * <PRightDrawer title="Add property" subtitle="Draft will autosave" :open="isOpen">
+ * <PRightDrawer v-model:open="showDrawer" title="Add property">
  *   <template #body>...form fields...</template>
  *   <template #footer>...buttons...</template>
  * </PRightDrawer>
@@ -11,7 +11,7 @@
 import { X } from 'lucide-vue-next'
 
 export interface RightDrawerProps {
-  /** Whether the drawer is visible */
+  /** Whether the drawer is visible (v-model) */
   open?: boolean
   /** Drawer width */
   width?: number
@@ -24,57 +24,87 @@ export interface RightDrawerProps {
 }
 
 withDefaults(defineProps<RightDrawerProps>(), {
-  open: true,
+  open: false,
   width: 460,
 })
 
 defineEmits<{
   close: []
+  'update:open': [value: boolean]
 }>()
 </script>
 
 <template>
-  <!-- Mobile backdrop overlay -->
-  <div
-    v-if="open"
-    class="fixed inset-0 bg-[rgba(23,20,15,0.35)] z-30 md:hidden"
-    @click="$emit('close')"
-  />
+  <!-- Mobile backdrop -->
+  <Transition name="backdrop">
+    <div
+      v-if="open"
+      class="fixed inset-0 bg-[rgba(23,20,15,0.35)] z-30 md:hidden"
+      @click="$emit('update:open', false); $emit('close')"
+    />
+  </Transition>
 
-  <div
-    v-if="open"
-    class="fixed inset-0 z-40 md:relative md:inset-auto w-full md:w-auto h-full bg-surface border-l border-line flex flex-col shrink-0"
-    :style="{ '--drawer-width': `${width}px` }"
-    :class="'md:[width:var(--drawer-width)]'"
-  >
-    <!-- Header -->
-    <div class="px-5 py-4 border-b border-line">
-      <div class="flex justify-between items-center mb-1">
-        <div v-if="eyebrow" class="text-xs text-ink3 uppercase tracking-wide font-medium">
-          {{ eyebrow }}
+  <!-- Drawer -->
+  <Transition name="drawer">
+    <div
+      v-if="open"
+      class="fixed inset-y-0 right-0 z-40 md:relative md:inset-auto w-full md:w-auto h-full bg-surface border-l border-line flex flex-col shrink-0"
+      :style="{ '--drawer-width': `${width}px` }"
+      :class="'md:[width:var(--drawer-width)]'"
+    >
+      <!-- Header -->
+      <div class="px-5 py-4 border-b border-line">
+        <div class="flex justify-between items-center mb-1">
+          <div v-if="eyebrow" class="text-xs text-ink3 uppercase tracking-wide font-medium">
+            {{ eyebrow }}
+          </div>
+          <button
+            type="button"
+            class="text-ink3 hover:text-ink transition-colors cursor-pointer"
+            aria-label="Close"
+            @click="$emit('update:open', false); $emit('close')"
+          >
+            <X :size="16" />
+          </button>
         </div>
-        <button
-          type="button"
-          class="text-ink3 hover:text-ink transition-colors"
-          aria-label="Close"
-          @click="$emit('close')"
-        >
-          <X :size="16" />
-        </button>
+        <div v-if="title" class="text-xl font-semibold text-ink tracking-tight">{{ title }}</div>
+        <div v-if="subtitle" class="text-base text-ink3 mt-0.5">{{ subtitle }}</div>
+        <slot name="header-extra" />
       </div>
-      <div v-if="title" class="text-xl font-semibold text-ink tracking-tight">{{ title }}</div>
-      <div v-if="subtitle" class="text-base text-ink3 mt-0.5">{{ subtitle }}</div>
-      <slot name="header-extra" />
-    </div>
 
-    <!-- Body -->
-    <div class="flex-1 overflow-auto px-5 py-4">
-      <slot name="body" />
-    </div>
+      <!-- Body -->
+      <div class="flex-1 overflow-auto px-5 py-4">
+        <slot name="body" />
+      </div>
 
-    <!-- Footer -->
-    <div v-if="$slots.footer" class="px-5 py-3 border-t border-line flex items-center gap-2">
-      <slot name="footer" />
+      <!-- Footer -->
+      <div v-if="$slots.footer" class="px-5 py-3 border-t border-line flex items-center gap-2">
+        <slot name="footer" />
+      </div>
     </div>
-  </div>
+  </Transition>
 </template>
+
+<style scoped>
+/* Drawer slide animation */
+.drawer-enter-active,
+.drawer-leave-active {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.drawer-enter-from,
+.drawer-leave-to {
+  transform: translateX(100%);
+}
+
+/* Backdrop fade */
+.backdrop-enter-active,
+.backdrop-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.backdrop-enter-from,
+.backdrop-leave-to {
+  opacity: 0;
+}
+</style>

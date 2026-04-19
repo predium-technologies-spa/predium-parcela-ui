@@ -1,14 +1,14 @@
 <script setup lang="ts">
 /**
  * Modal dialog with backdrop, header, body, and footer.
- * Supports destructive, confirmation, and form variants.
+ * Animated open/close with fade + scale transitions.
  *
  * @example
- * <PModal :open="showModal" title="Archive property?" variant="destructive" @close="close">
+ * <PModal :open="showModal" title="Archive?" variant="destructive" @close="showModal = false">
  *   <template #body>Are you sure?</template>
  *   <template #footer>
- *     <PButton variant="ghost" @click="close">Cancel</PButton>
- *     <PButton variant="danger">Archive</PButton>
+ *     <PButton variant="ghost" @click="showModal = false">Cancel</PButton>
+ *     <PButton variant="danger" @click="archive">Archive</PButton>
  *   </template>
  * </PModal>
  */
@@ -40,61 +40,100 @@ defineEmits<{
 
 <template>
   <Teleport to="body">
-    <div v-if="open" class="fixed inset-0 z-50 flex items-center justify-center">
-      <!-- Backdrop -->
+    <!-- Backdrop -->
+    <Transition name="modal-backdrop">
       <div
-        class="absolute inset-0 bg-[rgba(23,20,15,0.35)] backdrop-blur-[1px]"
-        @click="$emit('close')"
-      />
-
-      <!-- Dialog -->
-      <div
-        class="relative bg-surface rounded-2xl shadow-modal overflow-hidden w-[calc(100%-2rem)] sm:w-auto mx-4 sm:mx-auto"
-        :style="{ maxWidth: `${width}px` }"
-        role="dialog"
-        aria-modal="true"
+        v-if="open"
+        class="fixed inset-0 z-50 flex items-center justify-center"
       >
-        <!-- Header -->
-        <div class="px-5 py-4 flex gap-3.5 border-b border-line-soft">
-          <!-- Icon for destructive -->
-          <div
-            v-if="variant === 'destructive'"
-            class="w-8 h-8 rounded-xl bg-danger-bg text-danger grid place-items-center shrink-0"
-          >
-            <AlertTriangle :size="16" />
-          </div>
+        <div
+          class="absolute inset-0 bg-[rgba(23,20,15,0.35)] backdrop-blur-[1px]"
+          @click="$emit('close')"
+        />
 
-          <div class="flex-1">
-            <div class="flex justify-between items-start">
-              <div>
-                <div class="text-lg font-semibold text-ink tracking-tight">{{ title }}</div>
-                <div v-if="subtitle" class="text-xs font-mono text-ink4 mt-0.5">{{ subtitle }}</div>
-              </div>
-              <button
-                type="button"
-                class="text-ink4 hover:text-ink transition-colors"
-                aria-label="Close"
-                @click="$emit('close')"
+        <!-- Dialog -->
+        <Transition name="modal-dialog" appear>
+          <div
+            v-if="open"
+            class="relative bg-surface rounded-2xl shadow-modal overflow-hidden w-[calc(100%-2rem)] sm:w-auto mx-4 sm:mx-auto"
+            :style="{ maxWidth: `${width}px` }"
+            role="dialog"
+            aria-modal="true"
+          >
+            <!-- Header -->
+            <div class="px-5 py-4 flex gap-3.5 border-b border-line-soft">
+              <div
+                v-if="variant === 'destructive'"
+                class="w-8 h-8 rounded-xl bg-danger-bg text-danger grid place-items-center shrink-0"
               >
-                <X :size="16" />
-              </button>
+                <AlertTriangle :size="16" />
+              </div>
+
+              <div class="flex-1">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <div class="text-lg font-semibold text-ink tracking-tight">{{ title }}</div>
+                    <div v-if="subtitle" class="text-xs font-mono text-ink4 mt-0.5">{{ subtitle }}</div>
+                  </div>
+                  <button
+                    type="button"
+                    class="text-ink4 hover:text-ink transition-colors cursor-pointer"
+                    aria-label="Close"
+                    @click="$emit('close')"
+                  >
+                    <X :size="16" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Body -->
+            <div class="px-5 py-4">
+              <slot name="body" />
+            </div>
+
+            <!-- Footer -->
+            <div
+              v-if="$slots.footer"
+              class="px-5 py-3 bg-bg border-t border-line flex items-center gap-2"
+            >
+              <slot name="footer" />
             </div>
           </div>
-        </div>
-
-        <!-- Body -->
-        <div class="px-5 py-4">
-          <slot name="body" />
-        </div>
-
-        <!-- Footer -->
-        <div
-          v-if="$slots.footer"
-          class="px-5 py-3 bg-bg border-t border-line flex items-center gap-2"
-        >
-          <slot name="footer" />
-        </div>
+        </Transition>
       </div>
-    </div>
+    </Transition>
   </Teleport>
 </template>
+
+<style scoped>
+/* Backdrop fade */
+.modal-backdrop-enter-active,
+.modal-backdrop-leave-active {
+  transition: opacity 0.25s ease;
+}
+
+.modal-backdrop-enter-from,
+.modal-backdrop-leave-to {
+  opacity: 0;
+}
+
+/* Dialog scale + fade */
+.modal-dialog-enter-active {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-dialog-leave-active {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-dialog-enter-from {
+  opacity: 0;
+  transform: scale(0.95) translateY(8px);
+}
+
+.modal-dialog-leave-to {
+  opacity: 0;
+  transform: scale(0.95) translateY(8px);
+}
+</style>

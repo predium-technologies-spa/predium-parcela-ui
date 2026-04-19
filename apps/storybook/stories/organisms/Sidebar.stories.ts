@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 import { PSidebar } from '@parcela/ui'
+import { ref } from 'vue'
 import {
   LayoutDashboard,
   BarChart3,
@@ -22,22 +23,13 @@ const meta: Meta<typeof PSidebar> = {
   argTypes: {
     active: {
       control: 'select',
-      options: [
-        'dashboard',
-        'reports',
-        'property',
-        'units',
-        'tenants',
-        'leases',
-        'payments',
-        'work-orders',
-        'inspections',
-        'settings',
-      ],
+      options: ['dashboard', 'reports', 'property', 'units', 'tenants', 'leases', 'payments', 'tickets', 'inspect', 'settings'],
     },
+    expanded: { control: 'boolean' },
   },
   args: {
     active: 'property',
+    expanded: true,
   },
 }
 
@@ -45,45 +37,65 @@ export default meta
 type Story = StoryObj<typeof PSidebar>
 
 const sections = [
-  {
-    label: 'Workspace',
-    items: [
-      { key: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-      { key: 'reports', label: 'Reports', icon: BarChart3 },
-    ],
-  },
-  {
-    label: 'Portfolio',
-    items: [
-      { key: 'property', label: 'Properties', icon: Building, count: 48 },
-      { key: 'units', label: 'Units', icon: Grid3X3, count: 312 },
-      { key: 'tenants', label: 'Tenants', icon: Users, count: 287 },
-      { key: 'leases', label: 'Leases', icon: FileText, count: 287 },
-    ],
-  },
-  {
-    label: 'Operations',
-    items: [
-      { key: 'payments', label: 'Payments', icon: CreditCard },
-      { key: 'work-orders', label: 'Work orders', icon: Wrench, count: 14 },
-      { key: 'inspections', label: 'Inspections', icon: Search },
-    ],
-  },
-  {
-    label: 'System',
-    items: [
-      { key: 'settings', label: 'Settings', icon: Settings },
-    ],
-  },
+  { title: 'Workspace', items: [
+    { key: 'dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+    { key: 'reports', icon: BarChart3, label: 'Reports' },
+  ]},
+  { title: 'Portfolio', items: [
+    { key: 'property', icon: Building, label: 'Properties', badge: 48 },
+    { key: 'units', icon: Grid3X3, label: 'Units', badge: 312 },
+    { key: 'tenants', icon: Users, label: 'Tenants', badge: 287 },
+    { key: 'leases', icon: FileText, label: 'Leases', badge: 287 },
+  ]},
+  { title: 'Operations', items: [
+    { key: 'payments', icon: CreditCard, label: 'Payments' },
+    { key: 'tickets', icon: Wrench, label: 'Work orders', badge: 14 },
+    { key: 'inspect', icon: Search, label: 'Inspections' },
+  ]},
+  { title: 'System', items: [
+    { key: 'settings', icon: Settings, label: 'Settings' },
+  ]},
 ]
 
 export const Default: Story = {
-  render: (args) => ({
+  render: () => ({
     components: { PSidebar },
-    setup: () => ({ args, sections }),
+    setup() {
+      const expanded = ref(true)
+      return { sections, expanded }
+    },
     template: `
-      <div style="height: 100vh;">
-        <PSidebar v-bind="args" :sections="sections" />
+      <div style="height: 100vh; display: flex;">
+        <PSidebar
+          :sections="sections"
+          active="property"
+          v-model:expanded="expanded"
+        />
+        <div class="flex-1 bg-bg p-6">
+          <p class="text-md text-ink2">Sidebar is <strong class="text-ink">{{ expanded ? 'expanded' : 'collapsed' }}</strong> — click the toggle at the bottom.</p>
+        </div>
+      </div>
+    `,
+  }),
+}
+
+export const Collapsed: Story = {
+  render: () => ({
+    components: { PSidebar },
+    setup() {
+      const expanded = ref(false)
+      return { sections, expanded }
+    },
+    template: `
+      <div style="height: 100vh; display: flex;">
+        <PSidebar
+          :sections="sections"
+          active="property"
+          v-model:expanded="expanded"
+        />
+        <div class="flex-1 bg-bg p-6">
+          <p class="text-md text-ink2">Starts collapsed. Click the toggle to expand.</p>
+        </div>
       </div>
     `,
   }),
@@ -92,10 +104,16 @@ export const Default: Story = {
 export const Playground: Story = {
   render: (args) => ({
     components: { PSidebar },
-    setup: () => ({ args, sections }),
+    setup() {
+      const expanded = ref(args.expanded ?? true)
+      return { args, sections, expanded }
+    },
     template: `
-      <div style="height: 100vh;">
-        <PSidebar v-bind="args" :sections="sections" />
+      <div style="height: 100vh; display: flex;">
+        <PSidebar v-bind="args" :sections="sections" v-model:expanded="expanded" />
+        <div class="flex-1 bg-bg p-6">
+          <p class="text-md text-ink2">Use controls or the sidebar toggle button.</p>
+        </div>
       </div>
     `,
   }),
