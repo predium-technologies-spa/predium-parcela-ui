@@ -4,7 +4,6 @@ import {
   PTopNav,
   PButton,
   PCheckbox,
-  PInput,
 } from '@parcela/ui'
 import {
   LayoutDashboard,
@@ -18,6 +17,7 @@ import {
   Search,
   Settings,
   AlertTriangle,
+  X,
 } from 'lucide-vue-next'
 
 const sidebarSections = [
@@ -53,110 +53,89 @@ type Story = StoryObj
 
 export const Default: Story = {
   render: () => ({
-    components: { PSidebar, PTopNav, PButton, PCheckbox, PInput },
+    components: { PSidebar, PTopNav, PButton, PCheckbox },
     setup() {
-      return { sidebarSections, AlertTriangle }
+      return { sidebarSections, AlertTriangle, X }
     },
     template: `
-      <div style="position: relative; width: 1280px; height: 820px; overflow: hidden;">
+      <div class="relative font-sans text-ink" style="width: 1280px; height: 820px; overflow: hidden;">
         <!-- Background (dimmed) -->
-        <div style="display: flex; width: 100%; height: 100%; filter: saturate(0.7);">
+        <div class="flex w-full h-full" style="filter: saturate(0.7);">
           <PSidebar :sections="sidebarSections" active="property" />
-          <div style="flex: 1; display: flex; flex-direction: column; min-width: 0;">
+          <div class="flex-1 flex flex-col min-w-0">
             <PTopNav :breadcrumb="['Portfolio', 'Properties', 'Harper Hall']" />
-            <div style="flex: 1; padding: 24px 32px; background: var(--color-bg);">
-              <div style="font-size: 22px; font-weight: 600; color: var(--color-text); margin-bottom: 20px;">Harper Hall</div>
-              <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
-                <div style="background: var(--color-bg-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 16px;">
-                  <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px;">Units</div>
-                  <div style="font-size: 24px; font-weight: 600; color: var(--color-text);">36</div>
-                </div>
-                <div style="background: var(--color-bg-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 16px;">
-                  <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px;">Occupancy</div>
-                  <div style="font-size: 24px; font-weight: 600; color: var(--color-text);">78%</div>
-                </div>
-                <div style="background: var(--color-bg-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 16px;">
-                  <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px;">Rent roll</div>
-                  <div style="font-size: 24px; font-weight: 600; color: var(--color-text);">$68,100</div>
-                </div>
-                <div style="background: var(--color-bg-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 16px;">
-                  <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px;">NOI</div>
-                  <div style="font-size: 24px; font-weight: 600; color: var(--color-text);">$41,210</div>
+            <div class="flex-1 p-6 bg-bg">
+              <div class="text-2xl font-semibold text-ink mb-3 tracking-tight">Harper Hall</div>
+              <div class="bg-surface border border-line rounded-xl p-5">
+                <div class="grid grid-cols-4 gap-4">
+                  <div v-for="[k, v] in [['Units', '36'], ['Occupancy', '78%'], ['Rent roll', '$68,100'], ['NOI', '$41,210']]" :key="k">
+                    <div class="text-sm text-ink3">{{ k }}</div>
+                    <div class="text-xl font-mono text-ink mt-0.5">{{ v }}</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Modal overlay (inline, not using PModal/Teleport) -->
-        <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 50;">
-          <div style="width: 520px; background: var(--color-bg-surface); border-radius: 12px; box-shadow: 0 24px 48px rgba(0,0,0,0.2); overflow: hidden;">
+        <!-- Modal backdrop -->
+        <div class="absolute inset-0 z-50" style="background: rgba(23, 20, 15, 0.35); backdrop-filter: blur(1px);">
+          <!-- Dialog -->
+          <div class="absolute bg-surface rounded-2xl shadow-modal overflow-hidden" style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 480px;">
             <!-- Header -->
-            <div style="padding: 24px 24px 0;">
-              <div style="display: flex; align-items: flex-start; gap: 12px;">
-                <div style="width: 40px; height: 40px; border-radius: 8px; background: var(--color-danger-subtle); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                  <component :is="AlertTriangle" :size="20" style="color: var(--color-danger);" />
-                </div>
-                <div>
-                  <div style="font-size: 16px; font-weight: 600; color: var(--color-text);">Archive Harper Hall?</div>
-                  <div style="font-size: 13px; color: var(--color-text-secondary); margin-top: 2px;">PRP-0126 &middot; 36 units &middot; 4 active leases</div>
+            <div class="px-5 pt-5 pb-4 flex gap-3.5 border-b border-line-soft">
+              <div class="w-8 h-8 rounded-xl bg-danger-bg text-danger grid place-items-center shrink-0">
+                <component :is="AlertTriangle" :size="16" />
+              </div>
+              <div class="flex-1">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <div class="text-lg font-semibold text-ink tracking-tight">Archive Harper Hall?</div>
+                    <div class="text-xs font-mono text-ink4 mt-0.5">PRP-0126 · 36 units · 4 active leases</div>
+                  </div>
+                  <component :is="X" :size="16" class="text-ink4 cursor-pointer hover:text-ink" />
                 </div>
               </div>
             </div>
 
             <!-- Body -->
-            <div style="padding: 20px 24px;">
-              <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0 0 16px; line-height: 1.5;">
-                Archiving this property will remove it from all active views and reports.
-                Associated leases, payments, and work orders will be flagged for review.
-                You can restore it later from Settings &gt; Archived properties.
+            <div class="px-5 py-4">
+              <p class="text-md text-ink2 leading-relaxed mb-3.5">
+                Archiving will stop rent collection, pause scheduled inspections, and mark the property as read-only in all reports.
+                <strong class="text-ink">This action cannot be undone without a manager approval.</strong>
               </p>
 
-              <!-- Impact summary card -->
-              <div style="border: 1px solid var(--color-border); border-radius: 8px; background: var(--color-bg); overflow: hidden; margin-bottom: 16px;">
-                <div style="padding: 10px 16px; font-size: 12px; font-weight: 600; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1px solid var(--color-border);">
-                  Impact summary
-                </div>
-                <div style="padding: 0;">
-                  <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; border-bottom: 1px solid var(--color-border);">
-                    <div>
-                      <span style="font-size: 13px; color: var(--color-text);">Active leases</span>
-                      <span style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-left: 8px;">4</span>
-                    </div>
-                    <span style="font-size: 12px; color: var(--color-text-secondary);">Will be flagged for review</span>
+              <!-- Impact summary -->
+              <div class="bg-bg border border-line rounded-xl p-3.5 mb-3.5">
+                <div class="text-sm text-ink3 uppercase tracking-wide font-medium mb-2.5">Impact summary</div>
+                <div v-for="([k, v, note], i) in [
+                  ['Active leases', '4', 'Will be flagged for review'],
+                  ['Scheduled payments', '8', 'Will be held next cycle'],
+                  ['Open work orders', '2', 'Must be reassigned'],
+                ]" :key="k" class="flex items-center gap-3 py-2" :class="i < 2 && 'border-b border-line-soft'">
+                  <div class="flex-1">
+                    <div class="text-base text-ink2">{{ k }}</div>
+                    <div class="text-sm text-ink3">{{ note }}</div>
                   </div>
-                  <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; border-bottom: 1px solid var(--color-border);">
-                    <div>
-                      <span style="font-size: 13px; color: var(--color-text);">Scheduled payments</span>
-                      <span style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-left: 8px;">8</span>
-                    </div>
-                    <span style="font-size: 12px; color: var(--color-text-secondary);">Will be held next cycle</span>
-                  </div>
-                  <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 16px;">
-                    <div>
-                      <span style="font-size: 13px; color: var(--color-text);">Open work orders</span>
-                      <span style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-left: 8px;">2</span>
-                    </div>
-                    <span style="font-size: 12px; color: var(--color-text-secondary);">Must be reassigned</span>
-                  </div>
+                  <div class="font-mono text-md text-ink font-medium">{{ v }}</div>
                 </div>
               </div>
 
               <!-- Confirm input -->
-              <div style="margin-bottom: 4px;">
-                <label style="font-size: 13px; color: var(--color-text); font-weight: 500;">Type HARPER HALL to confirm:</label>
-                <div style="margin-top: 6px; padding: 8px 12px; border: 1px solid var(--color-border); border-radius: 6px; font-size: 14px; font-family: var(--font-mono); color: var(--color-text); background: var(--color-bg);">
-                  HARPER HALL<span style="border-right: 2px solid var(--color-primary); animation: blink 1s step-end infinite; margin-left: 1px;"></span>
-                </div>
+              <div class="text-base text-ink2 mb-1.5">
+                Type <span class="font-mono bg-chip-bg px-1.5 py-px rounded-sm text-ink">HARPER HALL</span> to confirm:
+              </div>
+              <div class="flex items-center bg-surface border border-ink rounded-lg px-2.5 py-2 font-mono text-md text-ink">
+                HARPER HALL<span class="ml-0.5 w-px h-3.5 bg-ink inline-block" style="animation: blink 1s steps(1) infinite;" />
               </div>
             </div>
 
             <!-- Footer -->
-            <div style="padding: 16px 24px; border-top: 1px solid var(--color-border); display: flex; align-items: center; gap: 12px;">
-              <PCheckbox label="Notify tenants" />
-              <div style="flex: 1;"></div>
+            <div class="px-5 py-3 bg-bg border-t border-line flex items-center gap-2.5">
+              <PCheckbox>Notify tenants</PCheckbox>
+              <div class="flex-1" />
               <PButton variant="ghost">Cancel</PButton>
-              <PButton style="background: var(--color-danger); color: white; border: none;">Archive property</PButton>
+              <PButton variant="primary" class="!bg-danger hover:!bg-danger/90">Archive property</PButton>
             </div>
           </div>
         </div>

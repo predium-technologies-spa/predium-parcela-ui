@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Tell Tailwind where to scan for class usage */
+@source "../../src/**/*.vue";
+@source "../../../../apps/storybook/stories/**/*.ts";
+
 /*
  * Parcela Design System — Tokens
  * All custom properties defined via @theme so Tailwind generates utilities.
