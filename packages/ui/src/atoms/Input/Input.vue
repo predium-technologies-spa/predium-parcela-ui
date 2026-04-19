@@ -47,8 +47,8 @@ defineEmits<{
     :class="[
       'group flex items-center gap-2 bg-surface border rounded-lg px-2.5 h-[34px] text-md transition-all duration-150',
       error
-        ? 'border-danger focus-within:border-danger focus-within:ring-1 focus-within:ring-danger/30'
-        : 'border-line focus-within:border-accent focus-within:ring-1 focus-within:ring-accent/20',
+        ? 'border-danger focus-within:border-danger'
+        : 'border-line focus-within:border-ink3',
       disabled ? 'opacity-40 cursor-not-allowed bg-chip-bg' : 'hover:border-ink4',
     ]"
   >

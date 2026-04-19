@@ -87,7 +87,7 @@ onBeforeUnmount(() => {
       :disabled="disabled"
       :class="[
         'w-full flex items-center justify-between bg-surface border rounded-lg px-2.5 h-[34px] text-md transition-colors cursor-pointer',
-        error ? 'border-danger' : isOpen ? 'border-ink ring-1 ring-ink' : 'border-line',
+        error ? 'border-danger' : isOpen ? 'border-ink3' : 'border-line',
         disabled ? 'opacity-40 pointer-events-none' : 'hover:border-ink4',
       ]"
       @click="toggle"
