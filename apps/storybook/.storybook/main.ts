@@ -1,5 +1,6 @@
 import type { StorybookConfig } from '@storybook/vue3-vite'
 import tailwindcss from '@tailwindcss/vite'
+import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 
 const uiSrc = resolve(__dirname, '../../packages/ui/src')
@@ -17,6 +18,11 @@ const config: StorybookConfig = {
   },
   async viteFinal(config) {
     config.plugins = config.plugins || []
+
+    // Ensure Vue plugin handles .vue files from packages/ui
+    // (Storybook's built-in Vue plugin may restrict to project root)
+    config.plugins.push(vue())
+
     config.plugins.push(tailwindcss())
 
     // Add a custom resolve plugin that maps @parcela/ui to source
@@ -29,11 +35,11 @@ const config: StorybookConfig = {
       },
     })
 
-    // Allow Vite to serve files from the packages directory
+    // Allow Vite to serve files from the entire monorepo
     config.server = config.server || {}
     config.server.fs = config.server.fs || {}
     config.server.fs.allow = config.server.fs.allow || []
-    config.server.fs.allow.push(resolve(__dirname, '../../packages'))
+    config.server.fs.allow.push(resolve(__dirname, '../../..'))
 
     return config
   },
