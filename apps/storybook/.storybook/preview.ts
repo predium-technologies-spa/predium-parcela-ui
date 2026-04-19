@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/vue3'
-import '@parcela/ui/styles/tokens.css'
-import '@parcela/ui/styles/global.css'
+import '../../../packages/ui/src/styles/tokens.css'
+import '../../../packages/ui/src/styles/global.css'
 
 const preview: Preview = {
   parameters: {

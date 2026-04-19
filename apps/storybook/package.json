@@ -8,7 +8,8 @@
     "build": "storybook build"
   },
   "dependencies": {
-    "@parcela/ui": "workspace:*"
+    "@parcela/ui": "workspace:*",
+    "lucide-vue-next": "^0.474.0"
   },
   "devDependencies": {
     "@storybook/vue3": "^8.6.0",
@@ -17,6 +18,7 @@
     "@storybook/blocks": "^8.6.0",
     "@storybook/manager-api": "^8.6.0",
     "@storybook/theming": "^8.6.0",
+    "@vitejs/plugin-vue": "^5.2.0",
     "storybook": "^8.6.0",
     "vue": "^3.5.0",
     "tailwindcss": "^4.1.0",
