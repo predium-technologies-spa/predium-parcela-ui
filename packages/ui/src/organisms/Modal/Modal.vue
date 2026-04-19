@@ -49,8 +49,8 @@ defineEmits<{
 
       <!-- Dialog -->
       <div
-        class="relative bg-surface rounded-2xl shadow-modal overflow-hidden"
-        :style="{ width: `${width}px` }"
+        class="relative bg-surface rounded-2xl shadow-modal overflow-hidden w-[calc(100%-2rem)] sm:w-auto mx-4 sm:mx-auto"
+        :style="{ maxWidth: `${width}px` }"
         role="dialog"
         aria-modal="true"
       >

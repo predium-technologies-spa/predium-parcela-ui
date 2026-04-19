@@ -31,7 +31,7 @@ withDefaults(defineProps<KpiCardProps>(), {
     <div class="text-sm text-ink3">{{ label }}</div>
     <div
       :class="[
-        'text-2xl font-semibold text-ink tracking-tight mt-0.5',
+        'text-xl sm:text-2xl font-semibold text-ink tracking-tight mt-0.5',
         mono ? 'font-mono' : 'font-sans',
       ]"
     >

@@ -30,7 +30,7 @@ withDefaults(defineProps<FormSectionProps>(), {
       current ? 'border-ink border-[1.5px] shadow-sticky' : 'border-line',
     ]"
   >
-    <div class="grid grid-cols-[280px_1fr] gap-6 p-5">
+    <div class="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6 p-5">
       <!-- Left: description -->
       <div>
         <div class="flex items-center gap-2 mb-1">
@@ -49,7 +49,7 @@ withDefaults(defineProps<FormSectionProps>(), {
       </div>
 
       <!-- Right: fields grid -->
-      <div class="grid grid-cols-2 gap-3.5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
         <slot />
       </div>
     </div>

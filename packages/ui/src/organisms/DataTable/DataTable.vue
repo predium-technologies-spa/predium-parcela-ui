@@ -46,7 +46,7 @@ defineEmits<{
 </script>
 
 <template>
-  <div class="bg-surface border border-line rounded-xl overflow-hidden">
+  <div class="bg-surface border border-line rounded-xl overflow-hidden overflow-x-auto">
     <table class="w-full border-collapse">
       <thead>
         <tr>

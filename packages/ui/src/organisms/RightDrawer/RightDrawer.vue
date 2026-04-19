@@ -34,10 +34,18 @@ defineEmits<{
 </script>
 
 <template>
+  <!-- Mobile backdrop overlay -->
   <div
     v-if="open"
-    class="h-full bg-surface border-l border-line flex flex-col shrink-0"
-    :style="{ width: `${width}px` }"
+    class="fixed inset-0 bg-[rgba(23,20,15,0.35)] z-30 md:hidden"
+    @click="$emit('close')"
+  />
+
+  <div
+    v-if="open"
+    class="fixed inset-0 z-40 md:relative md:inset-auto w-full md:w-auto h-full bg-surface border-l border-line flex flex-col shrink-0"
+    :style="{ '--drawer-width': `${width}px` }"
+    :class="'md:[width:var(--drawer-width)]'"
   >
     <!-- Header -->
     <div class="px-5 py-4 border-b border-line">

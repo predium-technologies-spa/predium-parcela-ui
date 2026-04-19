@@ -8,36 +8,12 @@
  * Parcela Design System — Tokens
  * All custom properties defined via @theme so Tailwind generates utilities.
  * Usage: bg-surface, text-ink, border-line, text-good, etc.
+ *
+ * Dark mode: use class strategy (.dark on <html> or parent).
+ * Colors reference CSS custom properties that swap in dark mode.
  */
 
 @theme {
-  /* ── Surfaces ── */
-  --color-bg: #FAFAF7;
-  --color-surface: #FFFFFF;
-  --color-chip-bg: #F3F1EB;
-
-  /* ── Ink (foreground) ── */
-  --color-ink: #17140F;
-  --color-ink2: #3A3631;
-  --color-ink3: #6E6A63;
-  --color-ink4: #9C978F;
-
-  /* ── Lines ── */
-  --color-line: #E8E5DE;
-  --color-line-soft: #F0EDE6;
-
-  /* ── Status foregrounds ── */
-  --color-good: #5A6B3E;
-  --color-warn: #8A6A1F;
-  --color-danger: #8B3A2E;
-  --color-info: #34495E;
-
-  /* ── Status backgrounds ── */
-  --color-good-bg: #EEF0E5;
-  --color-warn-bg: #F5EDD9;
-  --color-danger-bg: #F5E3DE;
-  --color-info-bg: #E6EAEE;
-
   /* ── Typography ── */
   --font-sans: "Inter", -apple-system, "Segoe UI", sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -59,13 +35,98 @@
   --radius-xl: 6px;
   --radius-2xl: 8px;
 
-  /* ── Shadows ── */
-  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-modal: 0 20px 60px rgba(23, 20, 15, 0.25), 0 4px 12px rgba(23, 20, 15, 0.12);
-  --shadow-sticky: 0 1px 3px rgba(23, 20, 15, 0.06);
-
   /* ── Layout ── */
   --spacing-sidebar: 240px;
   --spacing-topnav: 56px;
   --spacing-right-panel: 440px;
+
+  /* ── Colors (reference CSS vars that swap per mode) ── */
+  --color-bg: var(--parcela-bg);
+  --color-surface: var(--parcela-surface);
+  --color-chip-bg: var(--parcela-chip-bg);
+
+  --color-ink: var(--parcela-ink);
+  --color-ink2: var(--parcela-ink2);
+  --color-ink3: var(--parcela-ink3);
+  --color-ink4: var(--parcela-ink4);
+
+  --color-line: var(--parcela-line);
+  --color-line-soft: var(--parcela-line-soft);
+
+  --color-good: var(--parcela-good);
+  --color-warn: var(--parcela-warn);
+  --color-danger: var(--parcela-danger);
+  --color-info: var(--parcela-info);
+
+  --color-good-bg: var(--parcela-good-bg);
+  --color-warn-bg: var(--parcela-warn-bg);
+  --color-danger-bg: var(--parcela-danger-bg);
+  --color-info-bg: var(--parcela-info-bg);
+
+  /* ── Shadows (swap per mode) ── */
+  --shadow-card: var(--parcela-shadow-card);
+  --shadow-modal: var(--parcela-shadow-modal);
+  --shadow-sticky: var(--parcela-shadow-sticky);
+}
+
+/* ══════════════════════════════════════════
+   Light mode (default)
+   ══════════════════════════════════════════ */
+:root {
+  --parcela-bg: #FAFAF7;
+  --parcela-surface: #FFFFFF;
+  --parcela-chip-bg: #F3F1EB;
+
+  --parcela-ink: #17140F;
+  --parcela-ink2: #3A3631;
+  --parcela-ink3: #6E6A63;
+  --parcela-ink4: #9C978F;
+
+  --parcela-line: #E8E5DE;
+  --parcela-line-soft: #F0EDE6;
+
+  --parcela-good: #5A6B3E;
+  --parcela-warn: #8A6A1F;
+  --parcela-danger: #8B3A2E;
+  --parcela-info: #34495E;
+
+  --parcela-good-bg: #EEF0E5;
+  --parcela-warn-bg: #F5EDD9;
+  --parcela-danger-bg: #F5E3DE;
+  --parcela-info-bg: #E6EAEE;
+
+  --parcela-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --parcela-shadow-modal: 0 20px 60px rgba(23, 20, 15, 0.25), 0 4px 12px rgba(23, 20, 15, 0.12);
+  --parcela-shadow-sticky: 0 1px 3px rgba(23, 20, 15, 0.06);
+}
+
+/* ══════════════════════════════════════════
+   Dark mode (.dark class on ancestor or <html>)
+   ══════════════════════════════════════════ */
+.dark {
+  --parcela-bg: #141210;
+  --parcela-surface: #1C1A17;
+  --parcela-chip-bg: #262420;
+
+  --parcela-ink: #F0EDE6;
+  --parcela-ink2: #C8C3BA;
+  --parcela-ink3: #8A8580;
+  --parcela-ink4: #5C5852;
+
+  --parcela-line: #2E2B27;
+  --parcela-line-soft: #232120;
+
+  --parcela-good: #8FAD6A;
+  --parcela-warn: #C9A44E;
+  --parcela-danger: #C46B5C;
+  --parcela-info: #6B95BD;
+
+  --parcela-good-bg: #1E2418;
+  --parcela-warn-bg: #262014;
+  --parcela-danger-bg: #261816;
+  --parcela-info-bg: #161D24;
+
+  --parcela-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --parcela-shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.6), 0 4px 12px rgba(0, 0, 0, 0.4);
+  --parcela-shadow-sticky: 0 1px 3px rgba(0, 0, 0, 0.15);
 }

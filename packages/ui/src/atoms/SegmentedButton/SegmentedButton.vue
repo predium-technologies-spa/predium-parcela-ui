@@ -28,7 +28,7 @@ defineEmits<{
   <div
     role="group"
     :class="[
-      'inline-flex border border-line rounded-lg overflow-hidden bg-surface',
+      'inline-flex min-w-0 border border-line rounded-lg overflow-hidden bg-surface',
       disabled && 'opacity-40 pointer-events-none',
     ]"
   >
@@ -38,7 +38,7 @@ defineEmits<{
       type="button"
       :aria-pressed="modelValue === opt"
       :class="[
-        'flex-1 px-2.5 py-1.5 text-md text-center transition-colors',
+        'flex-1 min-w-0 px-2.5 py-1.5 text-sm sm:text-md text-center transition-colors',
         i > 0 && 'border-l border-line',
         modelValue === opt
           ? 'bg-ink text-white font-medium'

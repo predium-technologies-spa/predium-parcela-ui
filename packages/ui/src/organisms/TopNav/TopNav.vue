@@ -38,12 +38,12 @@ withDefaults(defineProps<TopNavProps>(), {
     <!-- Search -->
     <div
       v-if="search"
-      class="flex items-center gap-2 bg-bg border border-line rounded-xl px-3 py-1.5 w-[280px] text-ink4 text-md"
+      class="hidden md:flex items-center gap-2 bg-bg border border-line rounded-xl px-3 py-1.5 w-[280px] text-ink4 text-md"
     >
       <Search :size="14" aria-hidden="true" />
       <span class="flex-1">{{ searchPlaceholder }}</span>
       <span
-        class="font-mono text-xs text-ink4 bg-white px-1.5 py-px rounded-sm border border-line"
+        class="hidden lg:inline font-mono text-xs text-ink4 bg-white px-1.5 py-px rounded-sm border border-line"
       >⌘K</span>
     </div>
 

@@ -49,3 +49,8 @@ table {
   outline-offset: 2px;
   border-radius: var(--radius-sm);
 }
+
+/* Color scheme for native elements (scrollbars, form controls) */
+.dark {
+  color-scheme: dark;
+}

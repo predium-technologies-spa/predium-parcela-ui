@@ -28,7 +28,7 @@ withDefaults(defineProps<FormFieldProps>(), {
 
 <template>
   <div :style="cols === 2 ? { gridColumn: 'span 2' } : undefined">
-    <div class="flex justify-between mb-1.5">
+    <div class="flex flex-wrap justify-between mb-1.5">
       <label class="text-base font-medium text-ink2">
         {{ label }}
         <span v-if="required" class="text-danger">*</span>

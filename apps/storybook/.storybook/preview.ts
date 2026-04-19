@@ -15,8 +15,16 @@ const preview: Preview = {
       values: [
         { name: 'parcela', value: '#FAFAF7' },
         { name: 'surface', value: '#FFFFFF' },
-        { name: 'dark', value: '#17140F' },
+        { name: 'dark', value: '#141210' },
       ],
+    },
+    viewport: {
+      viewports: {
+        mobile: { name: 'Mobile', styles: { width: '375px', height: '812px' } },
+        mobileLg: { name: 'Mobile Large', styles: { width: '428px', height: '926px' } },
+        tablet: { name: 'Tablet', styles: { width: '768px', height: '1024px' } },
+        desktop: { name: 'Desktop', styles: { width: '1280px', height: '820px' } },
+      },
     },
     layout: 'centered',
   },

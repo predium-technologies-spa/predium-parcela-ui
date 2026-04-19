@@ -33,7 +33,7 @@ defineEmits<{
     class="flex items-center gap-2 px-2.5 py-2 bg-surface border border-line rounded-xl"
   >
     <!-- Tabs -->
-    <div class="flex gap-0.5 p-0.5 bg-bg rounded-lg">
+    <div class="flex flex-nowrap gap-0.5 p-0.5 bg-bg rounded-lg overflow-x-auto">
       <button
         v-for="(tab, i) in tabs"
         :key="i"
@@ -59,6 +59,8 @@ defineEmits<{
     <div class="flex-1" />
 
     <!-- Actions slot -->
-    <slot name="actions" />
+    <div class="hidden sm:flex items-center gap-2">
+      <slot name="actions" />
+    </div>
   </div>
 </template>

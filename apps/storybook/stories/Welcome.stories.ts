@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
+import { PButton, PBadge, PInput, PCheckbox, PAvatar, PKpiCard, PProgressBar } from '@parcela/ui'
+import { Plus, Download, Search } from 'lucide-vue-next'
 
 const meta: Meta = {
   title: 'Welcome',
@@ -72,6 +74,100 @@ export const Tokens: Story = {
           <div class="shadow-card bg-surface rounded-xl p-4 text-sm text-ink2 border border-line">shadow-card</div>
           <div class="shadow-sticky bg-surface rounded-xl p-4 text-sm text-ink2 border border-line">shadow-sticky</div>
           <div class="shadow-modal bg-surface rounded-2xl p-4 text-sm text-ink2">shadow-modal</div>
+        </div>
+      </div>
+    `,
+  }),
+}
+
+export const DarkMode: Story = {
+  render: () => ({
+    components: { PButton, PBadge, PInput, PCheckbox, PAvatar, PKpiCard, PProgressBar },
+    setup() {
+      return { Plus, Download, Search }
+    },
+    template: `
+      <div class="flex gap-6" style="max-width: 900px;">
+        <!-- Light -->
+        <div class="flex-1 bg-bg p-6 rounded-2xl border border-line">
+          <h2 class="text-xl font-semibold text-ink mb-4">Light Mode</h2>
+
+          <div class="flex flex-wrap gap-2 mb-4">
+            <PButton variant="primary" :icon="Plus">Primary</PButton>
+            <PButton variant="ghost" :icon="Download">Ghost</PButton>
+            <PButton variant="subtle">Subtle</PButton>
+            <PButton variant="danger">Danger</PButton>
+          </div>
+
+          <div class="flex flex-wrap gap-2 mb-4">
+            <PBadge tone="good">Active</PBadge>
+            <PBadge tone="warn">Pending</PBadge>
+            <PBadge tone="danger">Failed</PBadge>
+            <PBadge tone="info">Scheduled</PBadge>
+            <PBadge tone="neutral">Draft</PBadge>
+          </div>
+
+          <div class="mb-4" style="max-width: 280px;">
+            <PInput placeholder="Search properties..." :icon="Search" />
+          </div>
+
+          <div class="flex items-center gap-4 mb-4">
+            <PCheckbox :model-value="true">Elevator</PCheckbox>
+            <PCheckbox :model-value="false">Gym</PCheckbox>
+          </div>
+
+          <div class="flex gap-3 mb-4">
+            <PAvatar initials="ER" size="sm" />
+            <PAvatar initials="DO" size="md" />
+            <PAvatar initials="LM" size="lg" color="#34495E" />
+          </div>
+
+          <PKpiCard label="Rent collected" value="$118,240" delta="72% of month" tone="neutral" mono />
+
+          <div class="mt-4">
+            <PProgressBar :value="72" tone="good" size="md" />
+          </div>
+        </div>
+
+        <!-- Dark -->
+        <div class="dark flex-1 bg-bg p-6 rounded-2xl border border-line">
+          <h2 class="text-xl font-semibold text-ink mb-4">Dark Mode</h2>
+
+          <div class="flex flex-wrap gap-2 mb-4">
+            <PButton variant="primary" :icon="Plus">Primary</PButton>
+            <PButton variant="ghost" :icon="Download">Ghost</PButton>
+            <PButton variant="subtle">Subtle</PButton>
+            <PButton variant="danger">Danger</PButton>
+          </div>
+
+          <div class="flex flex-wrap gap-2 mb-4">
+            <PBadge tone="good">Active</PBadge>
+            <PBadge tone="warn">Pending</PBadge>
+            <PBadge tone="danger">Failed</PBadge>
+            <PBadge tone="info">Scheduled</PBadge>
+            <PBadge tone="neutral">Draft</PBadge>
+          </div>
+
+          <div class="mb-4" style="max-width: 280px;">
+            <PInput placeholder="Search properties..." :icon="Search" />
+          </div>
+
+          <div class="flex items-center gap-4 mb-4">
+            <PCheckbox :model-value="true">Elevator</PCheckbox>
+            <PCheckbox :model-value="false">Gym</PCheckbox>
+          </div>
+
+          <div class="flex gap-3 mb-4">
+            <PAvatar initials="ER" size="sm" />
+            <PAvatar initials="DO" size="md" />
+            <PAvatar initials="LM" size="lg" color="#34495E" />
+          </div>
+
+          <PKpiCard label="Rent collected" value="$118,240" delta="72% of month" tone="neutral" mono />
+
+          <div class="mt-4">
+            <PProgressBar :value="72" tone="good" size="md" />
+          </div>
         </div>
       </div>
     `,

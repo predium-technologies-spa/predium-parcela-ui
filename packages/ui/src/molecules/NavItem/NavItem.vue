@@ -39,7 +39,7 @@ withDefaults(defineProps<NavItemProps>(), {
       class="shrink-0"
       aria-hidden="true"
     />
-    <span class="flex-1 text-md">{{ label }}</span>
+    <span class="flex-1 text-md overflow-hidden whitespace-nowrap truncate">{{ label }}</span>
     <span
       v-if="badge !== undefined"
       :class="[
