@@ -1,0 +1,13 @@
+{
+  "name": "predium-ds-ui",
+  "private": true,
+  "scripts": {
+    "dev:storybook": "pnpm --filter @parcela/storybook dev",
+    "build:storybook": "pnpm --filter @parcela/storybook build",
+    "build:ui": "pnpm --filter @parcela/ui build",
+    "test": "pnpm --filter @parcela/ui test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
