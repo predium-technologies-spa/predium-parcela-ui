@@ -43,11 +43,17 @@ table {
   border-collapse: collapse;
 }
 
-/* Focus ring */
+/* Focus ring — skip inputs/textareas inside styled wrappers */
 :focus-visible {
-  outline: 2px solid var(--color-ink);
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
 }
 
 /* Color scheme for native elements (scrollbars, form controls) */
