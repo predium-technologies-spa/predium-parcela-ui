@@ -91,7 +91,7 @@ export const Default: Story = {
       }
     },
     template: `
-      <div class="w-full max-w-[1280px] min-h-screen lg:h-[820px] flex font-sans text-ink bg-bg">
+      <div class="w-full min-h-screen lg:h-[820px] flex font-sans text-ink bg-bg">
         <PSidebar :sections="sidebarSections" active="property" v-model:expanded="sidebarExpanded" />
 
         <div class="flex-1 flex flex-col min-w-0">

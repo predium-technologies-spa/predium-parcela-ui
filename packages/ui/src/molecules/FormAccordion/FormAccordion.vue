@@ -103,8 +103,8 @@ function toggle(i: number) {
           </div>
 
           <!-- Section actions -->
-          <div class="flex items-center gap-2 mt-6 pt-4" style="border-top: 1px solid var(--color-line-soft);">
-            <div class="flex-1" />
+          <div class="flex flex-wrap items-center gap-2 mt-6 pt-4" style="border-top: 1px solid var(--color-line-soft);">
+            <div class="flex-1 basis-full sm:basis-0" />
             <button
               type="button"
               class="px-4 py-2 text-base font-medium text-ink3 rounded-xl cursor-pointer transition-colors hover:bg-hover"

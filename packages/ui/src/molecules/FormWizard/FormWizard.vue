@@ -123,7 +123,7 @@ function goNext() {
 
     <!-- Step content -->
     <div class="flex-1 overflow-y-auto">
-      <div class="max-w-[560px] mx-auto px-5 py-10 sm:py-12">
+      <div class="max-w-[560px] mx-auto px-4 sm:px-5 py-8 sm:py-12">
         <!-- Step title & description -->
         <div class="mb-8">
           <div class="text-xs uppercase tracking-wide text-ink4 font-medium mb-1">

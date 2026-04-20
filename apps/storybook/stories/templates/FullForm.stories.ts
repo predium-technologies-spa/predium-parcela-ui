@@ -84,7 +84,7 @@ export const Default: Story = {
       }
     },
     template: `
-      <div class="flex w-full max-w-[1280px] min-h-screen lg:h-[820px] overflow-hidden bg-bg font-sans text-ink">
+      <div class="flex w-full min-h-screen lg:h-[820px] overflow-hidden bg-bg font-sans text-ink">
         <PSidebar :sections="sidebarSections" active="property" v-model:expanded="sidebarExpanded" />
 
         <div class="flex-1 flex flex-col min-w-0">
@@ -235,7 +235,7 @@ export const Default: Story = {
               <!-- 06 Documents -->
               <PFormSection number="06" title="Documents" description="Deed, title, insurance, inspection reports.">
                 <PFormField label="Attachments" :cols="2">
-                  <div class="flex flex-col items-center justify-center gap-2 p-8 rounded-xl text-center" style="border: 2px dashed var(--color-line);">
+                  <div class="flex flex-col items-center justify-center gap-2 p-6 sm:p-8 rounded-xl text-center border-2 border-dashed border-line">
                     <component :is="Upload" :size="20" class="text-ink4" />
                     <div class="text-base font-medium text-ink2">Drop files or browse</div>
                     <div class="text-sm text-ink4">PDF, DOC, XLS · up to 25 MB each</div>
@@ -246,7 +246,7 @@ export const Default: Story = {
           </div>
 
           <!-- Sticky footer -->
-          <div class="flex flex-wrap items-center gap-3 px-6 py-3 bg-surface shrink-0" style="border-top: 1px solid var(--color-line-soft);">
+          <div class="flex flex-wrap items-center gap-3 px-4 sm:px-6 py-3 bg-surface shrink-0 border-t border-line-soft">
             <PButton variant="ghost">Previous</PButton>
             <span class="hidden sm:inline text-sm text-ink3">
               <span class="font-mono text-ink2">04</span> of <span class="font-mono text-ink2">06</span> · Financials

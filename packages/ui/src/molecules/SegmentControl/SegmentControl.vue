@@ -66,7 +66,7 @@ const sizeClasses = {
   <div
     ref="containerRef"
     :class="[
-      'relative inline-flex bg-chip-bg p-[3px]',
+      'relative inline-flex max-w-full overflow-x-auto bg-chip-bg p-[3px]',
       rounded ? 'rounded-full' : 'rounded-xl',
     ]"
   >

@@ -105,13 +105,13 @@ function stepStatus(i: number): 'done' | 'current' | 'upcoming' {
   <!-- ═══ Horizontal ═══ -->
   <div
     v-else
-    class="flex items-center gap-1 overflow-x-auto px-4 py-3 bg-surface step-nav-horizontal"
+    class="flex items-center gap-1 overflow-x-auto px-3 sm:px-4 py-3 bg-surface step-nav-horizontal"
   >
     <template v-for="(step, i) in steps" :key="step.number">
       <button
         type="button"
         :class="[
-          'flex items-center gap-2 px-3 py-2 rounded-lg shrink-0 cursor-pointer transition-colors',
+          'flex items-center gap-2 px-3 py-2 rounded-lg shrink-0 cursor-pointer transition-colors min-h-[44px]',
           stepStatus(i) === 'current' && 'bg-active-bg',
           stepStatus(i) !== 'current' && 'hover:bg-hover',
         ]"
@@ -166,6 +166,11 @@ function stepStatus(i: number): 'done' | 'current' | 'upcoming' {
 }
 .step-nav-horizontal {
   border-bottom: 1px solid var(--color-line-soft);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.step-nav-horizontal::-webkit-scrollbar {
+  display: none;
 }
 .step-nav-divider {
   border-top: 1px solid var(--color-line-soft);

@@ -27,36 +27,24 @@ import {
 } from 'lucide-vue-next'
 
 const sidebarSections = [
-  {
-    label: 'Workspace',
-    items: [
-      { key: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-      { key: 'reports', label: 'Reports', icon: BarChart3 },
-    ],
-  },
-  {
-    label: 'Portfolio',
-    items: [
-      { key: 'property', label: 'Properties', icon: Building, count: 48 },
-      { key: 'units', label: 'Units', icon: Grid3X3, count: 312 },
-      { key: 'tenants', label: 'Tenants', icon: Users, count: 287 },
-      { key: 'leases', label: 'Leases', icon: FileText, count: 287 },
-    ],
-  },
-  {
-    label: 'Operations',
-    items: [
-      { key: 'payments', label: 'Payments', icon: CreditCard },
-      { key: 'work-orders', label: 'Work orders', icon: Wrench, count: 14 },
-      { key: 'inspections', label: 'Inspections', icon: Search },
-    ],
-  },
-  {
-    label: 'System',
-    items: [
-      { key: 'settings', label: 'Settings', icon: Settings },
-    ],
-  },
+  { title: 'Workspace', items: [
+    { key: 'dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+    { key: 'reports', icon: BarChart3, label: 'Reports' },
+  ]},
+  { title: 'Portfolio', items: [
+    { key: 'property', icon: Building, label: 'Properties', badge: 48 },
+    { key: 'units', icon: Grid3X3, label: 'Units', badge: 312 },
+    { key: 'tenants', icon: Users, label: 'Tenants', badge: 287 },
+    { key: 'leases', icon: FileText, label: 'Leases', badge: 287 },
+  ]},
+  { title: 'Operations', items: [
+    { key: 'payments', icon: CreditCard, label: 'Payments' },
+    { key: 'work-orders', icon: Wrench, label: 'Work orders', badge: 14 },
+    { key: 'inspections', icon: Search, label: 'Inspections' },
+  ]},
+  { title: 'System', items: [
+    { key: 'settings', icon: Settings, label: 'Settings' },
+  ]},
 ]
 
 const kanbanStages = [
@@ -107,20 +95,20 @@ export const Default: Story = {
       }
     },
     template: `
-      <div class="w-full max-w-[1280px] min-h-screen lg:h-[820px] flex font-sans">
+      <div class="w-full min-h-screen lg:h-[820px] flex font-sans">
         <PSidebar active="dashboard" :sections="sidebarSections" />
 
         <div class="flex-1 flex flex-col min-w-0">
           <PTopNav :breadcrumb="['Workspace', 'Dashboard']" />
 
-          <div style="flex: 1; overflow: auto; padding: 20px 24px; background: var(--color-bg);">
+          <div class="flex-1 overflow-auto p-4 sm:p-5 lg:p-6 bg-bg">
 
             <!-- Greeting header -->
             <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-5">
               <div>
-                <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px;">Sunday \u00b7 April 19, 2026</div>
-                <h1 style="font-size: 24px; font-weight: 600; margin: 0 0 4px 0; color: var(--color-text);">Good morning, Elena.</h1>
-                <div style="font-size: 14px; color: var(--color-text-secondary);">You have 6 events today.</div>
+                <div class="text-xs text-ink3 mb-1">Sunday \u00b7 April 19, 2026</div>
+                <h1 class="text-xl sm:text-2xl font-semibold m-0 mb-1 text-ink">Good morning, Elena.</h1>
+                <div class="text-sm text-ink3">You have 6 events today.</div>
               </div>
               <div class="hidden sm:flex gap-2">
                 <PButton variant="ghost" :icon="Calendar">Today</PButton>
@@ -133,7 +121,7 @@ export const Default: Story = {
             </div>
 
             <!-- KPI strip -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-5">
               <PKpiCard label="Showings today" value="4" tone="neutral" />
               <PKpiCard label="Active leads" value="23" delta="+3 this week" tone="good" />
               <PKpiCard label="Rent collected" value="$118,240" tone="good" mono />
@@ -141,15 +129,15 @@ export const Default: Story = {
             </div>
 
             <!-- Main grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-4 mb-5">
+            <div class="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-3 sm:gap-4 mb-5">
 
               <!-- Today's schedule -->
-              <div style="background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 12px; overflow: hidden;">
-                <div style="padding: 16px 16px 12px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-line);">
-                  <span style="font-weight: 600; font-size: 14px; color: var(--color-text);">Today's schedule</span>
+              <div class="bg-surface border border-line rounded-xl overflow-hidden">
+                <div class="px-4 pt-4 pb-3 flex justify-between items-center border-b border-line">
+                  <span class="font-semibold text-sm text-ink">Today's schedule</span>
                   <PButton variant="ghost" size="sm">View all</PButton>
                 </div>
-                <div style="padding: 8px 12px; display: flex; flex-direction: column; gap: 4px;">
+                <div class="p-2 px-3 flex flex-col gap-1">
                   <PAgendaItem time="09:00" duration="30m" type="Showing" label="Unit 4B \u00b7 Harper Hall" tone="info" status="confirmed" />
                   <PAgendaItem time="10:00" duration="45m" type="Inspection" label="Unit 12A \u00b7 Ashford Row" tone="warn" status="pending" />
                   <PAgendaItem time="11:30" duration="30m" type="Showing" label="Unit 7C \u00b7 North Ridge" tone="info" status="confirmed" />
@@ -160,15 +148,15 @@ export const Default: Story = {
               </div>
 
               <!-- Right column -->
-              <div style="display: flex; flex-direction: column; gap: 16px;">
+              <div class="flex flex-col gap-3 sm:gap-4">
 
                 <!-- Tasks -->
-                <div style="background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 12px; overflow: hidden;">
-                  <div style="padding: 16px 16px 12px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-line);">
-                    <span style="font-weight: 600; font-size: 14px; color: var(--color-text);">Tasks</span>
+                <div class="bg-surface border border-line rounded-xl overflow-hidden">
+                  <div class="px-4 pt-4 pb-3 flex justify-between items-center border-b border-line">
+                    <span class="font-semibold text-sm text-ink">Tasks</span>
                     <PButton variant="ghost" size="sm">View all</PButton>
                   </div>
-                  <div style="padding: 8px 12px; display: flex; flex-direction: column; gap: 4px;">
+                  <div class="p-2 px-3 flex flex-col gap-1">
                     <PTaskItem label="Send lease docs to M. Delacroix" when="08:00" v-model="t1" />
                     <PTaskItem label="Follow up on maintenance #247" when="09:30" v-model="t2" />
                     <PTaskItem label="Confirm showing with K. Rivera" when="10:00" v-model="t3" />
@@ -180,12 +168,12 @@ export const Default: Story = {
                 </div>
 
                 <!-- Messages -->
-                <div style="background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 12px; overflow: hidden;">
-                  <div style="padding: 16px 16px 12px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-line);">
-                    <span style="font-weight: 600; font-size: 14px; color: var(--color-text);">Messages</span>
+                <div class="bg-surface border border-line rounded-xl overflow-hidden">
+                  <div class="px-4 pt-4 pb-3 flex justify-between items-center border-b border-line">
+                    <span class="font-semibold text-sm text-ink">Messages</span>
                     <PButton variant="ghost" size="sm">View all</PButton>
                   </div>
-                  <div style="padding: 4px 12px; display: flex; flex-direction: column; gap: 2px;">
+                  <div class="p-1 px-3 flex flex-col gap-0.5">
                     <PMessageItem from="K. Rivera" unit="4B \u00b7 Harper Hall" preview="Sorry for the delay \u2014 I attached the signed addendum to the portal last night." time="08:42" :unread="true" />
                     <PMessageItem from="J. Okonkwo" unit="12A \u00b7 Ashford Row" preview="The kitchen faucet is still dripping after the repair visit yesterday." time="Yesterday" :unread="true" />
                     <PMessageItem from="M. Delacroix" unit="2C \u00b7 Briarwood 7" preview="Thanks for sending over the lease renewal. I'll review it this weekend." time="Mon" :unread="false" />
@@ -197,50 +185,50 @@ export const Default: Story = {
             </div>
 
             <!-- Bottom grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_0.8fr] gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_0.8fr] gap-3 sm:gap-4">
 
               <!-- Lead pipeline -->
-              <div style="background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 12px; overflow: hidden;">
-                <div style="padding: 16px 16px 12px; border-bottom: 1px solid var(--color-line);">
-                  <span style="font-weight: 600; font-size: 14px; color: var(--color-text);">Lead pipeline</span>
+              <div class="bg-surface border border-line rounded-xl overflow-hidden">
+                <div class="px-4 pt-4 pb-3 border-b border-line">
+                  <span class="font-semibold text-sm text-ink">Lead pipeline</span>
                 </div>
-                <div style="padding: 16px;">
+                <div class="p-4">
                   <PKanbanStageBar :stages="kanbanStages" />
                 </div>
               </div>
 
               <!-- Work orders -->
-              <div style="background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 12px; overflow: hidden;">
-                <div style="padding: 16px 16px 12px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-line);">
-                  <span style="font-weight: 600; font-size: 14px; color: var(--color-text);">Work orders</span>
+              <div class="bg-surface border border-line rounded-xl overflow-hidden">
+                <div class="px-4 pt-4 pb-3 flex justify-between items-center border-b border-line">
+                  <span class="font-semibold text-sm text-ink">Work orders</span>
                   <PButton variant="ghost" size="sm">View all</PButton>
                 </div>
-                <div style="padding: 8px 12px; display: flex; flex-direction: column; gap: 8px;">
-                  <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                      <div style="font-size: 13px; font-weight: 500; color: var(--color-text);">HVAC repair \u2014 Unit 3A</div>
-                      <div style="font-size: 12px; color: var(--color-text-secondary);">Linden Court</div>
+                <div class="p-2 px-3 flex flex-col gap-2">
+                  <div class="flex justify-between items-center">
+                    <div class="min-w-0">
+                      <div class="text-[13px] font-medium text-ink truncate">HVAC repair \u2014 Unit 3A</div>
+                      <div class="text-xs text-ink3">Linden Court</div>
                     </div>
                     <PBadge tone="danger">Urgent</PBadge>
                   </div>
-                  <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                      <div style="font-size: 13px; font-weight: 500; color: var(--color-text);">Leaking faucet \u2014 Unit 12A</div>
-                      <div style="font-size: 12px; color: var(--color-text-secondary);">Ashford Row</div>
+                  <div class="flex justify-between items-center">
+                    <div class="min-w-0">
+                      <div class="text-[13px] font-medium text-ink truncate">Leaking faucet \u2014 Unit 12A</div>
+                      <div class="text-xs text-ink3">Ashford Row</div>
                     </div>
                     <PBadge tone="warn">High</PBadge>
                   </div>
-                  <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                      <div style="font-size: 13px; font-weight: 500; color: var(--color-text);">Broken window lock \u2014 Unit 5B</div>
-                      <div style="font-size: 12px; color: var(--color-text-secondary);">North Ridge</div>
+                  <div class="flex justify-between items-center">
+                    <div class="min-w-0">
+                      <div class="text-[13px] font-medium text-ink truncate">Broken window lock \u2014 Unit 5B</div>
+                      <div class="text-xs text-ink3">North Ridge</div>
                     </div>
                     <PBadge tone="neutral">Normal</PBadge>
                   </div>
-                  <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                      <div style="font-size: 13px; font-weight: 500; color: var(--color-text);">Paint touch-up \u2014 Unit 8D</div>
-                      <div style="font-size: 12px; color: var(--color-text-secondary);">Cedar Lofts</div>
+                  <div class="flex justify-between items-center">
+                    <div class="min-w-0">
+                      <div class="text-[13px] font-medium text-ink truncate">Paint touch-up \u2014 Unit 8D</div>
+                      <div class="text-xs text-ink3">Cedar Lofts</div>
                     </div>
                     <PBadge tone="neutral">Low</PBadge>
                   </div>
@@ -248,37 +236,37 @@ export const Default: Story = {
               </div>
 
               <!-- Needs attention -->
-              <div style="background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 12px; overflow: hidden;">
-                <div style="padding: 16px 16px 12px; border-bottom: 1px solid var(--color-line);">
-                  <span style="font-weight: 600; font-size: 14px; color: var(--color-text);">Needs attention</span>
+              <div class="bg-surface border border-line rounded-xl overflow-hidden">
+                <div class="px-4 pt-4 pb-3 border-b border-line">
+                  <span class="font-semibold text-sm text-ink">Needs attention</span>
                 </div>
-                <div style="padding: 8px 12px; display: flex; flex-direction: column; gap: 8px;">
-                  <div style="display: flex; gap: 8px; align-items: flex-start;">
-                    <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--color-danger); margin-top: 6px; flex-shrink: 0;"></div>
-                    <div>
-                      <div style="font-size: 13px; font-weight: 500; color: var(--color-text);">Lease expiring in 3 days</div>
-                      <div style="font-size: 12px; color: var(--color-text-secondary);">Unit 2C \u00b7 Briarwood 7</div>
+                <div class="p-2 px-3 flex flex-col gap-2">
+                  <div class="flex gap-2 items-start">
+                    <div class="w-1.5 h-1.5 rounded-full bg-danger mt-1.5 shrink-0"></div>
+                    <div class="min-w-0">
+                      <div class="text-[13px] font-medium text-ink">Lease expiring in 3 days</div>
+                      <div class="text-xs text-ink3">Unit 2C \u00b7 Briarwood 7</div>
                     </div>
                   </div>
-                  <div style="display: flex; gap: 8px; align-items: flex-start;">
-                    <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--color-warn); margin-top: 6px; flex-shrink: 0;"></div>
-                    <div>
-                      <div style="font-size: 13px; font-weight: 500; color: var(--color-text);">Rent overdue 12 days</div>
-                      <div style="font-size: 12px; color: var(--color-text-secondary);">Unit 9A \u00b7 Cedar Lofts</div>
+                  <div class="flex gap-2 items-start">
+                    <div class="w-1.5 h-1.5 rounded-full bg-warn mt-1.5 shrink-0"></div>
+                    <div class="min-w-0">
+                      <div class="text-[13px] font-medium text-ink">Rent overdue 12 days</div>
+                      <div class="text-xs text-ink3">Unit 9A \u00b7 Cedar Lofts</div>
                     </div>
                   </div>
-                  <div style="display: flex; gap: 8px; align-items: flex-start;">
-                    <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--color-warn); margin-top: 6px; flex-shrink: 0;"></div>
-                    <div>
-                      <div style="font-size: 13px; font-weight: 500; color: var(--color-text);">Insurance cert expired</div>
-                      <div style="font-size: 12px; color: var(--color-text-secondary);">Market Square</div>
+                  <div class="flex gap-2 items-start">
+                    <div class="w-1.5 h-1.5 rounded-full bg-warn mt-1.5 shrink-0"></div>
+                    <div class="min-w-0">
+                      <div class="text-[13px] font-medium text-ink">Insurance cert expired</div>
+                      <div class="text-xs text-ink3">Market Square</div>
                     </div>
                   </div>
-                  <div style="display: flex; gap: 8px; align-items: flex-start;">
-                    <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--color-info); margin-top: 6px; flex-shrink: 0;"></div>
-                    <div>
-                      <div style="font-size: 13px; font-weight: 500; color: var(--color-text);">Inspection due this week</div>
-                      <div style="font-size: 12px; color: var(--color-text-secondary);">Unit 7C \u00b7 North Ridge</div>
+                  <div class="flex gap-2 items-start">
+                    <div class="w-1.5 h-1.5 rounded-full bg-info mt-1.5 shrink-0"></div>
+                    <div class="min-w-0">
+                      <div class="text-[13px] font-medium text-ink">Inspection due this week</div>
+                      <div class="text-xs text-ink3">Unit 7C \u00b7 North Ridge</div>
                     </div>
                   </div>
                 </div>

@@ -51,9 +51,9 @@ function close() {
   <Transition name="chat-panel">
     <div
       v-if="open"
-      class="fixed bottom-20 right-6 z-50"
+      class="fixed inset-0 sm:inset-auto sm:bottom-20 sm:right-6 z-50"
     >
-      <div class="chat-panel-container w-[400px] h-[600px] max-h-[80vh] bg-bg rounded-2xl shadow-modal flex flex-col overflow-hidden">
+      <div class="chat-panel-container w-full h-full sm:w-[400px] sm:h-[600px] sm:max-h-[80vh] bg-bg sm:rounded-2xl shadow-modal flex flex-col overflow-hidden">
         <!-- Header -->
         <div class="chat-panel-header px-4 py-3 flex items-center gap-3">
           <!-- Avatar -->

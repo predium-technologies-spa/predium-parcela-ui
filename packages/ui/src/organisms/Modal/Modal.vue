@@ -55,13 +55,13 @@ defineEmits<{
         <Transition name="modal-dialog" appear>
           <div
             v-if="open"
-            class="relative bg-surface rounded-2xl shadow-modal overflow-hidden w-[calc(100%-2rem)] sm:w-auto mx-4 sm:mx-auto"
+            class="relative bg-surface rounded-xl sm:rounded-2xl shadow-modal overflow-hidden w-[calc(100%-1.5rem)] sm:w-auto mx-3 sm:mx-auto max-h-[calc(100vh-2rem)]"
             :style="{ maxWidth: `${width}px` }"
             role="dialog"
             aria-modal="true"
           >
             <!-- Header -->
-            <div class="px-5 py-4 flex gap-3.5 border-b border-line-soft">
+            <div class="px-4 py-3 sm:px-5 sm:py-4 flex gap-3 sm:gap-3.5 border-b border-line-soft">
               <div
                 v-if="variant === 'destructive'"
                 class="w-8 h-8 rounded-xl bg-danger-bg text-danger grid place-items-center shrink-0"
@@ -77,7 +77,7 @@ defineEmits<{
                   </div>
                   <button
                     type="button"
-                    class="text-ink4 hover:text-ink transition-colors cursor-pointer"
+                    class="text-ink4 hover:text-ink transition-colors cursor-pointer p-2 -m-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
                     aria-label="Close"
                     @click="$emit('close')"
                   >
@@ -88,14 +88,14 @@ defineEmits<{
             </div>
 
             <!-- Body -->
-            <div class="px-5 py-4">
+            <div class="px-4 py-3 sm:px-5 sm:py-4 overflow-y-auto">
               <slot name="body" />
             </div>
 
             <!-- Footer -->
             <div
               v-if="$slots.footer"
-              class="px-5 py-3 bg-bg border-t border-line flex items-center gap-2"
+              class="px-4 py-3 sm:px-5 bg-bg border-t border-line flex flex-wrap items-center gap-2"
             >
               <slot name="footer" />
             </div>

@@ -28,36 +28,24 @@ import {
 } from 'lucide-vue-next'
 
 const sidebarSections = [
-  {
-    label: 'Workspace',
-    items: [
-      { key: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-      { key: 'reports', label: 'Reports', icon: BarChart3 },
-    ],
-  },
-  {
-    label: 'Portfolio',
-    items: [
-      { key: 'property', label: 'Properties', icon: Building, count: 48 },
-      { key: 'units', label: 'Units', icon: Grid3X3, count: 312 },
-      { key: 'tenants', label: 'Tenants', icon: Users, count: 287 },
-      { key: 'leases', label: 'Leases', icon: FileText, count: 287 },
-    ],
-  },
-  {
-    label: 'Operations',
-    items: [
-      { key: 'payments', label: 'Payments', icon: CreditCard },
-      { key: 'work-orders', label: 'Work orders', icon: Wrench, count: 14 },
-      { key: 'inspections', label: 'Inspections', icon: Search },
-    ],
-  },
-  {
-    label: 'System',
-    items: [
-      { key: 'settings', label: 'Settings', icon: Settings },
-    ],
-  },
+  { title: 'Workspace', items: [
+    { key: 'dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+    { key: 'reports', icon: BarChart3, label: 'Reports' },
+  ]},
+  { title: 'Portfolio', items: [
+    { key: 'property', icon: Building, label: 'Properties', badge: 48 },
+    { key: 'units', icon: Grid3X3, label: 'Units', badge: 312 },
+    { key: 'tenants', icon: Users, label: 'Tenants', badge: 287 },
+    { key: 'leases', icon: FileText, label: 'Leases', badge: 287 },
+  ]},
+  { title: 'Operations', items: [
+    { key: 'payments', icon: CreditCard, label: 'Payments' },
+    { key: 'work-orders', icon: Wrench, label: 'Work orders', badge: 14 },
+    { key: 'inspections', icon: Search, label: 'Inspections' },
+  ]},
+  { title: 'System', items: [
+    { key: 'settings', icon: Settings, label: 'Settings' },
+  ]},
 ]
 
 const columns = [
@@ -118,19 +106,19 @@ export const Default: Story = {
       }
     },
     template: `
-      <div class="w-full max-w-[1280px] min-h-screen lg:h-[820px] flex font-sans">
+      <div class="w-full min-h-screen lg:h-[820px] flex font-sans">
         <PSidebar active="property" :sections="sidebarSections" />
 
         <div class="flex-1 flex flex-col min-w-0">
           <PTopNav :breadcrumb="['Portfolio', 'Properties']" />
 
-          <div style="flex: 1; overflow: auto; padding: 20px 24px; background: var(--color-bg);">
+          <div class="flex-1 overflow-auto p-4 sm:p-5 lg:p-6 bg-bg">
 
             <!-- Page header -->
             <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-5">
               <div>
-                <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px;">Portfolio</div>
-                <h1 style="font-size: 24px; font-weight: 600; margin: 0; color: var(--color-text);">Properties</h1>
+                <div class="text-xs text-ink3 mb-1">Portfolio</div>
+                <h1 class="text-xl sm:text-2xl font-semibold m-0 text-ink">Properties</h1>
               </div>
               <div class="flex flex-wrap gap-2">
                 <PButton variant="ghost" :icon="Upload" class="hidden sm:inline-flex">Import</PButton>
@@ -140,7 +128,7 @@ export const Default: Story = {
             </div>
 
             <!-- KPI bar -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-5">
               <PKpiCard label="Properties" value="48" delta="+2 this qtr" tone="good" />
               <PKpiCard label="Units" value="312" delta="0 change" tone="neutral" />
               <PKpiCard label="Monthly rent" value="$612,840" delta="+4.2%" tone="good" mono />
@@ -160,8 +148,8 @@ export const Default: Story = {
             <PDataTable :columns="columns" :rows="rows" selectable sortable>
               <template #cell-property="{ row }">
                 <div>
-                  <div style="font-weight: 500;">{{ row.property }}</div>
-                  <div style="font-size: 12px; color: var(--color-text-secondary);">{{ row.address }}</div>
+                  <div class="font-medium">{{ row.property }}</div>
+                  <div class="text-xs text-ink3">{{ row.address }}</div>
                 </div>
               </template>
               <template #cell-status="{ row }">
@@ -170,15 +158,15 @@ export const Default: Story = {
             </PDataTable>
 
             <!-- Pagination footer -->
-            <div class="flex flex-col sm:flex-row justify-between items-center gap-3 py-3" style="font-size: 13px; color: var(--color-text-secondary);">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-3 py-3 text-[13px] text-ink3">
               <span>Showing 1\u20139 of 48 properties</span>
-              <div style="display: flex; gap: 4px;">
-                <button style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--color-line); background: var(--color-primary); color: white; font-size: 13px; cursor: pointer;">1</button>
-                <button style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--color-line); background: var(--color-surface); color: var(--color-text); font-size: 13px; cursor: pointer;">2</button>
-                <button style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--color-line); background: var(--color-surface); color: var(--color-text); font-size: 13px; cursor: pointer;">3</button>
-                <button class="hidden sm:block" style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--color-line); background: var(--color-surface); color: var(--color-text); font-size: 13px; cursor: pointer;">4</button>
-                <button class="hidden sm:block" style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--color-line); background: var(--color-surface); color: var(--color-text); font-size: 13px; cursor: pointer;">5</button>
-                <button class="hidden sm:block" style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--color-line); background: var(--color-surface); color: var(--color-text); font-size: 13px; cursor: pointer;">6</button>
+              <div class="flex gap-1">
+                <button class="w-8 h-8 rounded-md border border-line bg-accent text-white text-[13px] cursor-pointer">1</button>
+                <button class="w-8 h-8 rounded-md border border-line bg-surface text-ink text-[13px] cursor-pointer">2</button>
+                <button class="w-8 h-8 rounded-md border border-line bg-surface text-ink text-[13px] cursor-pointer">3</button>
+                <button class="hidden sm:block w-8 h-8 rounded-md border border-line bg-surface text-ink text-[13px] cursor-pointer">4</button>
+                <button class="hidden sm:block w-8 h-8 rounded-md border border-line bg-surface text-ink text-[13px] cursor-pointer">5</button>
+                <button class="hidden sm:block w-8 h-8 rounded-md border border-line bg-surface text-ink text-[13px] cursor-pointer">6</button>
               </div>
             </div>
 

@@ -113,7 +113,7 @@ export const Default: Story = {
       }
     },
     template: `
-      <div class="flex w-full max-w-[1280px] min-h-screen lg:h-[820px] overflow-hidden" style="background: var(--color-bg);">
+      <div class="flex w-full min-h-screen lg:h-[820px] overflow-hidden bg-bg">
         <!-- Sidebar -->
         <PSidebar :sections="sidebarSections" active="payments" />
 
@@ -122,13 +122,13 @@ export const Default: Story = {
           <PTopNav :breadcrumb="['Operations', 'Payments', 'History']" />
 
           <!-- Content -->
-          <div class="flex-1 overflow-y-auto px-4 py-6 sm:px-6 md:px-8" style="background: var(--color-bg);">
+          <div class="flex-1 overflow-y-auto p-4 sm:p-5 lg:p-6 bg-bg">
             <!-- Header -->
             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 mb-5">
               <div>
-                <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-secondary); margin-bottom: 4px;">Operations</div>
-                <div style="font-size: 22px; font-weight: 600; color: var(--color-text); margin-bottom: 4px;">Payment history</div>
-                <div style="font-size: 13px; color: var(--color-text-secondary);">All ledger entries across your portfolio &middot; last 30 days</div>
+                <div class="text-[11px] uppercase tracking-wide text-ink3 mb-1">Operations</div>
+                <div class="text-xl sm:text-[22px] font-semibold text-ink mb-1">Payment history</div>
+                <div class="text-[13px] text-ink3">All ledger entries across your portfolio &middot; last 30 days</div>
               </div>
               <div class="flex gap-2">
                 <PButton variant="ghost" size="sm" :icon="Download" class="hidden sm:inline-flex">Export</PButton>
@@ -137,7 +137,7 @@ export const Default: Story = {
             </div>
 
             <!-- KPI row -->
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 mb-5">
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 mb-5">
               <PKpiCard label="Collected" value="$41,090" tone="good" mono>
                 <template #sparkline>
                   <PSparkline :points="[3,4,3,5,4,6,5]" variant="line" tone="good" :height="28" />
@@ -163,25 +163,16 @@ export const Default: Story = {
             </PToolbar>
 
             <!-- Data table -->
-            <div style="margin-top: 0;">
+            <div>
               <PDataTable :columns="paymentColumns" :rows="paymentRows" selectable sortable>
                 <template #cell-tenant="{ row }">
-                  <div style="display: flex; align-items: center; gap: 8px;">
+                  <div class="flex items-center gap-2">
                     <PAvatar :initials="row.initials" size="sm" />
                     <span>{{ row.tenant }}</span>
                   </div>
                 </template>
                 <template #cell-method="{ row }">
-                  <span
-                    style="
-                      font-size: 11px;
-                      padding: 2px 8px;
-                      border-radius: 4px;
-                      background: var(--color-bg-hover);
-                      color: var(--color-text-secondary);
-                      font-weight: 500;
-                    "
-                  >{{ row.method }}</span>
+                  <span class="text-[11px] px-2 py-0.5 rounded bg-bg-hover text-ink3 font-medium">{{ row.method }}</span>
                 </template>
                 <template #cell-status="{ row }">
                   <PBadge :tone="row.statusTone">{{ row.status }}</PBadge>
@@ -190,13 +181,13 @@ export const Default: Story = {
             </div>
 
             <!-- Footer totals & pagination -->
-            <div class="flex flex-col sm:flex-row justify-between items-center gap-3 py-3 border-t mt-0" style="border-color: var(--color-border);">
-              <div style="font-size: 13px; color: var(--color-text-secondary);">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-3 py-3 border-t border-line mt-0">
+              <div class="text-[13px] text-ink3">
                 Showing 1&ndash;14 of 214 payments
               </div>
-              <div style="display: flex; align-items: center; gap: 4px;">
-                <span style="font-size: 13px; font-weight: 600; color: var(--color-text-secondary);">Total visible:</span>
-                <span style="font-size: 13px; font-weight: 600; font-family: var(--font-mono); color: var(--color-text);">$31,800.00</span>
+              <div class="flex items-center gap-1">
+                <span class="text-[13px] font-semibold text-ink3">Total visible:</span>
+                <span class="text-[13px] font-semibold font-mono text-ink">$31,800.00</span>
               </div>
             </div>
           </div>

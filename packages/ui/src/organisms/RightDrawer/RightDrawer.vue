@@ -53,14 +53,14 @@ defineEmits<{
       :class="'md:[width:var(--drawer-width)]'"
     >
       <!-- Header -->
-      <div class="px-5 py-4 border-b border-line">
+      <div class="px-4 py-3 md:px-5 md:py-4 border-b border-line">
         <div class="flex justify-between items-center mb-1">
           <div v-if="eyebrow" class="text-xs text-ink3 uppercase tracking-wide font-medium">
             {{ eyebrow }}
           </div>
           <button
             type="button"
-            class="text-ink3 hover:text-ink transition-colors cursor-pointer"
+            class="text-ink3 hover:text-ink transition-colors cursor-pointer p-2 -m-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
             aria-label="Close"
             @click="$emit('update:open', false); $emit('close')"
           >
@@ -73,12 +73,12 @@ defineEmits<{
       </div>
 
       <!-- Body -->
-      <div class="flex-1 overflow-auto px-5 py-4">
+      <div class="flex-1 overflow-auto px-4 py-3 md:px-5 md:py-4">
         <slot name="body" />
       </div>
 
       <!-- Footer -->
-      <div v-if="$slots.footer" class="px-5 py-3 border-t border-line flex items-center gap-2">
+      <div v-if="$slots.footer" class="px-4 py-3 md:px-5 border-t border-line flex flex-wrap items-center gap-2">
         <slot name="footer" />
       </div>
     </div>

@@ -30,7 +30,7 @@ withDefaults(defineProps<FormSectionProps>(), {
       current ? 'border-ink border-[1.5px] shadow-sticky' : 'border-line',
     ]"
   >
-    <div class="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6 p-5">
+    <div class="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-4 lg:gap-6 p-4 lg:p-5">
       <!-- Left: description -->
       <div>
         <div class="flex items-center gap-2 mb-1">
@@ -43,7 +43,7 @@ withDefaults(defineProps<FormSectionProps>(), {
             Current
           </span>
         </div>
-        <p v-if="description" class="text-base text-ink3 leading-relaxed">{{ description }}</p>
+        <p v-if="description" class="text-base text-ink3 leading-relaxed max-w-prose">{{ description }}</p>
         <!-- Extra slot for validation notices etc. -->
         <slot name="aside" />
       </div>

@@ -62,7 +62,7 @@ export const Default: Story = {
       return { sidebarSections, AlertTriangle, X, Trash2, showModal, sidebarExpanded }
     },
     template: `
-      <div class="relative font-sans text-ink w-full max-w-[1280px] min-h-screen lg:h-[820px] overflow-hidden">
+      <div class="relative font-sans text-ink w-full min-h-screen lg:h-[820px] overflow-hidden">
         <!-- Background -->
         <div class="flex w-full h-full" :style="showModal ? 'filter: saturate(0.7)' : ''">
           <PSidebar :sections="sidebarSections" active="property" v-model:expanded="sidebarExpanded" />

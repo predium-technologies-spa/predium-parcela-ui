@@ -31,9 +31,9 @@ withDefaults(defineProps<AgendaItemProps>(), {
 </script>
 
 <template>
-  <div class="flex items-stretch gap-3.5 px-4 py-3 border-b border-line-soft hover:bg-hover transition-colors">
+  <div class="flex items-stretch gap-2.5 sm:gap-3.5 px-3 sm:px-4 py-3 border-b border-line-soft hover:bg-hover transition-colors min-h-[44px]">
     <!-- Time -->
-    <div class="w-[52px] shrink-0">
+    <div class="w-[48px] sm:w-[52px] shrink-0">
       <div class="font-mono text-md text-ink font-medium">{{ time }}</div>
       <div class="font-mono text-xs text-ink4">{{ duration }}</div>
     </div>
@@ -51,7 +51,7 @@ withDefaults(defineProps<AgendaItemProps>(), {
 
     <!-- Content -->
     <div class="flex-1 min-w-0">
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
         <span class="text-xs uppercase tracking-wide text-ink3 font-medium">{{ type }}</span>
         <PBadge v-if="status === 'flagged'" tone="warn">Follow-up</PBadge>
         <PBadge v-if="status === 'pending'" tone="neutral">Pending</PBadge>
@@ -60,7 +60,7 @@ withDefaults(defineProps<AgendaItemProps>(), {
       <div v-if="sublabel" class="text-sm text-ink3">{{ sublabel }}</div>
     </div>
 
-    <div class="flex items-center">
+    <div class="flex items-center min-w-[44px] min-h-[44px] justify-center -mr-2 sm:min-w-0 sm:min-h-0 sm:mr-0">
       <ChevronRight :size="14" class="text-ink4" aria-hidden="true" />
     </div>
   </div>

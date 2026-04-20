@@ -27,7 +27,7 @@ withDefaults(defineProps<KpiCardProps>(), {
 </script>
 
 <template>
-  <div class="bg-surface border border-line rounded-xl p-3.5">
+  <div class="bg-surface border border-line rounded-xl p-3.5 min-w-0">
     <div class="text-sm text-ink3">{{ label }}</div>
     <div
       :class="[

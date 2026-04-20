@@ -58,7 +58,7 @@ defineEmits<{
 <template>
   <aside
     :class="[
-      'h-full bg-bg border-r border-line flex flex-col shrink-0 transition-all duration-300 ease-in-out overflow-hidden',
+      'h-full bg-bg border-r border-line hidden lg:flex flex-col shrink-0 transition-all duration-300 ease-in-out overflow-hidden',
       expanded ? 'w-[240px]' : 'w-[56px]',
     ]"
   >

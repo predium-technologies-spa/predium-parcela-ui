@@ -28,7 +28,7 @@ withDefaults(defineProps<MessageItemProps>(), {
 <template>
   <div
     :class="[
-      'flex gap-2.5 px-3.5 py-2.5 border-b border-line-soft',
+      'flex gap-2.5 px-3 sm:px-3.5 py-2.5 border-b border-line-soft min-h-[44px]',
       unread ? 'bg-hover' : 'bg-transparent',
     ]"
   >

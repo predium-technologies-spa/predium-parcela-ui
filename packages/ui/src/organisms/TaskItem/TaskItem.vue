@@ -29,7 +29,7 @@ defineEmits<{
 </script>
 
 <template>
-  <div class="flex items-center gap-2.5 px-3.5 py-2.5 border-b border-line-soft">
+  <div class="flex items-center gap-2.5 px-3 sm:px-3.5 py-2.5 border-b border-line-soft min-h-[44px]">
     <PCheckbox
       :model-value="modelValue"
       @update:model-value="$emit('update:modelValue', $event)"

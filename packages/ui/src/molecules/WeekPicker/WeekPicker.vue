@@ -52,7 +52,7 @@ function selectDay(day: WeekDay) {
       <div
         v-for="header in headers"
         :key="header"
-        class="py-2.5 text-sm font-medium text-ink3 text-center"
+        class="py-2.5 text-xs sm:text-sm font-medium text-ink3 text-center"
       >
         {{ header }}
       </div>
@@ -64,7 +64,7 @@ function selectDay(day: WeekDay) {
         v-for="(day, idx) in days"
         :key="day.date"
         :class="[
-          'min-h-[72px] flex flex-col items-center justify-center gap-1 py-2 cursor-pointer transition-colors',
+          'min-h-[60px] sm:min-h-[72px] flex flex-col items-center justify-center gap-0.5 sm:gap-1 py-1.5 sm:py-2 cursor-pointer transition-colors',
           idx > 0 && 'week-picker-cell-border',
           !day.disabled && 'hover:bg-hover',
           day.disabled && 'opacity-40 cursor-not-allowed',
@@ -75,7 +75,7 @@ function selectDay(day: WeekDay) {
         <span v-if="day.month" class="text-xs text-ink4">{{ day.month }}</span>
         <span
           :class="[
-            'w-9 h-9 rounded-full flex items-center justify-center text-sm font-semibold transition-all',
+            'w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-xs sm:text-sm font-semibold transition-all',
             modelValue === day.date
               ? 'bg-accent text-white week-picker-pop'
               : 'text-ink',

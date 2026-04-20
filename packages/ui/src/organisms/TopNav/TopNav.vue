@@ -29,7 +29,7 @@ withDefaults(defineProps<TopNavProps>(), {
 
 <template>
   <header
-    class="h-12 border-b border-line flex items-center px-4 gap-3 bg-surface shrink-0"
+    class="h-12 border-b border-line flex items-center px-3 lg:px-4 gap-2 lg:gap-3 bg-surface shrink-0"
   >
     <PBreadcrumbTrail :items="breadcrumb" />
 
@@ -48,11 +48,11 @@ withDefaults(defineProps<TopNavProps>(), {
     </div>
 
     <!-- Actions -->
-    <div class="flex items-center gap-1 text-ink2">
-      <button type="button" class="p-1.5 rounded-lg hover:bg-hover transition-colors relative" aria-label="Notifications">
+    <div class="flex items-center gap-0.5 lg:gap-1 text-ink2">
+      <button type="button" class="p-2.5 lg:p-1.5 rounded-lg hover:bg-hover transition-colors relative min-w-[44px] min-h-[44px] lg:min-w-0 lg:min-h-0 flex items-center justify-center" aria-label="Notifications">
         <Bell :size="16" />
       </button>
-      <button type="button" class="p-1.5 rounded-lg hover:bg-hover transition-colors" aria-label="Calendar">
+      <button type="button" class="p-2.5 lg:p-1.5 rounded-lg hover:bg-hover transition-colors min-w-[44px] min-h-[44px] lg:min-w-0 lg:min-h-0 flex items-center justify-center" aria-label="Calendar">
         <Calendar :size="16" />
       </button>
       <div class="w-px h-5 bg-line mx-1" />
