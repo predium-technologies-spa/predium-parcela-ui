@@ -1,9 +1,9 @@
 <script setup lang="ts">
 /**
- * Top navigation bar with breadcrumb, search, and avatar.
+ * Top navigation bar with breadcrumb, functional search, and avatar.
  *
  * @example
- * <PTopNav :breadcrumb="['Portfolio', 'Properties']" />
+ * <PTopNav :breadcrumb="['Portfolio', 'Properties']" v-model:searchQuery="query" @search="onSearch" />
  */
 import { Search, Bell, Calendar } from 'lucide-vue-next'
 import { PBreadcrumbTrail } from '../../molecules/BreadcrumbTrail'
@@ -16,6 +16,8 @@ export interface TopNavProps {
   search?: boolean
   /** Search placeholder */
   searchPlaceholder?: string
+  /** Search query (v-model) */
+  searchQuery?: string
   /** User initials */
   userInitials?: string
 }
@@ -23,8 +25,14 @@ export interface TopNavProps {
 withDefaults(defineProps<TopNavProps>(), {
   search: true,
   searchPlaceholder: 'Search…',
+  searchQuery: '',
   userInitials: 'ER',
 })
+
+defineEmits<{
+  'update:searchQuery': [value: string]
+  'search': [query: string]
+}>()
 </script>
 
 <template>
@@ -35,15 +43,22 @@ withDefaults(defineProps<TopNavProps>(), {
 
     <div class="flex-1" />
 
-    <!-- Search -->
+    <!-- Search (functional input) -->
     <div
       v-if="search"
-      class="p-topnav-search hidden md:flex items-center gap-2 bg-bg rounded-lg px-2.5 h-8 w-[220px] lg:w-[260px] text-ink4 text-sm"
+      class="p-topnav-search hidden md:flex items-center gap-2 bg-bg rounded-lg px-2.5 h-8 w-[220px] lg:w-[260px] text-sm"
     >
-      <Search :size="14" class="shrink-0" aria-hidden="true" />
-      <span class="flex-1 truncate">{{ searchPlaceholder }}</span>
+      <Search :size="14" class="text-ink4 shrink-0" aria-hidden="true" />
+      <input
+        type="text"
+        :value="searchQuery"
+        :placeholder="searchPlaceholder"
+        class="flex-1 min-w-0 bg-transparent outline-none text-ink placeholder:text-ink4"
+        @input="$emit('update:searchQuery', ($event.target as HTMLInputElement).value)"
+        @keydown.enter="$emit('search', searchQuery)"
+      />
       <span
-        class="hidden lg:inline font-mono text-[10px] text-ink4 bg-surface px-1 py-px rounded border border-line shrink-0"
+        class="hidden lg:inline font-mono text-[10px] text-ink4 bg-surface px-1 py-px rounded shrink-0 kbd-badge"
       >⌘K</span>
     </div>
 
@@ -63,6 +78,12 @@ withDefaults(defineProps<TopNavProps>(), {
 
 <style scoped>
 .p-topnav-search {
+  border: 1px solid var(--color-line-soft);
+}
+.p-topnav-search:focus-within {
+  border-color: var(--color-accent);
+}
+.kbd-badge {
   border: 1px solid var(--color-line-soft);
 }
 </style>
