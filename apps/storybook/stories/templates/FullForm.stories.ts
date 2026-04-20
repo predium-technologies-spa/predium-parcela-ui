@@ -25,6 +25,7 @@ import {
   Settings,
   Calendar,
   Upload,
+  ChevronRight,
 } from 'lucide-vue-next'
 import { ref } from 'vue'
 
@@ -50,12 +51,12 @@ const sidebarSections = [
 ]
 
 const stepNavSteps = [
-  { label: 'Identity' },
-  { label: 'Address & Location' },
-  { label: 'Structure' },
-  { label: 'Financials' },
-  { label: 'Team & Access' },
-  { label: 'Documents' },
+  { number: '01', label: 'Identity' },
+  { number: '02', label: 'Address & Location' },
+  { number: '03', label: 'Structure' },
+  { number: '04', label: 'Financials' },
+  { number: '05', label: 'Team & Access' },
+  { number: '06', label: 'Documents' },
 ]
 
 const meta: Meta = {
@@ -71,220 +72,190 @@ type Story = StoryObj
 export const Default: Story = {
   render: () => ({
     components: {
-      PSidebar,
-      PTopNav,
-      PStepNav,
-      PFormSection,
-      PFormField,
-      PInput,
-      PSelect,
-      PSegmentedButton,
-      PChip,
-      PBadge,
-      PButton,
+      PSidebar, PTopNav, PStepNav, PFormSection, PFormField,
+      PInput, PSelect, PSegmentedButton, PChip, PBadge, PButton,
     },
     setup() {
+      const sidebarExpanded = ref(true)
       const propertyClass = ref('B+')
       return {
-        sidebarSections,
-        stepNavSteps,
-        Calendar,
-        Upload,
-        propertyClass,
+        sidebarSections, stepNavSteps, Calendar, Upload, ChevronRight,
+        propertyClass, sidebarExpanded,
       }
     },
     template: `
-      <div class="flex w-full max-w-[1280px] min-h-screen lg:h-[820px] overflow-hidden" style="background: var(--color-bg);">
-        <!-- Sidebar -->
-        <PSidebar :sections="sidebarSections" active="property" />
+      <div class="flex w-full max-w-[1280px] min-h-screen lg:h-[820px] overflow-hidden bg-bg font-sans text-ink">
+        <PSidebar :sections="sidebarSections" active="property" v-model:expanded="sidebarExpanded" />
 
-        <!-- Main area -->
         <div class="flex-1 flex flex-col min-w-0">
           <PTopNav :breadcrumb="['Portfolio', 'Properties', 'New property']" />
 
-          <!-- Content row -->
-          <div style="flex: 1; display: flex; overflow: hidden;">
-            <!-- Step Nav -->
+          <div class="flex-1 flex overflow-hidden">
             <PStepNav :steps="stepNavSteps" :current="3" :completed="[0, 1, 2]" />
 
             <!-- Form body -->
-            <div class="flex-1 overflow-y-auto px-4 py-6 sm:px-6 md:px-8 pb-[120px]" style="background: var(--color-bg);">
-              <!-- Page header -->
-              <div style="margin-bottom: 24px;">
-                <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-secondary); margin-bottom: 4px;">New record</div>
-                <div style="display: flex; align-items: center; gap: 12px;">
-                  <span style="font-size: 22px; font-weight: 600; color: var(--color-text);">Add property</span>
-                  <PBadge tone="warn">Draft &middot; autosaved 12s ago</PBadge>
+            <div class="flex-1 overflow-y-auto p-6 lg:p-8 pb-24 bg-bg">
+              <!-- Header -->
+              <div class="mb-6">
+                <div class="text-xs uppercase tracking-wide text-ink4 font-medium mb-1">New record</div>
+                <div class="flex items-center gap-3">
+                  <span class="text-2xl font-semibold text-ink tracking-tight">Add property</span>
+                  <PBadge tone="warn">Draft · autosaved 12s ago</PBadge>
                 </div>
+                <p class="text-base text-ink3 mt-1">Complete all sections to publish.</p>
               </div>
 
-              <!-- Section 01: Identity -->
-              <PFormSection number="01" title="Identity">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                  <PFormField label="Property name" required :cols="2">
-                    <PInput modelValue="Harper Hall" />
-                  </PFormField>
-                  <PFormField label="Property ID">
-                    <PInput modelValue="PRP-0126" mono />
-                  </PFormField>
-                  <PFormField label="Internal code">
-                    <PInput modelValue="HRP-BX-02" mono />
-                  </PFormField>
-                  <PFormField label="Classification">
-                    <PSelect
-                      modelValue="mixed-use"
-                      :options="[
-                        { label: 'Multi-family', value: 'multi-family' },
-                        { label: 'Mixed-use', value: 'mixed-use' },
-                        { label: 'Commercial', value: 'commercial' },
-                      ]"
-                    />
-                  </PFormField>
-                  <PFormField label="Sub-type">
-                    <PSelect
-                      modelValue="residential-retail"
-                      :options="[
-                        { label: 'Residential over retail', value: 'residential-retail' },
-                        { label: 'Office over retail', value: 'office-retail' },
-                      ]"
-                    />
-                  </PFormField>
-                  <PFormField label="Tags" :cols="2">
-                    <div style="display: flex; flex-wrap: wrap; gap: 6px;">
-                      <PChip removable>core</PChip>
-                      <PChip removable>renovated-2019</PChip>
-                      <PChip removable>bronx</PChip>
-                    </div>
-                  </PFormField>
-                </div>
+              <!-- 01 Identity -->
+              <PFormSection number="01" title="Identity" description="How this property is identified in the system.">
+                <PFormField label="Property name" required :cols="2">
+                  <PInput model-value="Harper Hall" />
+                </PFormField>
+                <PFormField label="Property ID" hint="auto">
+                  <PInput model-value="PRP-0126" mono />
+                </PFormField>
+                <PFormField label="Internal code">
+                  <PInput model-value="HRP-BX-02" mono />
+                </PFormField>
+                <PFormField label="Classification" required>
+                  <PSelect model-value="Mixed-use" :options="['Multifamily', 'Mixed-use', 'Retail', 'Office']" />
+                </PFormField>
+                <PFormField label="Sub-type">
+                  <PSelect model-value="Residential over retail" :options="['Residential over retail', 'Office over retail']" />
+                </PFormField>
+                <PFormField label="Tags" :cols="2">
+                  <div class="flex flex-wrap gap-1.5">
+                    <PChip removable>core</PChip>
+                    <PChip removable>renovated-2019</PChip>
+                    <PChip removable>bronx</PChip>
+                    <PChip removable>section8-eligible</PChip>
+                  </div>
+                </PFormField>
               </PFormSection>
 
-              <!-- Section 02: Address & Location -->
-              <PFormSection number="02" title="Address & Location">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                  <PFormField label="Street" :cols="2">
-                    <PInput modelValue="402 Harper St" />
-                  </PFormField>
-                  <PFormField label="City">
-                    <PInput modelValue="Bronx" />
-                  </PFormField>
-                  <PFormField label="State">
-                    <PSelect
-                      modelValue="ny"
-                      :options="[
-                        { label: 'New York', value: 'ny' },
-                        { label: 'New Jersey', value: 'nj' },
-                        { label: 'Connecticut', value: 'ct' },
-                      ]"
-                    />
-                  </PFormField>
-                  <PFormField label="ZIP">
-                    <PInput modelValue="10457" mono />
-                  </PFormField>
-                  <PFormField label="County">
-                    <PInput placeholder="Enter county" />
-                  </PFormField>
-                  <PFormField label="Latitude">
-                    <PInput placeholder="e.g. 40.8448" mono />
-                  </PFormField>
-                  <PFormField label="Longitude">
-                    <PInput placeholder="e.g. -73.8958" mono />
-                  </PFormField>
-                  <PFormField label="Parcel / APN" :cols="2">
-                    <PInput placeholder="Enter parcel number" mono />
-                  </PFormField>
-                </div>
+              <!-- 02 Address -->
+              <PFormSection number="02" title="Address & Location" description="Physical location for maps, routing, and tax filings.">
+                <PFormField label="Street" required :cols="2">
+                  <PInput model-value="402 Harper St" />
+                </PFormField>
+                <PFormField label="City" required>
+                  <PInput model-value="Bronx" />
+                </PFormField>
+                <PFormField label="State" required>
+                  <PSelect model-value="New York" :options="['New York', 'New Jersey', 'Connecticut']" />
+                </PFormField>
+                <PFormField label="ZIP" required>
+                  <PInput model-value="10457" mono />
+                </PFormField>
+                <PFormField label="County">
+                  <PInput model-value="Bronx County" />
+                </PFormField>
+                <PFormField label="Latitude">
+                  <PInput model-value="40.8537" mono />
+                </PFormField>
+                <PFormField label="Longitude">
+                  <PInput model-value="-73.8814" mono />
+                </PFormField>
+                <PFormField label="Parcel / APN" :cols="2" hint="Used for tax matching">
+                  <PInput model-value="BX-2988-0042-01" mono />
+                </PFormField>
               </PFormSection>
 
-              <!-- Section 03: Structure -->
-              <PFormSection number="03" title="Structure">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                  <PFormField label="Year built">
-                    <PInput modelValue="1948" mono />
-                  </PFormField>
-                  <PFormField label="Last renovation">
-                    <PInput modelValue="2019" mono />
-                  </PFormField>
-                  <PFormField label="Floors above grade">
-                    <PInput placeholder="e.g. 6" mono />
-                  </PFormField>
-                  <PFormField label="Floors below grade">
-                    <PInput placeholder="e.g. 1" mono />
-                  </PFormField>
-                  <PFormField label="Gross area" :cols="2">
-                    <PInput modelValue="42,180" mono suffix="sq ft" />
-                  </PFormField>
-                </div>
+              <!-- 03 Structure -->
+              <PFormSection number="03" title="Structure" description="Physical characteristics of the building.">
+                <PFormField label="Year built" required>
+                  <PInput model-value="1948" mono />
+                </PFormField>
+                <PFormField label="Last renovation">
+                  <PInput model-value="2019" mono />
+                </PFormField>
+                <PFormField label="Floors above grade">
+                  <PInput model-value="5" mono />
+                </PFormField>
+                <PFormField label="Floors below grade">
+                  <PInput model-value="1" mono />
+                </PFormField>
+                <PFormField label="Gross area" required>
+                  <PInput model-value="42,180" mono suffix="sqft" />
+                </PFormField>
+                <PFormField label="Net leasable area">
+                  <PInput model-value="36,420" mono suffix="sqft" />
+                </PFormField>
+                <PFormField label="Residential units" required>
+                  <PInput model-value="36" mono />
+                </PFormField>
+                <PFormField label="Commercial units">
+                  <PInput model-value="4" mono />
+                </PFormField>
               </PFormSection>
 
-              <!-- Section 04: Financials (current) -->
-              <PFormSection number="04" title="Financials" :current="true">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                  <PFormField label="Acquisition price" required :cols="2">
-                    <PInput modelValue="4,280,000" mono suffix="USD" />
-                  </PFormField>
-                  <PFormField label="Acquisition date" required>
-                    <PInput modelValue="Mar 14, 2021" :icon="Calendar" />
-                  </PFormField>
-                  <PFormField label="Property class">
-                    <PSegmentedButton v-model="propertyClass" :options="['A', 'B', 'B+', 'C']" />
-                  </PFormField>
-                  <PFormField label="Base rent estimate" :cols="2">
-                    <PInput modelValue="1,890.00" mono suffix="/ unit / mo" />
-                  </PFormField>
-                  <PFormField label="Expense ratio">
-                    <PInput modelValue="38" mono suffix="%" />
-                  </PFormField>
-                  <PFormField label="Cap rate">
-                    <PInput modelValue="5.4" mono suffix="%" />
-                  </PFormField>
-                  <PFormField label="Tax assessment">
-                    <PInput modelValue="3,710,000" mono suffix="USD" />
-                  </PFormField>
-                </div>
+              <!-- 04 Financials (current) -->
+              <PFormSection number="04" title="Financials" :current="true" description="Acquisition, rent estimates, and tax metadata.">
+                <PFormField label="Acquisition price" required hint="USD">
+                  <PInput model-value="4,280,000" mono suffix="USD" />
+                </PFormField>
+                <PFormField label="Acquisition date" required>
+                  <PInput model-value="Mar 14, 2021" :icon="Calendar" />
+                </PFormField>
+                <PFormField label="Property class" required :cols="2">
+                  <PSegmentedButton v-model="propertyClass" :options="['A', 'B', 'B+', 'C', 'D']" />
+                </PFormField>
+                <PFormField label="Base rent estimate" hint="Blended avg">
+                  <PInput model-value="1,890.00" mono suffix="/ unit / mo" />
+                </PFormField>
+                <PFormField label="Expense ratio" hint="Of gross">
+                  <PInput model-value="38" mono suffix="%" />
+                </PFormField>
+                <PFormField label="Cap rate">
+                  <PInput model-value="5.4" mono suffix="%" />
+                </PFormField>
+                <PFormField label="Tax assessment">
+                  <PInput model-value="3,710,000" mono suffix="USD" />
+                </PFormField>
+                <PFormField label="Reporting currency" :cols="2">
+                  <PSelect model-value="USD — United States Dollar" :options="['USD — United States Dollar', 'CLP — Chilean Peso']" />
+                </PFormField>
               </PFormSection>
 
-              <!-- Section 05: Team & Access -->
-              <PFormSection number="05" title="Team & Access">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                  <PFormField label="Primary manager">
-                    <PInput modelValue="D. Okafor" />
-                  </PFormField>
-                  <PFormField label="Owner entity">
-                    <PInput placeholder="Select entity" />
-                  </PFormField>
-                </div>
+              <!-- 05 Team & Access -->
+              <PFormSection number="05" title="Team & Access" description="Who manages this property.">
+                <PFormField label="Primary manager" required>
+                  <PInput model-value="D. Okafor" />
+                </PFormField>
+                <PFormField label="Owner entity" required>
+                  <PSelect model-value="Meridian Holdings LLC" :options="['Meridian Holdings LLC', 'Parcela Inc.']" />
+                </PFormField>
+                <PFormField label="Backup manager">
+                  <PSelect placeholder="Select a user" :options="['L. Moreno', 'A. Petrov']" />
+                </PFormField>
+                <PFormField label="Maintenance vendor">
+                  <PSelect model-value="North Bronx Services" :options="['North Bronx Services', 'Metro Repairs']" />
+                </PFormField>
               </PFormSection>
 
-              <!-- Section 06: Documents -->
-              <PFormSection number="06" title="Documents">
-                <div
-                  style="
-                    border: 2px dashed var(--color-border);
-                    border-radius: 8px;
-                    padding: 32px;
-                    text-align: center;
-                    color: var(--color-text-secondary);
-                    font-size: 13px;
-                  "
-                >
-                  <component :is="Upload" :size="24" style="margin: 0 auto 8px; display: block; opacity: 0.5;" />
-                  <div>Drag files here or click to browse</div>
-                  <div style="font-size: 12px; margin-top: 4px;">PDF, DOC, XLS up to 25 MB each</div>
-                </div>
+              <!-- 06 Documents -->
+              <PFormSection number="06" title="Documents" description="Deed, title, insurance, inspection reports.">
+                <PFormField label="Attachments" :cols="2">
+                  <div class="flex flex-col items-center justify-center gap-2 p-8 rounded-xl text-center" style="border: 2px dashed var(--color-line);">
+                    <component :is="Upload" :size="20" class="text-ink4" />
+                    <div class="text-base font-medium text-ink2">Drop files or browse</div>
+                    <div class="text-sm text-ink4">PDF, DOC, XLS · up to 25 MB each</div>
+                  </div>
+                </PFormField>
               </PFormSection>
             </div>
           </div>
 
           <!-- Sticky footer -->
-          <div class="flex flex-wrap items-center gap-3 px-4 py-3 sm:px-6 border-t flex-shrink-0" style="border-color: var(--color-border); background: var(--color-bg-surface);">
+          <div class="flex flex-wrap items-center gap-3 px-6 py-3 bg-surface shrink-0" style="border-top: 1px solid var(--color-line-soft);">
             <PButton variant="ghost">Previous</PButton>
-            <span class="hidden sm:inline text-[13px]" style="color: var(--color-text-secondary);">04 of 06 &middot; Financials</span>
-            <div class="flex-1"></div>
-            <span class="hidden md:inline text-xs" style="color: var(--color-text-secondary);">Autosaved 12s ago</span>
+            <span class="hidden sm:inline text-sm text-ink3">
+              <span class="font-mono text-ink2">04</span> of <span class="font-mono text-ink2">06</span> · Financials
+            </span>
+            <div class="flex-1" />
+            <span class="hidden md:inline text-sm text-ink4">Autosaved 12s ago</span>
             <PButton variant="ghost" class="hidden md:inline-flex">Save draft</PButton>
             <PButton variant="ghost" class="hidden sm:inline-flex">Preview</PButton>
-            <PButton variant="primary">Continue to Team</PButton>
+            <PButton variant="primary" :icon="ChevronRight">Continue to Team</PButton>
           </div>
         </div>
       </div>
