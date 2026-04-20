@@ -156,3 +156,31 @@ export type { RightDrawerProps } from './organisms/RightDrawer'
 
 export { PModal } from './organisms/Modal'
 export type { ModalProps } from './organisms/Modal'
+
+// Chat
+export { PChatBubbleAI } from './chat/ChatBubbleAI'
+export type { ChatBubbleAIProps } from './chat/ChatBubbleAI'
+
+export { PChatBubbleUser } from './chat/ChatBubbleUser'
+export type { ChatBubbleUserProps } from './chat/ChatBubbleUser'
+
+export { PChatBubbleWaiting } from './chat/ChatBubbleWaiting'
+export type { ChatBubbleWaitingProps } from './chat/ChatBubbleWaiting'
+
+export { PChatQuickReplies } from './chat/ChatQuickReplies'
+export type { ChatQuickRepliesProps } from './chat/ChatQuickReplies'
+
+export { PChatSuggestions } from './chat/ChatSuggestions'
+export type { ChatSuggestionsProps } from './chat/ChatSuggestions'
+
+export { PChatDateSeparator } from './chat/ChatDateSeparator'
+export type { ChatDateSeparatorProps } from './chat/ChatDateSeparator'
+
+export { PChatInput } from './chat/ChatInput'
+export type { ChatInputProps } from './chat/ChatInput'
+
+export { PChatBadge } from './chat/ChatBadge'
+export type { ChatBadgeProps } from './chat/ChatBadge'
+
+export { PChatPanel } from './chat/ChatPanel'
+export type { ChatPanelProps } from './chat/ChatPanel'
