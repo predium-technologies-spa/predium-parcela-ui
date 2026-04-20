@@ -1,10 +1,13 @@
 <script setup lang="ts">
 /**
- * Sortable data table with sticky header, selectable rows, and footer totals.
+ * Data table: horizontal table on desktop, stacked cards on mobile.
  *
  * @example
  * <PDataTable :columns="cols" :rows="data" selectable>
- *   <template #footer>14 entries · total $37,990</template>
+ *   <template #cell-status="{ row }">
+ *     <PBadge :tone="row.statusTone">{{ row.status }}</PBadge>
+ *   </template>
+ *   <template #footer>14 entries</template>
  * </PDataTable>
  */
 import { ChevronDown } from 'lucide-vue-next'
@@ -46,7 +49,8 @@ defineEmits<{
 </script>
 
 <template>
-  <div class="bg-surface border border-line rounded-xl overflow-hidden overflow-x-auto">
+  <!-- ═══ Desktop: horizontal table (md+) ═══ -->
+  <div class="hidden md:block bg-surface border border-line rounded-xl overflow-hidden overflow-x-auto">
     <table class="w-full border-collapse">
       <thead>
         <tr>
@@ -107,7 +111,6 @@ defineEmits<{
               col.mono ? 'font-mono text-sm text-ink3' : 'text-ink2',
             ]"
           >
-            <!-- Named slot for custom cell rendering -->
             <slot :name="`cell-${col.key}`" :row="row" :value="row[col.key]" :index="i">
               {{ row[col.key] }}
             </slot>
@@ -125,5 +128,54 @@ defineEmits<{
         </tr>
       </tfoot>
     </table>
+  </div>
+
+  <!-- ═══ Mobile: stacked cards (<md) ═══ -->
+  <div class="md:hidden flex flex-col gap-3">
+    <div
+      v-for="(row, i) in rows"
+      :key="i"
+      class="bg-surface border border-line rounded-xl overflow-hidden"
+    >
+      <!-- Checkbox row (if selectable) -->
+      <div v-if="selectable" class="flex items-center gap-2.5 px-4 py-3 border-b border-line-soft bg-table-header">
+        <input
+          type="checkbox"
+          class="accent-ink"
+          :checked="selectedRows.includes(i)"
+          :aria-label="`Select row ${i + 1}`"
+        />
+        <span class="text-sm font-medium text-ink3 uppercase tracking-wide">Select</span>
+      </div>
+
+      <!-- Fields -->
+      <div
+        v-for="(col, ci) in columns"
+        :key="col.key"
+        :class="[
+          'px-4 py-2.5',
+          ci < columns.length - 1 && 'border-b border-line-soft',
+        ]"
+      >
+        <div class="text-xs font-medium text-ink4 uppercase tracking-wide mb-0.5">
+          {{ col.label }}
+        </div>
+        <div
+          :class="[
+            'text-base',
+            col.mono ? 'font-mono text-ink3' : 'text-ink',
+          ]"
+        >
+          <slot :name="`cell-${col.key}`" :row="row" :value="row[col.key]" :index="i">
+            {{ row[col.key] }}
+          </slot>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div v-if="$slots.footer" class="px-4 py-3 text-base text-ink3">
+      <slot name="footer" />
+    </div>
   </div>
 </template>
