@@ -87,17 +87,17 @@ onBeforeUnmount(() => {
       aria-haspopup="listbox"
       :disabled="disabled"
       :class="[
-        'w-full flex items-center justify-between bg-surface border rounded-xl shadow-sm cursor-pointer transition-all duration-150',
+        'w-full flex items-center justify-between bg-surface border border-line-soft rounded-xl cursor-pointer transition-all duration-150',
         // Size
         size === 'sm' && 'px-2.5 h-8 text-sm',
         size === 'md' && 'px-3 h-10 text-base',
         size === 'lg' && 'px-3.5 h-12 text-md',
         // State
         error
-          ? 'border-danger focus:ring-2 focus:ring-danger/10'
+          ? 'border-danger'
           : isOpen
-            ? 'border-ink3 ring-2 ring-ink/5'
-            : 'border-line hover:border-ink4',
+            ? 'border-accent'
+            : 'hover:border-line',
         disabled && 'opacity-50 cursor-not-allowed bg-chip-bg',
       ]"
       @click="toggle"

@@ -48,16 +48,16 @@ defineEmits<{
 <template>
   <div
     :class="[
-      'group flex items-center bg-surface border rounded-xl shadow-sm transition-all duration-150',
+      'group flex items-center bg-surface border border-line-soft rounded-xl transition-all duration-150',
       // Size
       size === 'sm' && 'gap-1.5 px-2.5 h-8 text-sm',
       size === 'md' && 'gap-2 px-3 h-10 text-base',
       size === 'lg' && 'gap-2.5 px-3.5 h-12 text-md',
       // State
       error
-        ? 'border-danger focus-within:border-danger focus-within:ring-2 focus-within:ring-danger/10'
-        : 'border-line focus-within:border-ink3 focus-within:ring-2 focus-within:ring-ink/5',
-      disabled ? 'opacity-50 cursor-not-allowed bg-chip-bg' : 'hover:border-ink4',
+        ? 'border-danger focus-within:border-danger'
+        : 'focus-within:border-accent',
+      disabled ? 'opacity-50 cursor-not-allowed bg-chip-bg' : 'hover:border-line',
     ]"
   >
     <component

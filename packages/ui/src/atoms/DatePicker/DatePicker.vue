@@ -171,7 +171,7 @@ onBeforeUnmount(() => {
         size === 'sm' && 'px-2.5 h-8 text-sm',
         size === 'md' && 'px-3 h-10 text-base',
         size === 'lg' && 'px-3.5 h-12 text-md',
-        isOpen ? 'border-ink3 ring-2 ring-ink/5' : 'border-line hover:border-ink4',
+        isOpen ? 'border-accent' : 'border-line-soft hover:border-line',
         disabled && 'opacity-50 cursor-not-allowed bg-chip-bg',
       ]"
       @click="toggle"
@@ -198,7 +198,7 @@ onBeforeUnmount(() => {
       <div
         v-if="isOpen"
         ref="panelRef"
-        class="absolute z-50 mt-1.5 w-72 bg-surface border border-line rounded-xl shadow-lg p-3"
+        class="absolute z-50 mt-1.5 w-72 bg-surface border border-line-soft rounded-xl shadow-lg p-3"
       >
         <!-- Month navigation -->
         <div class="flex items-center justify-between mb-2">
