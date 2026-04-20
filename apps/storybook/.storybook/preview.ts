@@ -1,4 +1,5 @@
 import type { Preview } from '@storybook/vue3'
+import { useEffect, useGlobals } from '@storybook/preview-api'
 import '../../../packages/ui/src/styles/tokens.css'
 import '../../../packages/ui/src/styles/global.css'
 
@@ -28,6 +29,17 @@ const preview: Preview = {
     },
     layout: 'padded',
   },
+  decorators: [
+    (story, context) => {
+      const isDark = context.globals?.backgrounds?.value === '#171411'
+      return {
+        setup() {
+          return { isDark }
+        },
+        template: `<div :class="isDark ? 'dark' : ''"><story /></div>`,
+      }
+    },
+  ],
 }
 
 export default preview

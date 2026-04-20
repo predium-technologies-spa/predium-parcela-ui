@@ -65,7 +65,7 @@ onBeforeUnmount(() => {
 })
 
 const kindClasses: Record<string, string> = {
-  info: 'bg-ink text-white',
+  info: 'toast-info text-white',
   success: 'bg-good text-white',
   warning: 'bg-warn text-ink',
   error: 'bg-danger text-white',
@@ -111,3 +111,12 @@ const kindClasses: Record<string, string> = {
     </div>
   </Transition>
 </template>
+
+<style scoped>
+.toast-info {
+  background: #1A1714;
+}
+.dark .toast-info {
+  background: #3D3833;
+}
+</style>

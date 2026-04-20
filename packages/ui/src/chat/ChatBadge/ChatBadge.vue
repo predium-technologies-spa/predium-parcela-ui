@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /**
  * Floating chat badge that triggers the chat panel.
- * Fixed position bottom-right.
+ * Always dark regardless of light/dark mode.
  *
  * @example
  * <PChatBadge name="Nora" :online="true" :unread-count="2" time="07:58" @click="openChat" />
@@ -40,7 +40,7 @@ const initial = props.name.charAt(0).toUpperCase()
   <div class="fixed bottom-6 right-6 z-50">
     <button
       type="button"
-      class="flex items-center gap-3 bg-ink text-white rounded-full pl-1.5 pr-4 py-1.5 shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
+      class="chat-badge flex items-center gap-3 rounded-full pl-1.5 pr-4 py-1.5 shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
       @click="$emit('click')"
     >
       <!-- Avatar -->
@@ -53,19 +53,19 @@ const initial = props.name.charAt(0).toUpperCase()
         </div>
         <span
           v-if="online"
-          class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-good border-2 border-ink"
+          class="chat-badge-dot absolute bottom-0 right-0 w-3 h-3 rounded-full"
         />
       </div>
 
       <!-- Text -->
       <div class="flex flex-col text-left">
         <span class="text-sm font-semibold text-white">{{ name }}</span>
-        <span class="text-xs opacity-60">{{ subtitle }}</span>
+        <span class="text-xs text-white/60">{{ subtitle }}</span>
       </div>
 
       <!-- Right: time + unread -->
       <div class="flex flex-col items-end gap-0.5 ml-2">
-        <span v-if="time" class="text-xs opacity-50">{{ time }}</span>
+        <span v-if="time" class="text-xs text-white/50">{{ time }}</span>
         <span
           v-if="unreadCount > 0"
           class="w-5 h-5 rounded-full bg-accent text-white text-xs font-semibold grid place-items-center"
@@ -76,3 +76,14 @@ const initial = props.name.charAt(0).toUpperCase()
     </button>
   </div>
 </template>
+
+<style scoped>
+/* Always dark — ignores dark mode token swap */
+.chat-badge {
+  background: #1A1714;
+}
+.chat-badge-dot {
+  background: #4D7C3A;
+  border: 2px solid #1A1714;
+}
+</style>

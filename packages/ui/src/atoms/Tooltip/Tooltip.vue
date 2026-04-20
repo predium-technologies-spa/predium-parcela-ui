@@ -34,7 +34,7 @@ const visible = ref(false)
       <div
         v-if="visible && content"
         :class="[
-          'absolute z-50 px-2.5 py-1.5 text-xs font-medium bg-ink text-white rounded-lg shadow-lg whitespace-nowrap pointer-events-none',
+          'absolute z-50 px-2.5 py-1.5 text-xs font-medium p-tooltip-bg text-white rounded-lg shadow-lg whitespace-nowrap pointer-events-none',
           placement === 'top' && 'bottom-full left-1/2 -translate-x-1/2 mb-2',
           placement === 'bottom' && 'top-full left-1/2 -translate-x-1/2 mt-2',
           placement === 'left' && 'right-full top-1/2 -translate-y-1/2 mr-2',
@@ -45,7 +45,7 @@ const visible = ref(false)
         <!-- Arrow -->
         <span
           :class="[
-            'absolute w-2 h-2 bg-ink rotate-45',
+            'absolute w-2 h-2 p-tooltip-bg rotate-45',
             placement === 'top' && 'top-full left-1/2 -translate-x-1/2 -mt-1',
             placement === 'bottom' && 'bottom-full left-1/2 -translate-x-1/2 -mb-1',
             placement === 'left' && 'left-full top-1/2 -translate-y-1/2 -ml-1',
@@ -58,6 +58,14 @@ const visible = ref(false)
 </template>
 
 <style scoped>
+/* Always dark — inverted from page background in both modes */
+.p-tooltip-bg {
+  background: #1A1714;
+}
+.dark .p-tooltip-bg {
+  background: #3D3833;
+}
+
 .p-tooltip-enter-active,
 .p-tooltip-leave-active {
   transition: opacity 150ms ease, transform 150ms ease;

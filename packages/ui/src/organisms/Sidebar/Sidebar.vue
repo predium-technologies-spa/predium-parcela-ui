@@ -123,7 +123,7 @@ defineEmits<{
               v-if="item.badge !== undefined"
               :class="[
                 'font-mono text-xs text-ink3 px-1.5 py-px rounded-sm whitespace-nowrap transition-all duration-300',
-                active === item.key ? 'bg-white' : 'bg-chip-bg',
+                active === item.key ? 'bg-surface' : 'bg-chip-bg',
                 expanded ? 'opacity-100' : 'opacity-0 w-0 overflow-hidden',
               ]"
             >

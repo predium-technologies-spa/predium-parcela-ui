@@ -26,8 +26,8 @@ const statusLabels: Record<string, string> = {
 <template>
   <div class="flex justify-end">
     <div class="flex flex-col items-end">
-      <!-- Bubble -->
-      <div class="bg-ink text-white rounded-2xl rounded-tr-md px-4 py-3 max-w-[320px] text-base leading-relaxed">
+      <!-- Bubble — always dark, works in both modes -->
+      <div class="chat-bubble-user text-white rounded-2xl rounded-tr-md px-4 py-3 max-w-[320px] text-base leading-relaxed">
         <slot />
       </div>
 
@@ -36,3 +36,12 @@ const statusLabels: Record<string, string> = {
     </div>
   </div>
 </template>
+
+<style scoped>
+.chat-bubble-user {
+  background: #1A1714;
+}
+.dark .chat-bubble-user {
+  background: #3D3833;
+}
+</style>
