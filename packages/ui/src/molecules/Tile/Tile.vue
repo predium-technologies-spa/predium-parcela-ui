@@ -30,7 +30,7 @@ defineEmits<{
     type="button"
     :disabled="disabled"
     :class="[
-      'p-tile relative flex flex-col w-full rounded-xl p-5 text-left transition-all duration-150 cursor-pointer',
+      'p-tile relative flex flex-col w-full rounded-xl p-5 text-left transition-all duration-150 cursor-pointer bg-surface',
       selected ? 'is-selected' : '',
       disabled && 'is-disabled opacity-50 cursor-not-allowed',
       align === 'center' && 'items-center text-center',

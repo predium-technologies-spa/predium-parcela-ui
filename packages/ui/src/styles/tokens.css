@@ -121,38 +121,38 @@
    Dark mode — Claude Code dark (.dark class)
    ══════════════════════════════════════════════════════ */
 .dark {
-  /* Surfaces */
+  /* Surfaces — stepped for clear layering */
   --p-bg: #171411;
-  --p-surface: #1E1B18;
-  --p-chip-bg: #292623;
-  --p-hover: #242120;
-  --p-active-bg: #302C28;
-  --p-table-header: #1E1B18;
+  --p-surface: #201D1A;
+  --p-chip-bg: #2C2925;
+  --p-hover: #2C2925;
+  --p-active-bg: #38342F;
+  --p-table-header: #201D1A;
 
-  /* Ink — warm light tones */
-  --p-ink: #F2EEE8;
-  --p-ink2: #C9C3BB;
-  --p-ink3: #8C877F;
-  --p-ink4: #5E5952;
+  /* Ink — high contrast readable tones */
+  --p-ink: #F0ECE6;
+  --p-ink2: #D4CFCA;
+  --p-ink3: #A09B94;
+  --p-ink4: #6E6961;
 
   /* Accent — lighter terracotta for dark bg */
-  --p-accent: #DA7756;
-  --p-accent-bg: #2C1F1A;
+  --p-accent: #E08060;
+  --p-accent-bg: #2E1F18;
 
-  /* Lines */
-  --p-line: #302C28;
-  --p-line-soft: #262320;
+  /* Lines — visible borders (key fix) */
+  --p-line: #3D3833;
+  --p-line-soft: #332F2A;
 
   /* Status — brighter for dark bg contrast */
-  --p-good: #7CB95E;
-  --p-warn: #D4A84D;
-  --p-danger: #E06B5C;
+  --p-good: #8AC56A;
+  --p-warn: #E0B850;
+  --p-danger: #E8766A;
   --p-info: #5CA0E0;
 
-  --p-good-bg: #1C2418;
-  --p-warn-bg: #2A2214;
-  --p-danger-bg: #2C1A18;
-  --p-info-bg: #161F2C;
+  --p-good-bg: #1F2C1A;
+  --p-warn-bg: #2E2518;
+  --p-danger-bg: #321E1A;
+  --p-info-bg: #1A2230;
 
   /* Shadows */
   --p-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.2);
