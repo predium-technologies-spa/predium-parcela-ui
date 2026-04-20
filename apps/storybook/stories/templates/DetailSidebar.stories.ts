@@ -5,6 +5,9 @@ import {
   PButton,
   PBadge,
   PDataTable,
+  PRightDrawer,
+  PKpiCard,
+  PStatusBadge,
 } from '@parcela/ui'
 import {
   LayoutDashboard,
@@ -18,58 +21,48 @@ import {
   Search,
   Settings,
   ChevronRight,
-  X,
+  Pencil,
 } from 'lucide-vue-next'
+import { ref } from 'vue'
 
 const sidebarSections = [
-  {
-    label: 'Workspace',
-    items: [
-      { key: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-      { key: 'reports', label: 'Reports', icon: BarChart3 },
-    ],
-  },
-  {
-    label: 'Portfolio',
-    items: [
-      { key: 'property', label: 'Properties', icon: Building, count: 48 },
-      { key: 'units', label: 'Units', icon: Grid3X3, count: 312 },
-      { key: 'tenants', label: 'Tenants', icon: Users, count: 287 },
-      { key: 'leases', label: 'Leases', icon: FileText, count: 287 },
-    ],
-  },
-  {
-    label: 'Operations',
-    items: [
-      { key: 'payments', label: 'Payments', icon: CreditCard },
-      { key: 'work-orders', label: 'Work orders', icon: Wrench, count: 14 },
-      { key: 'inspections', label: 'Inspections', icon: Search },
-    ],
-  },
-  {
-    label: 'System',
-    items: [
-      { key: 'settings', label: 'Settings', icon: Settings },
-    ],
-  },
+  { title: 'Workspace', items: [
+    { key: 'dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+    { key: 'reports', icon: BarChart3, label: 'Reports' },
+  ]},
+  { title: 'Portfolio', items: [
+    { key: 'property', icon: Building, label: 'Properties', badge: 48 },
+    { key: 'units', icon: Grid3X3, label: 'Units', badge: 312 },
+    { key: 'tenants', icon: Users, label: 'Tenants', badge: 287 },
+    { key: 'leases', icon: FileText, label: 'Leases', badge: 287 },
+  ]},
+  { title: 'Operations', items: [
+    { key: 'payments', icon: CreditCard, label: 'Payments' },
+    { key: 'tickets', icon: Wrench, label: 'Work orders', badge: 14 },
+    { key: 'inspect', icon: Search, label: 'Inspections' },
+  ]},
+  { title: 'System', items: [
+    { key: 'settings', icon: Settings, label: 'Settings' },
+  ]},
 ]
 
 const columns = [
   { key: 'property', label: 'Property' },
-  { key: 'id', label: 'ID', mono: true },
+  { key: 'type', label: 'Type' },
   { key: 'units', label: 'Units', align: 'right' as const, mono: true },
-  { key: 'occupancy', label: 'Occupancy', align: 'right' as const },
+  { key: 'occupancy', label: 'Occ.', align: 'right' as const, mono: true },
+  { key: 'rent', label: 'Rent', align: 'right' as const, mono: true },
   { key: 'status', label: 'Status' },
 ]
 
 const rows = [
-  { property: 'Ashford Row', address: '214 Ashford St, Brooklyn NY', id: 'PRP-0128', units: 24, occupancy: '96%', status: 'Active', statusTone: 'good' },
-  { property: 'Linden Court', address: '88 Linden Blvd, Queens NY', id: 'PRP-0127', units: 18, occupancy: '89%', status: 'Active', statusTone: 'good' },
-  { property: 'Harper Hall', address: '402 Harper St, Bronx NY', id: 'PRP-0126', units: 36, occupancy: '78%', status: 'Active', statusTone: 'good', _selected: true },
-  { property: 'Vine & Third', address: '1290 3rd Ave, Manhattan NY', id: 'PRP-0125', units: 6, occupancy: '100%', status: 'Active', statusTone: 'good' },
-  { property: 'North Ridge', address: '55 Ridge Rd, Jersey City NJ', id: 'PRP-0124', units: 42, occupancy: '93%', status: 'Active', statusTone: 'good' },
-  { property: 'Briarwood 7', address: '7 Briarwood Ln, Yonkers NY', id: 'PRP-0123', units: 12, occupancy: '100%', status: 'Active', statusTone: 'good' },
-  { property: 'Cedar Lofts', address: '330 Cedar St, Hoboken NJ', id: 'PRP-0122', units: 28, occupancy: '82%', status: 'Review', statusTone: 'warn' },
+  { property: 'Ashford Row', type: 'Multifamily', units: 24, occupancy: '96%', rent: '$52,400', status: 'Active', statusTone: 'good' },
+  { property: 'Linden Court', type: 'Multifamily', units: 18, occupancy: '89%', rent: '$31,200', status: 'Active', statusTone: 'good' },
+  { property: 'Harper Hall', type: 'Mixed-use', units: 36, occupancy: '78%', rent: '$68,100', status: 'Active', statusTone: 'good' },
+  { property: 'Vine & Third', type: 'Retail', units: 6, occupancy: '100%', rent: '$44,800', status: 'Active', statusTone: 'good' },
+  { property: 'North Ridge', type: 'Multifamily', units: 42, occupancy: '93%', rent: '$87,300', status: 'Active', statusTone: 'good' },
+  { property: 'Briarwood 7', type: 'Multifamily', units: 12, occupancy: '100%', rent: '$21,400', status: 'Active', statusTone: 'good' },
+  { property: 'Cedar Lofts', type: 'Multifamily', units: 28, occupancy: '82%', rent: '$61,800', status: 'Review', statusTone: 'warn' },
 ]
 
 const meta: Meta = {
@@ -85,38 +78,44 @@ type Story = StoryObj
 export const Default: Story = {
   render: () => ({
     components: {
-      PSidebar,
-      PTopNav,
-      PButton,
-      PBadge,
-      PDataTable,
+      PSidebar, PTopNav, PButton, PBadge, PDataTable,
+      PRightDrawer, PKpiCard, PStatusBadge,
     },
     setup() {
+      const sidebarExpanded = ref(true)
+      const drawerOpen = ref(true)
       return {
-        sidebarSections,
-        columns,
-        rows,
-        ChevronRight,
-        X,
+        sidebarSections, columns, rows,
+        ChevronRight, Pencil,
+        sidebarExpanded, drawerOpen,
       }
     },
     template: `
-      <div class="w-full max-w-[1280px] min-h-screen lg:h-[820px] flex font-sans">
-        <PSidebar active="property" :sections="sidebarSections" />
+      <div class="w-full max-w-[1280px] min-h-screen lg:h-[820px] flex font-sans text-ink bg-bg">
+        <PSidebar :sections="sidebarSections" active="property" v-model:expanded="sidebarExpanded" />
 
         <div class="flex-1 flex flex-col min-w-0">
           <PTopNav :breadcrumb="['Portfolio', 'Properties']" />
 
-          <div style="flex: 1; display: flex; overflow: hidden;">
+          <div class="flex-1 flex overflow-hidden">
+            <!-- Left: property table -->
+            <div class="hidden lg:flex flex-1 flex-col overflow-auto p-6 bg-bg">
+              <div class="flex items-center justify-between mb-4">
+                <h1 class="text-xl font-semibold text-ink tracking-tight">Properties</h1>
+                <PButton variant="primary" v-if="!drawerOpen" @click="drawerOpen = true">
+                  Select property
+                </PButton>
+              </div>
 
-            <!-- Left: table list -->
-            <div class="hidden lg:block flex-1 overflow-auto p-5 lg:p-6" style="background: var(--color-bg);">
-              <PDataTable :columns="columns" :rows="rows" selectable sortable>
+              <PDataTable :columns="columns" :rows="rows" selectable>
                 <template #cell-property="{ row }">
-                  <div>
-                    <div :style="{ fontWeight: row._selected ? '600' : '500' }">{{ row.property }}</div>
-                    <div style="font-size: 12px; color: var(--color-text-secondary);">{{ row.address }}</div>
-                  </div>
+                  <button
+                    type="button"
+                    class="text-left cursor-pointer hover:text-accent transition-colors"
+                    @click="drawerOpen = true"
+                  >
+                    <span class="font-medium text-ink">{{ row.property }}</span>
+                  </button>
                 </template>
                 <template #cell-status="{ row }">
                   <PBadge :tone="row.statusTone">{{ row.status }}</PBadge>
@@ -124,130 +123,76 @@ export const Default: Story = {
               </PDataTable>
             </div>
 
-            <!-- Right: detail panel -->
-            <div class="w-full lg:w-[440px] lg:border-l flex flex-col flex-shrink-0" style="border-color: var(--color-line); background: var(--color-surface);">
-
-              <!-- Panel header -->
-              <div style="padding: 16px 20px; border-bottom: 1px solid var(--color-line);">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-                  <span style="font-size: 12px; font-family: var(--font-mono); color: var(--color-text-secondary);">PRP-0126</span>
-                  <button style="background: none; border: none; cursor: pointer; color: var(--color-text-secondary); padding: 2px;">
-                    <span style="font-size: 18px;">\u00d7</span>
-                  </button>
-                </div>
-                <!-- Thumbnail placeholder -->
-                <div style="width: 100%; height: 120px; border-radius: 10px; background: var(--color-bg); border: 1px solid var(--color-line); margin-bottom: 12px; display: flex; align-items: center; justify-content: center;">
-                  <div style="width: 40px; height: 40px; border-radius: 8px; background: var(--color-line);"></div>
-                </div>
-                <h2 style="font-size: 20px; font-weight: 600; margin: 0 0 4px 0; color: var(--color-text);">Harper Hall</h2>
-                <div style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 8px;">402 Harper St, Bronx NY 10451</div>
-                <div style="display: flex; gap: 6px;">
+            <!-- Right: detail drawer (uses PRightDrawer) -->
+            <PRightDrawer
+              v-model:open="drawerOpen"
+              :width="440"
+              title="Harper Hall"
+              subtitle="402 Harper St, Bronx NY 10457"
+              eyebrow="PRP-0126"
+            >
+              <template #header-extra>
+                <div class="flex gap-1.5 mt-2">
                   <PBadge tone="good">Active</PBadge>
-                  <PBadge tone="neutral">Mixed-use</PBadge>
+                  <PBadge tone="info">Mixed-use</PBadge>
+                  <PBadge tone="neutral">36 units</PBadge>
                 </div>
-              </div>
+              </template>
 
-              <!-- Panel body -->
-              <div style="flex: 1; overflow: auto; padding: 16px 20px;">
-
-                <!-- Compact overview -->
-                <div style="margin-bottom: 20px;">
-                  <h3 style="font-size: 13px; font-weight: 600; margin: 0 0 10px 0; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Overview</h3>
-                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px 20px;">
-                    <div>
-                      <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 2px;">Property ID</div>
-                      <div style="font-size: 13px; font-family: var(--font-mono); color: var(--color-text);">PRP-0126</div>
-                    </div>
-                    <div>
-                      <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 2px;">Type</div>
-                      <div style="font-size: 13px; color: var(--color-text);">Mixed-use</div>
-                    </div>
-                    <div>
-                      <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 2px;">Units</div>
-                      <div style="font-size: 13px; color: var(--color-text);">36</div>
-                    </div>
-                    <div>
-                      <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 2px;">Occupancy</div>
-                      <div style="font-size: 13px; color: var(--color-text);">78%</div>
-                    </div>
-                    <div>
-                      <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 2px;">Year built</div>
-                      <div style="font-size: 13px; color: var(--color-text);">1962</div>
-                    </div>
-                    <div>
-                      <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 2px;">Manager</div>
-                      <div style="font-size: 13px; color: var(--color-text);">D. Okafor</div>
+              <template #body>
+                <!-- Overview -->
+                <div class="mb-6">
+                  <h3 class="text-xs font-semibold text-ink3 uppercase tracking-wide mb-3">Overview</h3>
+                  <div class="grid grid-cols-2 gap-3">
+                    <div v-for="[k, v] in [
+                      ['Property ID', 'PRP-0126'],
+                      ['Type', 'Mixed-use'],
+                      ['Units', '36'],
+                      ['Occupancy', '78%'],
+                      ['Year built', '1962'],
+                      ['Manager', 'D. Okafor'],
+                    ]" :key="k">
+                      <div class="text-xs text-ink4">{{ k }}</div>
+                      <div class="text-sm text-ink font-medium">{{ v }}</div>
                     </div>
                   </div>
                 </div>
 
                 <!-- Financial snapshot -->
-                <div style="margin-bottom: 20px;">
-                  <h3 style="font-size: 13px; font-weight: 600; margin: 0 0 10px 0; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Financial snapshot</h3>
-                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                    <div style="background: var(--color-bg); border-radius: 8px; padding: 10px 12px;">
-                      <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 2px;">Gross rent</div>
-                      <div style="font-size: 16px; font-weight: 600; font-family: var(--font-mono); color: var(--color-text);">$68,100</div>
-                    </div>
-                    <div style="background: var(--color-bg); border-radius: 8px; padding: 10px 12px;">
-                      <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 2px;">Collected</div>
-                      <div style="font-size: 16px; font-weight: 600; font-family: var(--font-mono); color: var(--color-good);">$64,420</div>
-                    </div>
-                    <div style="background: var(--color-bg); border-radius: 8px; padding: 10px 12px;">
-                      <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 2px;">Outstanding</div>
-                      <div style="font-size: 16px; font-weight: 600; font-family: var(--font-mono); color: var(--color-warn);">$3,680</div>
-                    </div>
-                    <div style="background: var(--color-bg); border-radius: 8px; padding: 10px 12px;">
-                      <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 2px;">NOI</div>
-                      <div style="font-size: 16px; font-weight: 600; font-family: var(--font-mono); color: var(--color-text);">$41,210</div>
-                    </div>
+                <div class="mb-6">
+                  <h3 class="text-xs font-semibold text-ink3 uppercase tracking-wide mb-3">Financial snapshot</h3>
+                  <div class="grid grid-cols-2 gap-2">
+                    <PKpiCard label="Gross rent" value="$68,100" mono />
+                    <PKpiCard label="Collected" value="$64,420" tone="good" mono />
+                    <PKpiCard label="Outstanding" value="$3,680" tone="warn" mono />
+                    <PKpiCard label="NOI" value="$41,210" mono />
                   </div>
                 </div>
 
                 <!-- Recent activity -->
                 <div>
-                  <h3 style="font-size: 13px; font-weight: 600; margin: 0 0 10px 0; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Recent activity</h3>
-                  <div style="display: flex; flex-direction: column; gap: 10px;">
-                    <div style="display: flex; gap: 8px; align-items: flex-start;">
-                      <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--color-good); margin-top: 5px; flex-shrink: 0;"></div>
-                      <div>
-                        <div style="font-size: 12px; font-weight: 500; color: var(--color-text);">Lease signed \u2014 Unit 14B</div>
-                        <div style="font-size: 11px; color: var(--color-text-secondary);">2 hours ago</div>
-                      </div>
-                    </div>
-                    <div style="display: flex; gap: 8px; align-items: flex-start;">
-                      <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--color-info); margin-top: 5px; flex-shrink: 0;"></div>
-                      <div>
-                        <div style="font-size: 12px; font-weight: 500; color: var(--color-text);">Inspection completed \u2014 Unit 8A</div>
-                        <div style="font-size: 11px; color: var(--color-text-secondary);">Yesterday</div>
-                      </div>
-                    </div>
-                    <div style="display: flex; gap: 8px; align-items: flex-start;">
-                      <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--color-warn); margin-top: 5px; flex-shrink: 0;"></div>
-                      <div>
-                        <div style="font-size: 12px; font-weight: 500; color: var(--color-text);">Work order \u2014 Plumbing, Unit 3C</div>
-                        <div style="font-size: 11px; color: var(--color-text-secondary);">2 days ago</div>
-                      </div>
-                    </div>
-                    <div style="display: flex; gap: 8px; align-items: flex-start;">
-                      <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--color-danger); margin-top: 5px; flex-shrink: 0;"></div>
-                      <div>
-                        <div style="font-size: 12px; font-weight: 500; color: var(--color-text);">Rent overdue \u2014 Unit 11A</div>
-                        <div style="font-size: 11px; color: var(--color-text-secondary);">3 days ago</div>
-                      </div>
+                  <h3 class="text-xs font-semibold text-ink3 uppercase tracking-wide mb-3">Recent activity</h3>
+                  <div class="flex flex-col gap-3">
+                    <div v-for="[dot, title, time] in [
+                      ['good', 'Lease signed — Unit 14B', '2 hours ago'],
+                      ['info', 'Inspection completed — Unit 8A', 'Yesterday'],
+                      ['warn', 'Work order — Plumbing, Unit 3C', '2 days ago'],
+                      ['danger', 'Rent overdue — Unit 11A', '3 days ago'],
+                    ]" :key="title" class="flex gap-2 items-start">
+                      <PStatusBadge :tone="dot" :label="title" />
+                      <span class="text-xs text-ink4 shrink-0 ml-auto">{{ time }}</span>
                     </div>
                   </div>
                 </div>
+              </template>
 
-              </div>
-
-              <!-- Panel footer -->
-              <div style="padding: 12px 20px; border-top: 1px solid var(--color-line); display: flex; gap: 8px; justify-content: flex-end;">
+              <template #footer>
+                <PButton variant="ghost" @click="drawerOpen = false">Close</PButton>
+                <div class="flex-1" />
                 <PButton variant="ghost" :icon="ChevronRight">Open full page</PButton>
-                <PButton variant="primary">Edit property</PButton>
-              </div>
-
-            </div>
+                <PButton variant="primary" :icon="Pencil">Edit property</PButton>
+              </template>
+            </PRightDrawer>
           </div>
         </div>
       </div>
