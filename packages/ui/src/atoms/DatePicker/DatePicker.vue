@@ -167,12 +167,12 @@ onBeforeUnmount(() => {
       type="button"
       :disabled="disabled"
       :class="[
-        'w-full flex items-center justify-between bg-surface border rounded-xl shadow-sm cursor-pointer transition-all duration-150',
+        'p-datepicker-trigger w-full flex items-center justify-between bg-surface rounded-xl cursor-pointer transition-all duration-150',
         size === 'sm' && 'px-2.5 h-8 text-sm',
         size === 'md' && 'px-3 h-10 text-base',
         size === 'lg' && 'px-3.5 h-12 text-md',
-        isOpen ? 'border-accent' : 'border-line-soft hover:border-line',
-        disabled && 'opacity-50 cursor-not-allowed bg-chip-bg',
+        isOpen && 'is-open',
+        disabled && 'is-disabled opacity-50 cursor-not-allowed bg-chip-bg',
       ]"
       @click="toggle"
     >
@@ -198,7 +198,7 @@ onBeforeUnmount(() => {
       <div
         v-if="isOpen"
         ref="panelRef"
-        class="absolute z-50 mt-1.5 w-72 bg-surface border border-line-soft rounded-xl shadow-lg p-3"
+        class="p-datepicker-panel absolute z-50 mt-1.5 w-72 bg-surface rounded-xl shadow-lg p-3"
       >
         <!-- Month navigation -->
         <div class="flex items-center justify-between mb-2">
@@ -259,3 +259,18 @@ onBeforeUnmount(() => {
     </Transition>
   </div>
 </template>
+
+<style scoped>
+.p-datepicker-trigger {
+  border: 1px solid var(--color-line-soft);
+}
+.p-datepicker-trigger:hover:not(.is-disabled) {
+  border-color: var(--color-line);
+}
+.p-datepicker-trigger.is-open {
+  border-color: var(--color-accent);
+}
+.p-datepicker-panel {
+  border: 1px solid var(--color-line-soft);
+}
+</style>

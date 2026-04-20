@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * Styled text input — Tailwind Forms aesthetic.
+ * Styled text input — clean, soft borders.
  *
  * @example
  * <PInput v-model="name" placeholder="Property name" />
@@ -48,16 +48,12 @@ defineEmits<{
 <template>
   <div
     :class="[
-      'group flex items-center bg-surface border border-line-soft rounded-xl transition-all duration-150',
-      // Size
+      'p-input group flex items-center bg-surface rounded-xl transition-all duration-150',
       size === 'sm' && 'gap-1.5 px-2.5 h-8 text-sm',
       size === 'md' && 'gap-2 px-3 h-10 text-base',
       size === 'lg' && 'gap-2.5 px-3.5 h-12 text-md',
-      // State
-      error
-        ? 'border-danger focus-within:border-danger'
-        : 'focus-within:border-accent',
-      disabled ? 'opacity-50 cursor-not-allowed bg-chip-bg' : 'hover:border-line',
+      error && 'is-error',
+      disabled && 'is-disabled opacity-50 cursor-not-allowed bg-chip-bg',
     ]"
   >
     <component
@@ -84,3 +80,21 @@ defineEmits<{
     </span>
   </div>
 </template>
+
+<style scoped>
+.p-input {
+  border: 1px solid var(--color-line-soft);
+}
+.p-input:hover:not(.is-disabled) {
+  border-color: var(--color-line);
+}
+.p-input:focus-within:not(.is-disabled) {
+  border-color: var(--color-accent);
+}
+.p-input.is-error {
+  border-color: var(--color-danger);
+}
+.p-input.is-error:focus-within {
+  border-color: var(--color-danger);
+}
+</style>

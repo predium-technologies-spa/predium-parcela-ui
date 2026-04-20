@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * Custom styled select dropdown — Tailwind Forms aesthetic.
+ * Custom styled select dropdown — clean, soft borders.
  *
  * @example
  * <PSelect v-model="type" placeholder="Select type" :options="['Multifamily', 'Retail']" />
@@ -52,10 +52,8 @@ function select(opt: string) {
 
 function handleClickOutside(e: MouseEvent) {
   if (
-    triggerRef.value &&
-    !triggerRef.value.contains(e.target as Node) &&
-    listRef.value &&
-    !listRef.value.contains(e.target as Node)
+    triggerRef.value && !triggerRef.value.contains(e.target as Node) &&
+    listRef.value && !listRef.value.contains(e.target as Node)
   ) {
     isOpen.value = false
   }
@@ -87,18 +85,13 @@ onBeforeUnmount(() => {
       aria-haspopup="listbox"
       :disabled="disabled"
       :class="[
-        'w-full flex items-center justify-between bg-surface border border-line-soft rounded-xl cursor-pointer transition-all duration-150',
-        // Size
+        'p-select w-full flex items-center justify-between bg-surface rounded-xl cursor-pointer transition-all duration-150',
         size === 'sm' && 'px-2.5 h-8 text-sm',
         size === 'md' && 'px-3 h-10 text-base',
         size === 'lg' && 'px-3.5 h-12 text-md',
-        // State
-        error
-          ? 'border-danger'
-          : isOpen
-            ? 'border-accent'
-            : 'hover:border-line',
-        disabled && 'opacity-50 cursor-not-allowed bg-chip-bg',
+        isOpen && 'is-open',
+        error && 'is-error',
+        disabled && 'is-disabled opacity-50 cursor-not-allowed bg-chip-bg',
       ]"
       @click="toggle"
     >
@@ -129,7 +122,7 @@ onBeforeUnmount(() => {
         ref="listRef"
         role="listbox"
         :aria-label="placeholder"
-        class="absolute z-50 mt-1.5 w-full bg-surface border border-line rounded-xl shadow-lg overflow-auto max-h-[280px] py-1"
+        class="p-select-dropdown absolute z-50 mt-1.5 w-full bg-surface rounded-xl shadow-lg overflow-auto max-h-[280px] py-1"
       >
         <li
           v-for="opt in options"
@@ -159,3 +152,21 @@ onBeforeUnmount(() => {
     </Transition>
   </div>
 </template>
+
+<style scoped>
+.p-select {
+  border: 1px solid var(--color-line-soft);
+}
+.p-select:hover:not(.is-disabled) {
+  border-color: var(--color-line);
+}
+.p-select.is-open {
+  border-color: var(--color-accent);
+}
+.p-select.is-error {
+  border-color: var(--color-danger);
+}
+.p-select-dropdown {
+  border: 1px solid var(--color-line-soft);
+}
+</style>
