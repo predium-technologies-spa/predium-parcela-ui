@@ -26,7 +26,7 @@ const preview: Preview = {
         desktop: { name: 'Desktop', styles: { width: '1280px', height: '820px' } },
       },
     },
-    layout: 'centered',
+    layout: 'padded',
   },
 }
 
