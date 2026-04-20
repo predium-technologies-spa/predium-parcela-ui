@@ -46,7 +46,7 @@ function selectDay(day: WeekDay) {
 </script>
 
 <template>
-  <div class="w-full rounded-xl overflow-hidden week-picker-container">
+  <div class="w-full rounded-xl overflow-hidden bg-surface week-picker-container">
     <!-- Headers -->
     <div class="grid week-picker-headers" :style="{ gridTemplateColumns: gridCols }">
       <div
