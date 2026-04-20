@@ -107,19 +107,22 @@ function goNext() {
 
     <!-- Step content -->
     <div class="flex-1 overflow-y-auto">
-      <div class="max-w-[560px] mx-auto px-5 py-8">
+      <div class="max-w-[560px] mx-auto px-5 py-10 sm:py-12">
         <!-- Step title & description -->
-        <div class="mb-6">
-          <h2 class="text-xl font-semibold text-ink tracking-tight">
+        <div class="mb-8">
+          <h2 class="text-2xl font-semibold text-ink tracking-tight">
             {{ currentStepDef?.title }}
           </h2>
-          <p v-if="currentStepDef?.description" class="text-base text-ink3 mt-1">
+          <p v-if="currentStepDef?.description" class="text-base text-ink3 mt-2 leading-relaxed">
             {{ currentStepDef.description }}
           </p>
         </div>
 
+        <!-- Divider -->
+        <div class="mb-8" style="border-top: 1px solid var(--color-line-soft);" />
+
         <!-- Step slot content -->
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-5">
           <template v-for="(step, i) in steps" :key="i">
             <div v-show="i === currentStep">
               <slot :name="`step-${i}`" :step="step" :index="i" />
