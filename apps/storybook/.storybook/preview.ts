@@ -1,9 +1,26 @@
 import type { Preview } from '@storybook/vue3'
-import { useEffect, useGlobals } from '@storybook/preview-api'
+import { onMounted } from 'vue'
 import '../../../packages/ui/src/styles/tokens.css'
 import '../../../packages/ui/src/styles/global.css'
 
 const preview: Preview = {
+  globalTypes: {
+    theme: {
+      description: 'Color theme',
+      toolbar: {
+        title: 'Theme',
+        icon: 'paintbrush',
+        items: [
+          { value: 'light', title: 'Light', icon: 'sun' },
+          { value: 'dark', title: 'Dark', icon: 'moon' },
+        ],
+        dynamicTitle: true,
+      },
+    },
+  },
+  initialGlobals: {
+    theme: 'light',
+  },
   parameters: {
     controls: {
       matchers: {
@@ -11,14 +28,7 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
-    backgrounds: {
-      default: 'parcela',
-      values: [
-        { name: 'parcela', value: '#FAF9F7' },
-        { name: 'surface', value: '#FFFFFF' },
-        { name: 'dark', value: '#171411' },
-      ],
-    },
+    backgrounds: { disable: true },
     viewport: {
       viewports: {
         mobile: { name: 'Mobile', styles: { width: '375px', height: '812px' } },
@@ -31,12 +41,27 @@ const preview: Preview = {
   },
   decorators: [
     (story, context) => {
-      const isDark = context.globals?.backgrounds?.value === '#171411'
+      const isDark = context.globals.theme === 'dark'
+
       return {
+        components: { story },
         setup() {
-          return { isDark }
+          onMounted(() => {
+            // Apply .dark to <html> so CSS vars swap globally
+            const root = document.documentElement
+            const body = document.body
+            if (isDark) {
+              root.classList.add('dark')
+              body.style.backgroundColor = '#171411'
+              body.style.color = '#F2EEE8'
+            } else {
+              root.classList.remove('dark')
+              body.style.backgroundColor = '#FAF9F7'
+              body.style.color = '#1A1714'
+            }
+          })
         },
-        template: `<div :class="isDark ? 'dark' : ''"><story /></div>`,
+        template: '<story />',
       }
     },
   ],
