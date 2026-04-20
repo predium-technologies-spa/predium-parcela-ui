@@ -37,6 +37,9 @@ export type { ProgressBarProps } from './atoms/ProgressBar'
 export { PSpinner } from './atoms/Spinner'
 export type { SpinnerProps } from './atoms/Spinner'
 
+export { PDatePicker } from './atoms/DatePicker'
+export type { DatePickerProps } from './atoms/DatePicker'
+
 // Molecules
 export { PKpiCard } from './molecules/KpiCard'
 export type { KpiCardProps } from './molecules/KpiCard'
