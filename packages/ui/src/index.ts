@@ -120,6 +120,9 @@ export type { TreeViewProps, TreeNode } from './molecules/TreeView'
 export { PStepper } from './molecules/Stepper'
 export type { StepperProps, StepDef } from './molecules/Stepper'
 
+export { PFormWizard } from './molecules/FormWizard'
+export type { FormWizardProps, FormWizardStep } from './molecules/FormWizard'
+
 // Organisms
 export { PSidebar } from './organisms/Sidebar'
 export type { SidebarProps, SidebarSection, SidebarNavItem } from './organisms/Sidebar'
