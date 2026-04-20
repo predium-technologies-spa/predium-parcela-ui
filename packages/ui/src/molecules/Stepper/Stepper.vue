@@ -24,33 +24,33 @@ defineProps<StepperProps>()
 
 <template>
   <div class="overflow-x-auto">
-    <!-- Top row: circles + lines aligned -->
-    <div class="flex items-center min-w-max px-4">
+    <!-- Top row: circles + lines touching -->
+    <div class="flex items-center min-w-max px-6">
       <template v-for="(step, idx) in steps" :key="idx">
         <!-- Circle -->
         <div
           :class="[
-            'w-8 h-8 rounded-full text-sm font-semibold flex items-center justify-center shrink-0',
-            idx <= activeStep ? 'bg-accent text-white' : 'stepper-circle-future text-ink4',
+            'w-8 h-8 rounded-full text-sm font-semibold flex items-center justify-center shrink-0 z-10',
+            idx <= activeStep ? 'bg-accent text-white' : 'stepper-circle-future text-ink4 bg-bg',
           ]"
         >
           <Check v-if="idx < activeStep" :size="14" :stroke-width="2.5" />
           <span v-else>{{ idx + 1 }}</span>
         </div>
 
-        <!-- Connector line (between circles) -->
+        <!-- Connector line — no gap, touches circles -->
         <div
           v-if="idx < steps.length - 1"
           :class="[
-            'h-0.5 min-w-[48px] flex-1 mx-2',
+            'h-0.5 min-w-[40px] flex-1 -mx-px',
             idx < activeStep ? 'bg-accent' : 'stepper-connector-incomplete',
           ]"
         />
       </template>
     </div>
 
-    <!-- Bottom row: labels aligned under circles -->
-    <div class="flex min-w-max px-4 mt-2">
+    <!-- Bottom row: labels centered under circles -->
+    <div class="flex min-w-max px-6 mt-2">
       <template v-for="(step, idx) in steps" :key="idx">
         <div class="flex justify-center shrink-0" style="width: 32px;">
           <span
@@ -64,10 +64,10 @@ defineProps<StepperProps>()
           </span>
         </div>
 
-        <!-- Spacer matching connector width -->
+        <!-- Spacer matching connector -->
         <div
           v-if="idx < steps.length - 1"
-          class="min-w-[48px] flex-1 mx-2"
+          class="min-w-[40px] flex-1 -mx-px"
         />
       </template>
     </div>
