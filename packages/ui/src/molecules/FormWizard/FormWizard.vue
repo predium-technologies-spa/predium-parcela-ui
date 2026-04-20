@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /**
- * Multi-step form wizard with progress bar, animated transitions,
- * and sticky navigation footer. Content-agnostic — use slots for each step.
+ * Multi-step form wizard with clickable step navigation,
+ * progress bar, and sticky footer. Content-agnostic via slots.
  *
  * @example
  * <PFormWizard :steps="steps" v-model:currentStep="step">
@@ -10,14 +10,14 @@
  * </PFormWizard>
  */
 import { computed } from 'vue'
-import { ChevronLeft, ChevronRight } from 'lucide-vue-next'
+import { Check, ChevronLeft, ChevronRight } from 'lucide-vue-next'
 
 export interface FormWizardStep {
   /** Step title */
   title: string
   /** Step description */
   description?: string
-  /** Whether this step is complete (shows checkmark in progress) */
+  /** Whether this step is complete */
   completed?: boolean
 }
 
@@ -52,56 +52,72 @@ const isLast = computed(() => props.currentStep === props.steps.length - 1)
 const progress = computed(() => ((props.currentStep + 1) / props.steps.length) * 100)
 const currentStepDef = computed(() => props.steps[props.currentStep])
 
+function goTo(i: number) {
+  emit('update:currentStep', i)
+}
+
 function goBack() {
-  if (!isFirst.value) {
-    emit('update:currentStep', props.currentStep - 1)
-  }
+  if (!isFirst.value) goTo(props.currentStep - 1)
 }
 
 function goNext() {
   if (isLast.value) {
     emit('finish')
   } else {
-    emit('update:currentStep', props.currentStep + 1)
+    goTo(props.currentStep + 1)
   }
 }
 </script>
 
 <template>
   <div class="flex flex-col h-full bg-bg">
-    <!-- Progress header -->
-    <div class="shrink-0 bg-surface px-6 pt-5 pb-4" style="border-bottom: 1px solid var(--color-line-soft);">
-      <!-- Step indicator -->
-      <div class="flex items-center justify-between mb-1">
-        <span class="text-sm font-medium text-ink2">
-          Step {{ currentStep + 1 }} of {{ steps.length }}
-          <span class="text-ink4 ml-1">·</span>
-          <span class="text-ink ml-1">{{ currentStepDef?.title }}</span>
-        </span>
-        <span class="text-sm text-ink4 font-mono">{{ Math.round(progress) }}%</span>
-      </div>
-
-      <!-- Progress bar -->
-      <div class="w-full h-1.5 bg-chip-bg rounded-full overflow-hidden">
+    <!-- Header: progress + step nav -->
+    <div class="shrink-0 bg-surface" style="border-bottom: 1px solid var(--color-line-soft);">
+      <!-- Progress bar (thin, top) -->
+      <div class="w-full h-1 bg-chip-bg">
         <div
-          class="h-full bg-accent rounded-full transition-all duration-500 ease-out"
+          class="h-full bg-accent transition-all duration-500 ease-out"
           :style="{ width: `${progress}%` }"
         />
       </div>
 
-      <!-- Step dots -->
-      <div class="flex items-center gap-1.5 mt-3">
+      <!-- Clickable step nav -->
+      <div class="flex overflow-x-auto px-2 sm:px-4">
         <button
           v-for="(step, i) in steps"
           :key="i"
           type="button"
+          class="wizard-step-btn flex items-center gap-2 px-3 sm:px-4 py-3 shrink-0 cursor-pointer transition-colors"
           :class="[
-            'w-2 h-2 rounded-full transition-all duration-300 cursor-pointer',
-            i === currentStep ? 'bg-accent w-5' : i < currentStep || step.completed ? 'bg-accent/40' : 'bg-chip-bg',
+            i === currentStep && 'is-active',
           ]"
-          :aria-label="`Go to step ${i + 1}: ${step.title}`"
-          @click="emit('update:currentStep', i)"
-        />
+          @click="goTo(i)"
+        >
+          <!-- Step circle -->
+          <div
+            :class="[
+              'w-6 h-6 rounded-full text-xs font-semibold flex items-center justify-center shrink-0 transition-all duration-200',
+              i < currentStep || step.completed
+                ? 'bg-accent text-white'
+                : i === currentStep
+                  ? 'bg-accent text-white'
+                  : 'wizard-circle-future text-ink4',
+            ]"
+          >
+            <Check v-if="i < currentStep || (step.completed && i !== currentStep)" :size="12" :stroke-width="2.5" />
+            <span v-else>{{ i + 1 }}</span>
+          </div>
+
+          <!-- Step label (hidden on small mobile, shown on sm+) -->
+          <span
+            :class="[
+              'hidden sm:inline text-sm whitespace-nowrap transition-colors',
+              i === currentStep ? 'font-medium text-ink' : 'text-ink3',
+            ]"
+          >
+            {{ step.title }}
+          </span>
+        </button>
       </div>
     </div>
 
@@ -110,6 +126,9 @@ function goNext() {
       <div class="max-w-[560px] mx-auto px-5 py-10 sm:py-12">
         <!-- Step title & description -->
         <div class="mb-8">
+          <div class="text-xs uppercase tracking-wide text-ink4 font-medium mb-1">
+            Step {{ currentStep + 1 }} of {{ steps.length }}
+          </div>
           <h2 class="text-2xl font-semibold text-ink tracking-tight">
             {{ currentStepDef?.title }}
           </h2>
@@ -173,3 +192,18 @@ function goNext() {
     </div>
   </div>
 </template>
+
+<style scoped>
+.wizard-step-btn.is-active {
+  border-bottom: 2px solid var(--color-accent);
+}
+.wizard-step-btn:not(.is-active) {
+  border-bottom: 2px solid transparent;
+}
+.wizard-step-btn:hover:not(.is-active) {
+  background: var(--color-hover);
+}
+.wizard-circle-future {
+  border: 1.5px solid var(--color-line);
+}
+</style>

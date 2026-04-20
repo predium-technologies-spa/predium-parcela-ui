@@ -123,6 +123,9 @@ export type { StepperProps, StepDef } from './molecules/Stepper'
 export { PFormWizard } from './molecules/FormWizard'
 export type { FormWizardProps, FormWizardStep } from './molecules/FormWizard'
 
+export { PFormAccordion } from './molecules/FormAccordion'
+export type { FormAccordionProps, FormAccordionSection } from './molecules/FormAccordion'
+
 // Organisms
 export { PSidebar } from './organisms/Sidebar'
 export type { SidebarProps, SidebarSection, SidebarNavItem } from './organisms/Sidebar'
