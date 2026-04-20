@@ -1,101 +1,34 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PDataTable, PBadge } from '@parcela/ui'
+import { PDataTable, PBadge, PProgressBar } from '@parcela/ui'
+import { ref } from 'vue'
 
 const columns = [
-  { key: 'property', label: 'Property' },
+  { key: 'property', label: 'Property', sortable: true },
   { key: 'id', label: 'ID', mono: true },
-  { key: 'type', label: 'Type' },
-  { key: 'units', label: 'Units', align: 'right' as const, mono: true },
-  { key: 'occupancy', label: 'Occupancy', align: 'right' as const },
-  { key: 'rentRoll', label: 'Rent roll', align: 'right' as const, mono: true },
+  { key: 'type', label: 'Type', sortable: true },
+  { key: 'units', label: 'Units', align: 'right' as const, mono: true, sortable: true },
+  { key: 'occupancy', label: 'Occupancy', align: 'right' as const, sortable: true },
+  { key: 'rent', label: 'Rent roll', align: 'right' as const, mono: true, sortable: true },
   { key: 'status', label: 'Status' },
 ]
 
 const rows = [
-  {
-    property: 'Ashford Row',
-    address: '401 Ashford Ave, Austin TX',
-    id: 'PRP-0118',
-    type: 'Multi-family',
-    units: 24,
-    occupancy: '96%',
-    rentRoll: '$38,400',
-    status: 'Active',
-    statusTone: 'good',
-  },
-  {
-    property: 'Linden Court',
-    address: '820 Linden Blvd, Denver CO',
-    id: 'PRP-0122',
-    type: 'Multi-family',
-    units: 18,
-    occupancy: '89%',
-    rentRoll: '$27,900',
-    status: 'Active',
-    statusTone: 'good',
-  },
-  {
-    property: 'Harper Hall',
-    address: '36 Harper St, Portland OR',
-    id: 'PRP-0126',
-    type: 'Multi-family',
-    units: 36,
-    occupancy: '92%',
-    rentRoll: '$54,000',
-    status: 'Active',
-    statusTone: 'good',
-  },
-  {
-    property: 'Waverly Place',
-    address: '12 Waverly Pl, Seattle WA',
-    id: 'PRP-0131',
-    type: 'Townhome',
-    units: 8,
-    occupancy: '100%',
-    rentRoll: '$14,800',
-    status: 'Review',
-    statusTone: 'warn',
-  },
-  {
-    property: 'Greystone Terrace',
-    address: '900 Greystone Dr, Chicago IL',
-    id: 'PRP-0134',
-    type: 'Multi-family',
-    units: 42,
-    occupancy: '85%',
-    rentRoll: '$63,000',
-    status: 'Onboarding',
-    statusTone: 'info',
-  },
+  { property: 'Ashford Row', id: 'PRP-0128', type: 'Multifamily', units: 24, occupancy: 96, rent: '$52,400', status: 'Active', statusTone: 'good' },
+  { property: 'Linden Court', id: 'PRP-0127', type: 'Multifamily', units: 18, occupancy: 89, rent: '$31,200', status: 'Active', statusTone: 'good' },
+  { property: 'Harper Hall', id: 'PRP-0126', type: 'Mixed-use', units: 36, occupancy: 78, rent: '$68,100', status: 'Active', statusTone: 'good' },
+  { property: 'Vine & Third', id: 'PRP-0125', type: 'Retail', units: 6, occupancy: 100, rent: '$44,800', status: 'Active', statusTone: 'good' },
+  { property: 'North Ridge', id: 'PRP-0124', type: 'Multifamily', units: 42, occupancy: 93, rent: '$87,300', status: 'Active', statusTone: 'good' },
 ]
 
 const meta: Meta<typeof PDataTable> = {
   title: 'Organisms/DataTable',
   component: PDataTable,
-  argTypes: {
-    selectable: { control: 'boolean' },
-    sortable: { control: 'boolean' },
-  },
-  args: {
-    columns,
-    rows,
-    selectable: true,
-    sortable: true,
-  },
 }
 
 export default meta
 type Story = StoryObj<typeof PDataTable>
 
 export const Default: Story = {
-  render: (args) => ({
-    components: { PDataTable },
-    setup: () => ({ args }),
-    template: '<PDataTable v-bind="args" />',
-  }),
-}
-
-export const Composition: Story = {
   render: () => ({
     components: { PDataTable, PBadge },
     setup: () => ({ columns, rows }),
@@ -103,10 +36,57 @@ export const Composition: Story = {
       <PDataTable :columns="columns" :rows="rows" selectable sortable>
         <template #cell-property="{ row }">
           <div>
-            <div style="font-weight: 500;">{{ row.property }}</div>
-            <div style="font-size: 12px; color: var(--color-text-secondary);">{{ row.address }}</div>
+            <div class="font-medium text-ink">{{ row.property }}</div>
           </div>
         </template>
+        <template #cell-occupancy="{ value }">
+          <div class="flex items-center gap-2">
+            <PProgressBar :value="value" :tone="value >= 90 ? 'good' : value >= 70 ? 'warn' : 'danger'" size="sm" style="width: 48px;" />
+            <span class="font-mono text-sm">{{ value }}%</span>
+          </div>
+        </template>
+        <template #cell-status="{ row }">
+          <PBadge :tone="row.statusTone">{{ row.status }}</PBadge>
+        </template>
+        <template #footer>
+          <strong class="text-ink2">5</strong> properties shown
+        </template>
+      </PDataTable>
+    `,
+  }),
+}
+
+export const WithPagination: Story = {
+  render: () => ({
+    components: { PDataTable, PBadge },
+    setup() {
+      const page = ref(1)
+      const pageSize = 5
+      const allRows = [
+        ...rows,
+        { property: 'Briarwood 7', id: 'PRP-0123', type: 'Multifamily', units: 12, occupancy: 100, rent: '$21,400', status: 'Active', statusTone: 'good' },
+        { property: 'Cedar Lofts', id: 'PRP-0122', type: 'Multifamily', units: 28, occupancy: 82, rent: '$61,800', status: 'Review', statusTone: 'warn' },
+        { property: 'Market Square', id: 'PRP-0121', type: 'Mixed-use', units: 19, occupancy: 68, rent: '$33,500', status: 'Review', statusTone: 'warn' },
+        { property: 'Oakline', id: 'PRP-0120', type: 'Multifamily', units: 15, occupancy: 0, rent: '$0', status: 'Onboarding', statusTone: 'info' },
+      ]
+      // Simulate remote pagination
+      const pageRows = ref(allRows.slice(0, pageSize))
+      function onPageChange(p: number) {
+        page.value = p
+        const start = (p - 1) * pageSize
+        pageRows.value = allRows.slice(start, start + pageSize)
+      }
+      return { columns, pageRows, page, allRows, onPageChange }
+    },
+    template: `
+      <PDataTable
+        :columns="columns"
+        :rows="pageRows"
+        selectable
+        sortable
+        :pagination="{ page, pageSize: 5, totalRows: allRows.length }"
+        @page-change="onPageChange"
+      >
         <template #cell-status="{ row }">
           <PBadge :tone="row.statusTone">{{ row.status }}</PBadge>
         </template>
@@ -116,15 +96,28 @@ export const Composition: Story = {
 }
 
 export const Playground: Story = {
-  render: (args) => ({
+  render: () => ({
     components: { PDataTable, PBadge },
-    setup: () => ({ args }),
+    setup() {
+      const selected = ref<number[]>([])
+      return { columns, rows, selected }
+    },
     template: `
-      <PDataTable v-bind="args">
-        <template #cell-status="{ row }">
-          <PBadge :tone="row.statusTone">{{ row.status }}</PBadge>
-        </template>
-      </PDataTable>
+      <div>
+        <PDataTable
+          :columns="columns"
+          :rows="rows"
+          selectable
+          sortable
+          v-model:selected-rows="selected"
+          @sort="(key, dir) => console.log('Sort:', key, dir)"
+        >
+          <template #cell-status="{ row }">
+            <PBadge :tone="row.statusTone">{{ row.status }}</PBadge>
+          </template>
+        </PDataTable>
+        <p class="text-sm text-ink3 mt-3">Selected rows: {{ selected }}</p>
+      </div>
     `,
   }),
 }
