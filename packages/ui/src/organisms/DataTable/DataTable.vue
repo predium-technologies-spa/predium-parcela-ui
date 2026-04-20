@@ -50,7 +50,7 @@ defineEmits<{
 
 <template>
   <!-- ═══ Desktop: horizontal table (md+) ═══ -->
-  <div class="hidden md:block bg-surface border border-line rounded-xl overflow-hidden overflow-x-auto">
+  <div class="hidden lg:block bg-surface border border-line rounded-xl overflow-hidden overflow-x-auto">
     <table class="w-full border-collapse">
       <thead>
         <tr>
@@ -131,7 +131,7 @@ defineEmits<{
   </div>
 
   <!-- ═══ Mobile: stacked cards (<md) ═══ -->
-  <div class="md:hidden flex flex-col gap-3">
+  <div class="lg:hidden flex flex-col gap-3">
     <div
       v-for="(row, i) in rows"
       :key="i"
