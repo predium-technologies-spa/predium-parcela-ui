@@ -63,7 +63,7 @@ const dashOffset = computed(() => CIRCUMFERENCE * (1 - progress.value))
           <!-- Body -->
           <div class="flex flex-col items-center">
             <!-- Circular timer -->
-            <div class="relative mb-7">
+            <div class="relative mb-8">
               <svg :width="SIZE" :height="SIZE" class="-rotate-90">
                 <!-- Track -->
                 <circle
