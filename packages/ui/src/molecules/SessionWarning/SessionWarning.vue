@@ -61,9 +61,9 @@ const dashOffset = computed(() => CIRCUMFERENCE * (1 - progress.value))
           <div class="h-1" style="background: var(--color-accent);" />
 
           <!-- Body -->
-          <div class="flex flex-col items-center px-8 pt-8 pb-6">
+          <div class="flex flex-col items-center px-10 pt-10 pb-8">
             <!-- Circular timer -->
-            <div class="relative mb-5">
+            <div class="relative mb-6">
               <svg :width="SIZE" :height="SIZE" class="-rotate-90">
                 <!-- Track -->
                 <circle
@@ -92,14 +92,16 @@ const dashOffset = computed(() => CIRCUMFERENCE * (1 - progress.value))
 
             <!-- Text -->
             <h3 class="text-[17px] font-semibold mb-2" style="color: var(--color-ink);">¿Sigues ahi?</h3>
-            <p class="text-[13px] text-center leading-relaxed mb-6" style="color: var(--color-ink3);">
+            <p class="text-[13px] text-center leading-relaxed mb-8" style="color: var(--color-ink3);">
               Por seguridad cerraremos tu sesion en <strong class="font-semibold" style="color: var(--color-ink);">{{ remaining }}</strong> s.<br>
               Presiona continuar si todavia estas trabajando.
             </p>
 
             <!-- Actions -->
-            <PButton variant="primary" class="w-full" @click="$emit('continue')">Seguir trabajando</PButton>
-            <PButton variant="ghost" class="w-full mt-2" @click="$emit('logout')">Cerrar sesion ahora</PButton>
+            <div class="w-full space-y-3">
+              <PButton variant="primary" class="w-full" @click="$emit('continue')">Seguir trabajando</PButton>
+              <PButton variant="ghost" class="w-full" @click="$emit('logout')">Cerrar sesion ahora</PButton>
+            </div>
           </div>
         </div>
       </div>

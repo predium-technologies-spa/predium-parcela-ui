@@ -42,10 +42,10 @@ defineEmits<{
           <div class="h-1" style="background: var(--color-warn);" />
 
           <!-- Body -->
-          <div class="flex flex-col items-center px-8 pt-8 pb-6">
+          <div class="flex flex-col items-center px-10 pt-10 pb-8">
             <!-- Icon -->
             <div
-              class="w-14 h-14 rounded-full flex items-center justify-center mb-5"
+              class="w-14 h-14 rounded-full flex items-center justify-center mb-6"
               style="background: var(--color-warn-bg);"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--color-warn);">
@@ -55,13 +55,15 @@ defineEmits<{
 
             <!-- Text -->
             <h3 class="text-[17px] font-semibold mb-2" style="color: var(--color-ink);">Sesion expirada</h3>
-            <p class="text-[13px] text-center leading-relaxed mb-6" style="color: var(--color-ink3);">
+            <p class="text-[13px] text-center leading-relaxed mb-8" style="color: var(--color-ink3);">
               Tu sesion ha expirado por inactividad.<br>
               Por favor, vuelve a iniciar sesion.
             </p>
 
             <!-- Action -->
-            <PButton variant="primary" class="w-full" @click="$emit('relogin')">Reingresar</PButton>
+            <div class="w-full">
+              <PButton variant="primary" class="w-full" @click="$emit('relogin')">Reingresar</PButton>
+            </div>
           </div>
         </div>
       </div>
