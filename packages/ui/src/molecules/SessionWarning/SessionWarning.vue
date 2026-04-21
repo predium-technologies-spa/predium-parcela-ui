@@ -52,18 +52,18 @@ const dashOffset = computed(() => CIRCUMFERENCE * (1 - progress.value))
     <Transition name="sw-dialog">
       <div v-if="open" class="fixed inset-0 z-[9999] flex items-center justify-center p-4">
         <div
-          class="w-[360px] max-w-[calc(100vw-2rem)] rounded-lg overflow-hidden shadow-2xl"
-          style="background: var(--color-surface);"
+          class="w-[400px] max-w-[calc(100vw-2rem)] rounded-xl shadow-2xl p-6"
+          style="background: var(--color-surface); border: 1px solid var(--color-line);"
           role="dialog"
           aria-modal="true"
         >
           <!-- Gold top bar -->
-          <div class="h-1" style="background: var(--color-accent);" />
+          <div class="h-1 -mx-6 -mt-6 mb-8 rounded-t-xl" style="background: var(--color-accent);" />
 
           <!-- Body -->
-          <div class="flex flex-col items-center px-10 pt-10 pb-8">
+          <div class="flex flex-col items-center">
             <!-- Circular timer -->
-            <div class="relative mb-6">
+            <div class="relative mb-7">
               <svg :width="SIZE" :height="SIZE" class="-rotate-90">
                 <!-- Track -->
                 <circle
@@ -91,14 +91,14 @@ const dashOffset = computed(() => CIRCUMFERENCE * (1 - progress.value))
             </div>
 
             <!-- Text -->
-            <h3 class="text-[17px] font-semibold mb-2" style="color: var(--color-ink);">¿Sigues ahi?</h3>
-            <p class="text-[13px] text-center leading-relaxed mb-8" style="color: var(--color-ink3);">
+            <h3 class="text-[18px] font-semibold mb-2" style="color: var(--color-ink);">¿Sigues ahi?</h3>
+            <p class="text-[13px] text-center leading-relaxed" style="color: var(--color-ink3);">
               Por seguridad cerraremos tu sesion en <strong class="font-semibold" style="color: var(--color-ink);">{{ remaining }}</strong> s.<br>
               Presiona continuar si todavia estas trabajando.
             </p>
 
             <!-- Actions -->
-            <div class="w-full space-y-3">
+            <div class="w-full mt-8 pt-6 flex flex-col gap-4" style="border-top: 1px solid var(--color-line-soft);">
               <PButton variant="primary" class="w-full" @click="$emit('continue')">Seguir trabajando</PButton>
               <PButton variant="ghost" class="w-full" @click="$emit('logout')">Cerrar sesion ahora</PButton>
             </div>
