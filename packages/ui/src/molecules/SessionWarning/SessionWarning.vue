@@ -7,6 +7,7 @@
  * <PSessionWarning :open="showWarning" :remaining="57" :total="120" @continue="reactivate" @logout="logout" />
  */
 import { computed } from 'vue'
+import PButton from '../../atoms/Button/Button.vue'
 
 export interface SessionWarningProps {
   /** Whether the modal is visible */
@@ -51,7 +52,7 @@ const dashOffset = computed(() => CIRCUMFERENCE * (1 - progress.value))
     <Transition name="sw-dialog">
       <div v-if="open" class="fixed inset-0 z-[9999] flex items-center justify-center p-4">
         <div
-          class="w-full max-w-sm rounded-lg overflow-hidden shadow-2xl"
+          class="w-[360px] max-w-[calc(100vw-2rem)] rounded-lg overflow-hidden shadow-2xl"
           style="background: var(--color-surface);"
           role="dialog"
           aria-modal="true"
@@ -97,24 +98,8 @@ const dashOffset = computed(() => CIRCUMFERENCE * (1 - progress.value))
             </p>
 
             <!-- Actions -->
-            <button
-              type="button"
-              class="w-full h-11 rounded-md text-[14px] font-medium text-white cursor-pointer transition-opacity hover:opacity-90"
-              style="background: var(--color-ink);"
-              @click="$emit('continue')"
-            >
-              Seguir trabajando
-            </button>
-            <button
-              type="button"
-              class="w-full mt-2 h-10 text-[13px] font-medium cursor-pointer transition-colors rounded-md"
-              style="color: var(--color-ink3); background: transparent;"
-              @mouseenter="($event.target as HTMLElement).style.background = 'var(--color-bg)'"
-              @mouseleave="($event.target as HTMLElement).style.background = 'transparent'"
-              @click="$emit('logout')"
-            >
-              Cerrar sesion ahora
-            </button>
+            <PButton variant="primary" class="w-full" @click="$emit('continue')">Seguir trabajando</PButton>
+            <PButton variant="ghost" class="w-full mt-2" @click="$emit('logout')">Cerrar sesion ahora</PButton>
           </div>
         </div>
       </div>

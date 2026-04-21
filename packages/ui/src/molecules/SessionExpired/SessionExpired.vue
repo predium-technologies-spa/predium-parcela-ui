@@ -15,6 +15,8 @@ withDefaults(defineProps<SessionExpiredProps>(), {
   open: false,
 })
 
+import PButton from '../../atoms/Button/Button.vue'
+
 defineEmits<{
   relogin: []
 }>()
@@ -31,7 +33,7 @@ defineEmits<{
     <Transition name="se-dialog">
       <div v-if="open" class="fixed inset-0 z-[9999] flex items-center justify-center p-4">
         <div
-          class="w-full max-w-sm rounded-lg overflow-hidden shadow-2xl"
+          class="w-[360px] max-w-[calc(100vw-2rem)] rounded-lg overflow-hidden shadow-2xl"
           style="background: var(--color-surface);"
           role="dialog"
           aria-modal="true"
@@ -59,14 +61,7 @@ defineEmits<{
             </p>
 
             <!-- Action -->
-            <button
-              type="button"
-              class="w-full h-11 rounded-md text-[14px] font-medium text-white cursor-pointer transition-opacity hover:opacity-90"
-              style="background: var(--color-ink);"
-              @click="$emit('relogin')"
-            >
-              Reingresar
-            </button>
+            <PButton variant="primary" class="w-full" @click="$emit('relogin')">Reingresar</PButton>
           </div>
         </div>
       </div>
