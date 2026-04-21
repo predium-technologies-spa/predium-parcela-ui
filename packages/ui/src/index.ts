@@ -126,6 +126,12 @@ export type { FormWizardProps, FormWizardStep } from './molecules/FormWizard'
 export { PFormAccordion } from './molecules/FormAccordion'
 export type { FormAccordionProps, FormAccordionSection } from './molecules/FormAccordion'
 
+export { PSessionWarning } from './molecules/SessionWarning'
+export type { SessionWarningProps } from './molecules/SessionWarning'
+
+export { PSessionExpired } from './molecules/SessionExpired'
+export type { SessionExpiredProps } from './molecules/SessionExpired'
+
 // Organisms
 export { PSidebar } from './organisms/Sidebar'
 export type { SidebarProps, SidebarSection, SidebarNavItem } from './organisms/Sidebar'
