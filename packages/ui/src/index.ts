@@ -193,6 +193,9 @@ export type { RightDrawerProps } from './organisms/RightDrawer'
 export { PModal } from './organisms/Modal'
 export type { ModalProps } from './organisms/Modal'
 
+export { PResizable } from './organisms/Resizable'
+export type { ResizableProps } from './organisms/Resizable'
+
 // Chat
 export { PChatBubbleAI } from './chat/ChatBubbleAI'
 export type { ChatBubbleAIProps } from './chat/ChatBubbleAI'
