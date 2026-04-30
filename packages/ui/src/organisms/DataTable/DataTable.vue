@@ -60,6 +60,12 @@ export interface DataTableProps {
   sortable?: boolean
   /** Remote pagination config */
   pagination?: DataTablePagination | null
+  /** Label shown next to the row checkbox in mobile card view */
+  selectLabel?: string
+  /** Pagination summary prefix (e.g. "Showing") */
+  showingLabel?: string
+  /** Pagination summary conjunction (e.g. "of") */
+  ofLabel?: string
 }
 
 const props = withDefaults(defineProps<DataTableProps>(), {
@@ -67,6 +73,9 @@ const props = withDefaults(defineProps<DataTableProps>(), {
   selectedRows: () => [],
   sortable: false,
   pagination: null,
+  selectLabel: 'Select',
+  showingLabel: 'Showing',
+  ofLabel: 'of',
 })
 
 const emit = defineEmits<{
@@ -313,7 +322,7 @@ function toggleAllRows() {
           :aria-label="`Select row ${row.index + 1}`"
           @change="row.toggleSelected()"
         />
-        <span class="text-sm font-medium text-ink3 uppercase tracking-wide">Select</span>
+        <span class="text-sm font-medium text-ink3 uppercase tracking-wide">{{ selectLabel }}</span>
       </div>
       <div
         v-for="(col, ci) in columns"
@@ -337,8 +346,8 @@ function toggleAllRows() {
   <!-- ═══ Pagination (if provided) ═══ -->
   <div v-if="pagination" class="flex flex-col sm:flex-row items-center justify-between gap-3 px-1 py-3 text-sm text-ink3">
     <div>
-      Showing <span class="font-mono text-ink2">{{ pageStart }}–{{ pageEnd }}</span>
-      of <span class="font-mono text-ink2">{{ pagination.totalRows.toLocaleString() }}</span>
+      {{ showingLabel }} <span class="font-mono text-ink2">{{ pageStart }}–{{ pageEnd }}</span>
+      {{ ofLabel }} <span class="font-mono text-ink2">{{ pagination.totalRows.toLocaleString() }}</span>
     </div>
     <div class="flex items-center gap-1">
       <button

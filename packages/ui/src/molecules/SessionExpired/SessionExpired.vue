@@ -9,10 +9,16 @@
 export interface SessionExpiredProps {
   /** Whether the modal is visible */
   open?: boolean
+  /** Dialog heading */
+  title?: string
+  /** Label for the re-login button */
+  reloginLabel?: string
 }
 
 withDefaults(defineProps<SessionExpiredProps>(), {
   open: false,
+  title: 'Sesion expirada',
+  reloginLabel: 'Reingresar',
 })
 
 import PButton from '../../atoms/Button/Button.vue'
@@ -54,15 +60,17 @@ defineEmits<{
             </div>
 
             <!-- Text -->
-            <h3 class="text-[18px] font-semibold mb-2" style="color: var(--color-ink);">Sesion expirada</h3>
+            <h3 class="text-[18px] font-semibold mb-2" style="color: var(--color-ink);">{{ title }}</h3>
             <p class="text-[13px] text-center leading-relaxed" style="color: var(--color-ink3);">
-              Tu sesion ha expirado por inactividad.<br>
-              Por favor, vuelve a iniciar sesion.
+              <slot name="body">
+                Tu sesion ha expirado por inactividad.<br>
+                Por favor, vuelve a iniciar sesion.
+              </slot>
             </p>
 
             <!-- Action -->
             <div class="w-full mt-8 pt-6" style="border-top: 1px solid var(--color-line-soft);">
-              <PButton variant="primary" class="w-full" @click="$emit('relogin')">Reingresar</PButton>
+              <PButton variant="primary" class="w-full" @click="$emit('relogin')">{{ reloginLabel }}</PButton>
             </div>
           </div>
         </div>

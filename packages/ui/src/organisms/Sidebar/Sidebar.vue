@@ -38,6 +38,10 @@ export interface SidebarProps {
   storageUsed?: number
   /** Storage label */
   storageLabel?: string
+  /** Label for the storage section heading */
+  storageHeading?: string
+  /** Label for the collapse button */
+  collapseLabel?: string
 }
 
 withDefaults(defineProps<SidebarProps>(), {
@@ -47,6 +51,8 @@ withDefaults(defineProps<SidebarProps>(), {
   expanded: true,
   storageUsed: 42,
   storageLabel: '42.1 / 100 GB',
+  storageHeading: 'Storage',
+  collapseLabel: 'Collapse',
 })
 
 defineEmits<{
@@ -149,7 +155,7 @@ defineEmits<{
             expanded ? 'opacity-100' : 'opacity-0 w-0 overflow-hidden',
           ]"
         >
-          Collapse
+          {{ collapseLabel }}
         </span>
       </button>
     </div>
@@ -163,7 +169,7 @@ defineEmits<{
       ]"
     >
       <div class="flex justify-between text-sm text-ink3 mb-1.5">
-        <span>Storage</span>
+        <span>{{ storageHeading }}</span>
         <span class="font-mono">{{ storageLabel }}</span>
       </div>
       <PProgressBar :value="storageUsed" tone="neutral" size="sm" />

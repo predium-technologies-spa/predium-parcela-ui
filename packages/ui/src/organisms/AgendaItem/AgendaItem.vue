@@ -23,10 +23,16 @@ export interface AgendaItemProps {
   tone?: 'neutral' | 'good' | 'warn' | 'info'
   /** Status badge */
   status?: 'confirmed' | 'pending' | 'flagged'
+  /** Label for the "flagged" status badge */
+  flaggedLabel?: string
+  /** Label for the "pending" status badge */
+  pendingLabel?: string
 }
 
 withDefaults(defineProps<AgendaItemProps>(), {
   tone: 'neutral',
+  flaggedLabel: 'Follow-up',
+  pendingLabel: 'Pending',
 })
 </script>
 
@@ -53,8 +59,8 @@ withDefaults(defineProps<AgendaItemProps>(), {
     <div class="flex-1 min-w-0">
       <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
         <span class="text-xs uppercase tracking-wide text-ink3 font-medium">{{ type }}</span>
-        <PBadge v-if="status === 'flagged'" tone="warn">Follow-up</PBadge>
-        <PBadge v-if="status === 'pending'" tone="neutral">Pending</PBadge>
+        <PBadge v-if="status === 'flagged'" tone="warn">{{ flaggedLabel }}</PBadge>
+        <PBadge v-if="status === 'pending'" tone="neutral">{{ pendingLabel }}</PBadge>
       </div>
       <div class="text-md font-medium text-ink mt-0.5">{{ label }}</div>
       <div v-if="sublabel" class="text-sm text-ink3">{{ sublabel }}</div>
