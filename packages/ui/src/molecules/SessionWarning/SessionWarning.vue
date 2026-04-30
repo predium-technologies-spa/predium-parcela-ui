@@ -16,11 +16,23 @@ export interface SessionWarningProps {
   remaining: number
   /** Total warning duration in seconds */
   total?: number
+  /** Label shown below the timer (e.g. "restantes") */
+  remainingLabel?: string
+  /** Dialog heading */
+  title?: string
+  /** Label for the continue button */
+  continueLabel?: string
+  /** Label for the logout button */
+  logoutLabel?: string
 }
 
 const props = withDefaults(defineProps<SessionWarningProps>(), {
   open: false,
   total: 120,
+  remainingLabel: 'restantes',
+  title: '¿Sigues ahi?',
+  continueLabel: 'Seguir trabajando',
+  logoutLabel: 'Cerrar sesion ahora',
 })
 
 defineEmits<{
@@ -86,21 +98,23 @@ const dashOffset = computed(() => CIRCUMFERENCE * (1 - progress.value))
               <!-- Time display -->
               <div class="absolute inset-0 flex flex-col items-center justify-center">
                 <span class="text-[20px] font-semibold font-mono tracking-tight" style="color: var(--color-ink);">{{ display }}</span>
-                <span class="text-[9px] uppercase tracking-widest font-medium" style="color: var(--color-ink3);">restantes</span>
+                <span class="text-[9px] uppercase tracking-widest font-medium" style="color: var(--color-ink3);">{{ remainingLabel }}</span>
               </div>
             </div>
 
             <!-- Text -->
-            <h3 class="text-[18px] font-semibold mb-2" style="color: var(--color-ink);">¿Sigues ahi?</h3>
+            <h3 class="text-[18px] font-semibold mb-2" style="color: var(--color-ink);">{{ title }}</h3>
             <p class="text-[13px] text-center leading-relaxed" style="color: var(--color-ink3);">
-              Por seguridad cerraremos tu sesion en <strong class="font-semibold" style="color: var(--color-ink);">{{ remaining }}</strong> s.<br>
-              Presiona continuar si todavia estas trabajando.
+              <slot name="body">
+                Por seguridad cerraremos tu sesion en <strong class="font-semibold" style="color: var(--color-ink);">{{ remaining }}</strong> s.<br>
+                Presiona continuar si todavia estas trabajando.
+              </slot>
             </p>
 
             <!-- Actions -->
             <div class="w-full mt-8 pt-6 flex flex-col gap-4" style="border-top: 1px solid var(--color-line-soft);">
-              <PButton variant="primary" class="w-full" @click="$emit('continue')">Seguir trabajando</PButton>
-              <PButton variant="ghost" class="w-full" @click="$emit('logout')">Cerrar sesion ahora</PButton>
+              <PButton variant="primary" class="w-full" @click="$emit('continue')">{{ continueLabel }}</PButton>
+              <PButton variant="ghost" class="w-full" @click="$emit('logout')">{{ logoutLabel }}</PButton>
             </div>
           </div>
         </div>

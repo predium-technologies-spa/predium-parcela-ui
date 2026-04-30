@@ -26,6 +26,10 @@ export interface StepNavProps {
   direction?: 'vertical' | 'horizontal'
   /** Show completion progress */
   showProgress?: boolean
+  /** Heading above step list (vertical mode) */
+  sectionsLabel?: string
+  /** Heading above progress bar (vertical mode) */
+  completionLabel?: string
 }
 
 const props = withDefaults(defineProps<StepNavProps>(), {
@@ -33,6 +37,8 @@ const props = withDefaults(defineProps<StepNavProps>(), {
   completed: () => [],
   direction: 'vertical',
   showProgress: true,
+  sectionsLabel: 'Sections',
+  completionLabel: 'Completion',
 })
 
 defineEmits<{
@@ -56,7 +62,7 @@ function stepStatus(i: number): 'done' | 'current' | 'upcoming' {
     v-if="direction === 'vertical'"
     class="hidden md:flex md:flex-col w-[220px] shrink-0 bg-table-header p-4 step-nav-vertical"
   >
-    <div class="text-xs text-ink3 uppercase tracking-widest font-medium mb-2.5">Sections</div>
+    <div class="text-xs text-ink3 uppercase tracking-widest font-medium mb-2.5">{{ sectionsLabel }}</div>
 
     <button
       v-for="(step, i) in steps"
@@ -94,7 +100,7 @@ function stepStatus(i: number): 'done' | 'current' | 'upcoming' {
 
     <template v-if="showProgress">
       <div class="step-nav-divider my-4" />
-      <div class="text-sm text-ink3 mb-1.5">Completion</div>
+      <div class="text-sm text-ink3 mb-1.5">{{ completionLabel }}</div>
       <PProgressBar :value="progress" tone="neutral" size="sm" />
       <div class="font-mono text-sm text-ink2 mt-1.5">
         {{ completed.length }} / {{ steps.length }}
