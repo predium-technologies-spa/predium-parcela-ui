@@ -175,6 +175,9 @@ export type { AgendaItemProps } from './organisms/AgendaItem'
 export { PChart } from './organisms/Chart'
 export type { ChartProps } from './organisms/Chart'
 
+export { PChartBar } from './organisms/ChartBar'
+export type { ChartBarProps } from './organisms/ChartBar'
+
 export { PTaskItem } from './organisms/TaskItem'
 export type { TaskItemProps } from './organisms/TaskItem'
 
