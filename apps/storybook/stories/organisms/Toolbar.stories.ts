@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PToolbar, PButton } from '@parcela/ui'
+import { PToolbar, PButton } from '@eddwinpaz/predium-ui'
 import { Filter, ArrowUpDown, MoreVertical } from 'lucide-vue-next'
 
 const meta: Meta<typeof PToolbar> = {

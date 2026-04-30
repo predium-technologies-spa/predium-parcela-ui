@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PButton } from '@parcela/ui'
+import { PButton } from '@eddwinpaz/predium-ui'
 import { Download, Plus, Upload, Trash2 } from 'lucide-vue-next'
 
 const meta: Meta<typeof PButton> = {

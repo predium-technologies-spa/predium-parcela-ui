@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PFileUploader } from '@parcela/ui'
+import { PFileUploader } from '@eddwinpaz/predium-ui'
 
 const meta: Meta<typeof PFileUploader> = {
   title: 'Molecules/FileUploader',

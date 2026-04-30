@@ -6,7 +6,7 @@ import {
   PChatDateSeparator,
   PChatSuggestions,
   PChatInput,
-} from '@parcela/ui'
+} from '@eddwinpaz/predium-ui'
 import { ref } from 'vue'
 
 const meta: Meta<typeof PChatPanel> = {

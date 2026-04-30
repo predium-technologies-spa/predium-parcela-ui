@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PPopover, PButton } from '@parcela/ui'
+import { PPopover, PButton } from '@eddwinpaz/predium-ui'
 
 const meta: Meta<typeof PPopover> = {
   title: 'Molecules/Popover',

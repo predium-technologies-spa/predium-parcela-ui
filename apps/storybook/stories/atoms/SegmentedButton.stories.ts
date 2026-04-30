@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PSegmentedButton } from '@parcela/ui'
+import { PSegmentedButton } from '@eddwinpaz/predium-ui'
 import { ref } from 'vue'
 
 const meta: Meta<typeof PSegmentedButton> = {

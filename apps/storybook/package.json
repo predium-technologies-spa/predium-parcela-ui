@@ -1,5 +1,5 @@
 {
-  "name": "@parcela/storybook",
+  "name": "@eddwinpaz/predium-ui-storybook",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -8,7 +8,7 @@
     "build": "storybook build"
   },
   "dependencies": {
-    "@parcela/ui": "workspace:*",
+    "@eddwinpaz/predium-ui": "workspace:*",
     "lucide-vue-next": "^0.474.0"
   },
   "devDependencies": {

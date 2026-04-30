@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PSkeleton } from '@parcela/ui'
+import { PSkeleton } from '@eddwinpaz/predium-ui'
 
 const meta: Meta<typeof PSkeleton> = {
   title: 'Atoms/Skeleton',

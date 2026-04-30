@@ -1,5 +1,5 @@
 {
-  "name": "@parcela/ui",
+  "name": "@eddwinpaz/predium-ui",
   "version": "0.1.0",
   "type": "module",
   "main": "./packages/ui/src/index.ts",
@@ -15,10 +15,10 @@
     "vue": "^3.5.0"
   },
   "scripts": {
-    "dev:storybook": "pnpm --filter @parcela/storybook dev",
-    "build:storybook": "pnpm --filter @parcela/storybook build",
-    "build:ui": "pnpm --filter @parcela/ui build",
-    "test": "pnpm --filter @parcela/ui test"
+    "dev:storybook": "pnpm --filter @eddwinpaz/predium-ui-storybook dev",
+    "build:storybook": "pnpm --filter @eddwinpaz/predium-ui-storybook build",
+    "build:ui": "pnpm --filter @eddwinpaz/predium-ui build",
+    "test": "pnpm --filter @eddwinpaz/predium-ui test"
   },
   "engines": {
     "node": ">=20"

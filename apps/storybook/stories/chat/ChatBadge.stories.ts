@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PChatBadge } from '@parcela/ui'
+import { PChatBadge } from '@eddwinpaz/predium-ui'
 
 const meta: Meta<typeof PChatBadge> = {
   title: 'Chat/ChatBadge',

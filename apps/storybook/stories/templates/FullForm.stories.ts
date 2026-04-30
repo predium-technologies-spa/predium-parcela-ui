@@ -11,7 +11,7 @@ import {
   PChip,
   PBadge,
   PButton,
-} from '@parcela/ui'
+} from '@eddwinpaz/predium-ui'
 import {
   LayoutDashboard,
   BarChart3,

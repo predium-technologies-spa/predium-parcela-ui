@@ -4,7 +4,7 @@ import {
   PTopNav,
   PButton,
   PBadge,
-} from '@parcela/ui'
+} from '@eddwinpaz/predium-ui'
 import {
   LayoutDashboard,
   BarChart3,

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PChip } from '@parcela/ui'
+import { PChip } from '@eddwinpaz/predium-ui'
 
 const meta: Meta<typeof PChip> = {
   title: 'Atoms/Chip',

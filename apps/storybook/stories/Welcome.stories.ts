@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PButton, PBadge, PInput, PCheckbox, PAvatar, PKpiCard, PProgressBar } from '@parcela/ui'
+import { PButton, PBadge, PInput, PCheckbox, PAvatar, PKpiCard, PProgressBar } from '@eddwinpaz/predium-ui'
 import { Plus, Download, Search } from 'lucide-vue-next'
 
 const meta: Meta = {

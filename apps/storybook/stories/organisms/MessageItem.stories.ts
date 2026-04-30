@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PMessageItem } from '@parcela/ui'
+import { PMessageItem } from '@eddwinpaz/predium-ui'
 
 const meta: Meta<typeof PMessageItem> = {
   title: 'Organisms/MessageItem',

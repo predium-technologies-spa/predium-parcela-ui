@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PTile } from '@parcela/ui'
+import { PTile } from '@eddwinpaz/predium-ui'
 import { ref } from 'vue'
 import { Home, Building2, Warehouse, Landmark } from 'lucide-vue-next'
 

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PChatBubbleAI, PChatQuickReplies } from '@parcela/ui'
+import { PChatBubbleAI, PChatQuickReplies } from '@eddwinpaz/predium-ui'
 
 const meta: Meta<typeof PChatBubbleAI> = {
   title: 'Chat/ChatBubbleAI',

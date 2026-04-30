@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PFilterPill } from '@parcela/ui'
+import { PFilterPill } from '@eddwinpaz/predium-ui'
 import { Filter } from 'lucide-vue-next'
 
 const meta: Meta<typeof PFilterPill> = {

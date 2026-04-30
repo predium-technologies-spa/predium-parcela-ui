@@ -20,7 +20,7 @@ importers:
 
   apps/storybook:
     dependencies:
-      '@parcela/ui':
+      '@eddwinpaz/predium-ui':
         specifier: workspace:*
         version: link:../../packages/ui
       lucide-vue-next:

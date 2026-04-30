@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PChart } from '@parcela/ui'
+import { PChart } from '@eddwinpaz/predium-ui'
 
 const meta: Meta<typeof PChart> = {
   title: 'Organisms/Chart',
