@@ -52,6 +52,9 @@ export type { DividerProps } from './atoms/Divider'
 export { PPinCode } from './atoms/PinCode'
 export type { PinCodeProps } from './atoms/PinCode'
 
+export { PNumberField } from './atoms/NumberField'
+export type { NumberFieldProps } from './atoms/NumberField'
+
 export { PToggle } from './atoms/Toggle'
 export type { ToggleProps } from './atoms/Toggle'
 
