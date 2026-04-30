@@ -17,7 +17,7 @@ export { PInput } from './atoms/Input'
 export type { InputProps, PInputType } from './atoms/Input'
 
 export { PSelect } from './atoms/Select'
-export type { SelectProps } from './atoms/Select'
+export type { SelectProps, SelectOption } from './atoms/Select'
 
 export { PCheckbox } from './atoms/Checkbox'
 export type { CheckboxProps } from './atoms/Checkbox'

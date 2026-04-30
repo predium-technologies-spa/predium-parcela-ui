@@ -4,17 +4,37 @@
  *
  * @example
  * <PSelect v-model="type" placeholder="Select type" :options="['Multifamily', 'Retail']" />
+ * <PSelect
+ *   v-model="status"
+ *   :options="[
+ *     { value: 'ACTIVE', label: 'Active' },
+ *     { value: 'PAUSED', label: 'Paused' },
+ *   ]"
+ * />
  */
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
 import { ChevronDown, Check } from 'lucide-vue-next'
+
+export interface SelectOption {
+  /** The value stored in modelValue when this option is picked */
+  value: string
+  /** The user-facing label rendered in the trigger and dropdown */
+  label: string
+  /** Whether this individual option is disabled */
+  disabled?: boolean
+}
 
 export interface SelectProps {
   /** Selected value (v-model) */
   modelValue?: string
   /** Placeholder text when no value */
   placeholder?: string
-  /** Option list */
-  options?: string[]
+  /**
+   * Option list. Either an array of strings (where the option is both the
+   * stored value and the label) or an array of `{ value, label }` objects
+   * for distinct values and labels.
+   */
+  options?: ReadonlyArray<string | SelectOption>
   /** Whether the select is disabled */
   disabled?: boolean
   /** Error state */
@@ -40,13 +60,25 @@ const isOpen = ref(false)
 const triggerRef = ref<HTMLElement>()
 const listRef = ref<HTMLElement>()
 
+const normalizedOptions = computed<SelectOption[]>(() =>
+  props.options.map((opt) =>
+    typeof opt === 'string' ? { value: opt, label: opt } : opt,
+  ),
+)
+
+const selectedLabel = computed(() => {
+  const match = normalizedOptions.value.find((o) => o.value === props.modelValue)
+  return match?.label ?? props.modelValue
+})
+
 function toggle() {
   if (props.disabled) return
   isOpen.value = !isOpen.value
 }
 
-function select(opt: string) {
-  emit('update:modelValue', opt)
+function select(opt: SelectOption) {
+  if (opt.disabled) return
+  emit('update:modelValue', opt.value)
   isOpen.value = false
 }
 
@@ -96,7 +128,7 @@ onBeforeUnmount(() => {
       @click="toggle"
     >
       <span :class="modelValue ? 'text-ink' : 'text-ink4'" class="truncate">
-        {{ modelValue || placeholder }}
+        {{ modelValue ? selectedLabel : placeholder }}
       </span>
       <ChevronDown
         :size="size === 'sm' ? 14 : 16"
@@ -125,27 +157,30 @@ onBeforeUnmount(() => {
         class="p-select-dropdown absolute z-50 mt-1.5 w-full bg-surface rounded-xl shadow-lg overflow-auto max-h-[280px] py-1"
       >
         <li
-          v-for="opt in options"
-          :key="opt"
+          v-for="opt in normalizedOptions"
+          :key="opt.value"
           role="option"
-          :aria-selected="modelValue === opt"
+          :aria-selected="modelValue === opt.value"
+          :aria-disabled="opt.disabled || undefined"
           :class="[
-            'flex items-center justify-between px-3 py-2 text-base cursor-pointer transition-colors',
-            modelValue === opt
+            'flex items-center justify-between px-3 py-2 text-base transition-colors',
+            opt.disabled && 'opacity-50 cursor-not-allowed',
+            !opt.disabled && 'cursor-pointer',
+            modelValue === opt.value
               ? 'bg-accent-bg text-accent font-medium'
-              : 'text-ink2 hover:bg-hover',
+              : !opt.disabled && 'text-ink2 hover:bg-hover',
           ]"
           @click="select(opt)"
         >
-          <span>{{ opt }}</span>
+          <span>{{ opt.label }}</span>
           <Check
-            v-if="modelValue === opt"
+            v-if="modelValue === opt.value"
             :size="14"
             class="text-accent shrink-0"
             aria-hidden="true"
           />
         </li>
-        <li v-if="options.length === 0" class="px-3 py-2 text-base text-ink4">
+        <li v-if="normalizedOptions.length === 0" class="px-3 py-2 text-base text-ink4">
           No options
         </li>
       </ul>
