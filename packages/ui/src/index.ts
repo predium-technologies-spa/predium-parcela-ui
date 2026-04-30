@@ -83,6 +83,9 @@ export type { FormFieldProps } from './molecules/FormField'
 export { PBreadcrumbTrail } from './molecules/BreadcrumbTrail'
 export type { BreadcrumbTrailProps } from './molecules/BreadcrumbTrail'
 
+export { PCard } from './molecules/Card'
+export type { CardProps } from './molecules/Card'
+
 export { PFilterPill } from './molecules/FilterPill'
 export type { FilterPillProps } from './molecules/FilterPill'
 
