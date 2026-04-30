@@ -14,7 +14,7 @@ export { PLiveRegion } from './atoms/LiveRegion'
 export type { LiveRegionProps } from './atoms/LiveRegion'
 
 export { PInput } from './atoms/Input'
-export type { InputProps } from './atoms/Input'
+export type { InputProps, PInputType } from './atoms/Input'
 
 export { PSelect } from './atoms/Select'
 export type { SelectProps } from './atoms/Select'

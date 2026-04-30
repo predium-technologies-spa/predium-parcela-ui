@@ -9,9 +9,28 @@
  */
 import { type Component } from 'vue'
 
+export type PInputType =
+  | 'text'
+  | 'number'
+  | 'email'
+  | 'password'
+  | 'tel'
+  | 'url'
+  | 'search'
+  | 'date'
+  | 'datetime-local'
+  | 'month'
+  | 'time'
+  | 'week'
+
 export interface InputProps {
-  /** Input value (v-model) */
-  modelValue?: string
+  /**
+   * Input value (v-model). Accepts string, number, or null for convenience —
+   * the underlying HTML input always renders a string. For numeric refs use
+   * the `v-model.number` modifier so the emitted string is parsed back to
+   * number on update.
+   */
+  modelValue?: string | number | null
   /** Placeholder text */
   placeholder?: string
   /** Use monospace font */
@@ -24,8 +43,8 @@ export interface InputProps {
   disabled?: boolean
   /** Error state */
   error?: boolean
-  /** Input type */
-  type?: 'text' | 'number' | 'email' | 'password'
+  /** Input type — covers the HTML5 form input types we render (excludes file/checkbox/radio which need other components). */
+  type?: PInputType
   /** Size variant */
   size?: 'sm' | 'md' | 'lg'
 }
