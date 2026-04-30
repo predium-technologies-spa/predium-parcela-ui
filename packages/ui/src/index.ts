@@ -154,6 +154,9 @@ export { PSessionExpired } from './molecules/SessionExpired'
 export type { SessionExpiredProps } from './molecules/SessionExpired'
 
 // Organisms
+export { PCommand } from './organisms/Command'
+export type { CommandProps, CommandGroup, CommandItem } from './organisms/Command'
+
 export { PSidebar } from './organisms/Sidebar'
 export type { SidebarProps, SidebarSection, SidebarNavItem } from './organisms/Sidebar'
 
