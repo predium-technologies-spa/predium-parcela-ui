@@ -7,8 +7,12 @@
  * <PTextarea v-model="bio" :rows="5" resize="none" />
  */
 export interface TextareaProps {
-  /** Textarea value (v-model) */
-  modelValue?: string
+  /**
+   * Textarea value (v-model). Accepts string, number, or null — the underlying
+   * HTML textarea always renders a string. Useful for nullable form fields so
+   * consumers do not have to pre-coerce.
+   */
+  modelValue?: string | number | null
   /** Placeholder text */
   placeholder?: string
   /** Number of visible rows */
