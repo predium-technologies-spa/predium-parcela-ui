@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PAvatar } from '@parcela/ui'
+import { PAvatar } from '@eddwinpaz/predium-ui'
 
 const meta: Meta<typeof PAvatar> = {
   title: 'Atoms/Avatar',

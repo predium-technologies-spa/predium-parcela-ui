@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PNavItem } from '@parcela/ui'
+import { PNavItem } from '@eddwinpaz/predium-ui'
 import { Home, Building, Users, FileText, CreditCard } from 'lucide-vue-next'
 
 const meta: Meta<typeof PNavItem> = {

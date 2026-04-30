@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PToast, PButton } from '@parcela/ui'
+import { PToast, PButton } from '@eddwinpaz/predium-ui'
 import { ref } from 'vue'
 
 const meta: Meta<typeof PToast> = {

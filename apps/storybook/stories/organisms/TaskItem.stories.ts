@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PTaskItem } from '@parcela/ui'
+import { PTaskItem } from '@eddwinpaz/predium-ui'
 import { ref } from 'vue'
 
 const meta: Meta<typeof PTaskItem> = {

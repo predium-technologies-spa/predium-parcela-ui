@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PSpinner } from '@parcela/ui'
+import { PSpinner } from '@eddwinpaz/predium-ui'
 
 const meta: Meta<typeof PSpinner> = {
   title: 'Atoms/Spinner',

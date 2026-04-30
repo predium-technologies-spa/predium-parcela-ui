@@ -9,7 +9,7 @@ import {
   PBadge,
   PButton,
   PAvatar,
-} from '@parcela/ui'
+} from '@eddwinpaz/predium-ui'
 import {
   LayoutDashboard,
   BarChart3,

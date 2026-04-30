@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 import { ref } from 'vue'
-import { PWeekPicker } from '@parcela/ui'
+import { PWeekPicker } from '@eddwinpaz/predium-ui'
 
 const sampleDays = [
   { date: 14, month: 'Jan', price: '$120' },

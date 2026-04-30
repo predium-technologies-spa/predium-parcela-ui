@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 import { ref } from 'vue'
-import { PChatInput } from '@parcela/ui'
+import { PChatInput } from '@eddwinpaz/predium-ui'
 
 const meta: Meta<typeof PChatInput> = {
   title: 'Chat/ChatInput',

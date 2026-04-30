@@ -11,7 +11,7 @@ import {
   PDataTable,
   PBadge,
   PProgressBar,
-} from '@parcela/ui'
+} from '@eddwinpaz/predium-ui'
 import {
   LayoutDashboard,
   BarChart3,

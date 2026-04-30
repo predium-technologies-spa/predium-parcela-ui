@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PModal, PButton } from '@parcela/ui'
+import { PModal, PButton } from '@eddwinpaz/predium-ui'
 import { ref } from 'vue'
 import { Trash2, FileDown } from 'lucide-vue-next'
 

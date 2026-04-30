@@ -1,4 +1,4 @@
-// @parcela/ui — barrel export
+// @eddwinpaz/predium-ui — barrel export
 
 // Atoms
 export { PButton } from './atoms/Button'

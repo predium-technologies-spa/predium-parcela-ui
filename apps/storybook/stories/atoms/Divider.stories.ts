@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PDivider } from '@parcela/ui'
+import { PDivider } from '@eddwinpaz/predium-ui'
 
 const meta: Meta<typeof PDivider> = {
   title: 'Atoms/Divider',

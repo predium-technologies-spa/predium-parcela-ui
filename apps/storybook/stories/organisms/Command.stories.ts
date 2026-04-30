@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PCommand } from '@parcela/ui'
+import { PCommand } from '@eddwinpaz/predium-ui'
 import { ref } from 'vue'
 
 const meta: Meta<typeof PCommand> = {

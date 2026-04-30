@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PBadge } from '@parcela/ui'
+import { PBadge } from '@eddwinpaz/predium-ui'
 
 const meta: Meta<typeof PBadge> = {
   title: 'Atoms/Badge',

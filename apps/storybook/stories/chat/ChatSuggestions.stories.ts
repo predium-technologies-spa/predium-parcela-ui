@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PChatSuggestions } from '@parcela/ui'
+import { PChatSuggestions } from '@eddwinpaz/predium-ui'
 
 const meta: Meta<typeof PChatSuggestions> = {
   title: 'Chat/ChatSuggestions',

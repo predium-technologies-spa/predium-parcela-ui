@@ -4,7 +4,7 @@ import {
   PTopNav,
   PButton,
   PCheckbox,
-} from '@parcela/ui'
+} from '@eddwinpaz/predium-ui'
 import { ref } from 'vue'
 import {
   LayoutDashboard,

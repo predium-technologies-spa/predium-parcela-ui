@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PProgressBar } from '@parcela/ui'
+import { PProgressBar } from '@eddwinpaz/predium-ui'
 
 const meta: Meta<typeof PProgressBar> = {
   title: 'Atoms/ProgressBar',

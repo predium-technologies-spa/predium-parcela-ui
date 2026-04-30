@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PIcon } from '@parcela/ui'
+import { PIcon } from '@eddwinpaz/predium-ui'
 import {
   Search, Plus, Bell, Calendar, Settings, Download,
   Upload, Check, ChevronRight, X, Filter, MoreVertical,

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PNumberField } from '@parcela/ui'
+import { PNumberField } from '@eddwinpaz/predium-ui'
 import { ref } from 'vue'
 
 const meta: Meta<typeof PNumberField> = {
