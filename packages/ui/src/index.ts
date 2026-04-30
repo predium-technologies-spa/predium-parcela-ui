@@ -10,6 +10,9 @@ export type { BadgeProps } from './atoms/Badge'
 export { PIcon } from './atoms/Icon'
 export type { IconProps } from './atoms/Icon'
 
+export { PLiveRegion } from './atoms/LiveRegion'
+export type { LiveRegionProps } from './atoms/LiveRegion'
+
 export { PInput } from './atoms/Input'
 export type { InputProps } from './atoms/Input'
 
