@@ -95,6 +95,9 @@ export type { StepperItemProps } from './molecules/StepperItem'
 export { PTabs } from './molecules/Tabs'
 export type { TabsProps, TabItem } from './molecules/Tabs'
 
+export { PTagsInput } from './molecules/TagsInput'
+export type { TagsInputProps } from './molecules/TagsInput'
+
 export { PTile } from './molecules/Tile'
 export type { TileProps } from './molecules/Tile'
 
