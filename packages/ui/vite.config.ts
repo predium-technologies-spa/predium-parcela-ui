@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue'
 import tailwindcss from '@tailwindcss/vite'
 import dts from 'vite-plugin-dts'
 import { resolve } from 'path'
-import { copyFileSync, mkdirSync } from 'fs'
+import { readFileSync, writeFileSync, mkdirSync } from 'fs'
 
 export default defineConfig({
   plugins: [
@@ -21,15 +21,15 @@ export default defineConfig({
     {
       name: 'copy-styles',
       closeBundle() {
+        const stripSources = (input: string): string =>
+          input.replace(/^\s*@source\s+["'][^"']+["']\s*;?\s*$\n?/gm, '')
+
         mkdirSync(resolve(__dirname, 'dist/styles'), { recursive: true })
-        copyFileSync(
-          resolve(__dirname, 'src/styles/tokens.css'),
-          resolve(__dirname, 'dist/styles/tokens.css'),
-        )
-        copyFileSync(
-          resolve(__dirname, 'src/styles/global.css'),
-          resolve(__dirname, 'dist/styles/global.css'),
-        )
+
+        for (const file of ['tokens.css', 'global.css']) {
+          const src = readFileSync(resolve(__dirname, `src/styles/${file}`), 'utf8')
+          writeFileSync(resolve(__dirname, `dist/styles/${file}`), stripSources(src))
+        }
       },
     },
   ],

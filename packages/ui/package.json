@@ -11,6 +11,7 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./style.css": "./dist/ui.css",
     "./styles/tokens.css": "./dist/styles/tokens.css",
     "./styles/global.css": "./dist/styles/global.css"
   },
