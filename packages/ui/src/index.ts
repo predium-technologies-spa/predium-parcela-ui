@@ -172,6 +172,9 @@ export type { ToolbarProps, ToolbarTab } from './organisms/Toolbar'
 export { PAgendaItem } from './organisms/AgendaItem'
 export type { AgendaItemProps } from './organisms/AgendaItem'
 
+export { PChart } from './organisms/Chart'
+export type { ChartProps } from './organisms/Chart'
+
 export { PTaskItem } from './organisms/TaskItem'
 export type { TaskItemProps } from './organisms/TaskItem'
 
