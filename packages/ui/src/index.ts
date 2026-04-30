@@ -34,6 +34,9 @@ export type { SparklineProps } from './atoms/Sparkline'
 export { PProgressBar } from './atoms/ProgressBar'
 export type { ProgressBarProps } from './atoms/ProgressBar'
 
+export { PSkeleton } from './atoms/Skeleton'
+export type { SkeletonProps } from './atoms/Skeleton'
+
 export { PSpinner } from './atoms/Spinner'
 export type { SpinnerProps } from './atoms/Spinner'
 
