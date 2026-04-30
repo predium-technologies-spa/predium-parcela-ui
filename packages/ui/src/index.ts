@@ -40,6 +40,9 @@ export type { SpinnerProps } from './atoms/Spinner'
 export { PDatePicker } from './atoms/DatePicker'
 export type { DatePickerProps } from './atoms/DatePicker'
 
+export { PDivider } from './atoms/Divider'
+export type { DividerProps } from './atoms/Divider'
+
 export { PPinCode } from './atoms/PinCode'
 export type { PinCodeProps } from './atoms/PinCode'
 
