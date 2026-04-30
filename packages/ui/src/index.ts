@@ -116,6 +116,9 @@ export type { PopoverProps } from './molecules/Popover'
 export { PCombobox } from './molecules/Combobox'
 export type { ComboboxProps, ComboboxOption } from './molecules/Combobox'
 
+export { PDropdownMenu } from './molecules/DropdownMenu'
+export type { DropdownMenuProps, DropdownMenuItem } from './molecules/DropdownMenu'
+
 export { PTimedButton } from './molecules/TimedButton'
 export type { TimedButtonProps } from './molecules/TimedButton'
 
