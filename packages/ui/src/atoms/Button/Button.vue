@@ -30,12 +30,12 @@ withDefaults(defineProps<ButtonProps>(), {
   <button
     :disabled="disabled"
     :class="[
-      'inline-flex items-center justify-center gap-2 font-medium cursor-pointer border rounded-xl shadow-sm transition-all duration-150',
+      'inline-flex items-center justify-center gap-2 font-semibold cursor-pointer border shadow-xs transition-all duration-150',
       'focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2',
-      // Size
-      size === 'sm' && 'px-3 py-1.5 text-sm h-8',
-      size === 'md' && 'px-4 py-2 text-base h-10',
-      size === 'lg' && 'px-5 py-2.5 text-md h-12',
+      // Size — shape per Tailwind UI button spec (color tokens preserved below)
+      size === 'sm' && 'rounded-md px-2.5 py-1.5 text-sm',
+      size === 'md' && 'rounded-md px-3 py-2 text-sm',
+      size === 'lg' && 'rounded-md px-3.5 py-2.5 text-sm',
       // Variant
       variant === 'primary' && 'bg-accent text-white border-transparent hover:bg-accent/90 active:bg-accent/80',
       variant === 'ghost' && 'bg-transparent text-ink2 border-line hover:bg-hover active:bg-chip-bg shadow-none',

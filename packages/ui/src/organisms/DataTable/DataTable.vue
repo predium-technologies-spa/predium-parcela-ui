@@ -28,6 +28,7 @@ import {
   type RowSelectionState,
 } from '@tanstack/vue-table'
 import { ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from 'lucide-vue-next'
+import { vAutoAnimate } from '../../composables/vAutoAnimate'
 
 export interface DataTableColumn {
   key: string
@@ -256,7 +257,7 @@ function toggleAllRows() {
           </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody v-auto-animate="{ duration: 200 }">
         <tr
           v-for="row in table.getRowModel().rows"
           :key="row.id"
@@ -308,7 +309,7 @@ function toggleAllRows() {
   </div>
 
   <!-- ═══ Mobile cards (<lg) ═══ -->
-  <div class="lg:hidden flex flex-col gap-3">
+  <div v-auto-animate="{ duration: 200 }" class="lg:hidden flex flex-col gap-3">
     <div
       v-for="row in table.getRowModel().rows"
       :key="row.id"

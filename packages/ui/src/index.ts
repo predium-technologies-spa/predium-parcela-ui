@@ -81,7 +81,7 @@ export { PFormField } from './molecules/FormField'
 export type { FormFieldProps } from './molecules/FormField'
 
 export { PBreadcrumbTrail } from './molecules/BreadcrumbTrail'
-export type { BreadcrumbTrailProps } from './molecules/BreadcrumbTrail'
+export type { BreadcrumbItem, BreadcrumbTrailProps } from './molecules/BreadcrumbTrail'
 
 export { PCard } from './molecules/Card'
 export type { CardProps } from './molecules/Card'
@@ -229,3 +229,6 @@ export type { ChatBadgeProps } from './chat/ChatBadge'
 
 export { PChatPanel } from './chat/ChatPanel'
 export type { ChatPanelProps } from './chat/ChatPanel'
+
+// ── Composables / directives ──
+export { useReducedMotion, vAutoAnimate } from './composables'

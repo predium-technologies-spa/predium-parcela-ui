@@ -12,7 +12,7 @@
  *   ]"
  * />
  */
-import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
+import { computed, nextTick, ref, onMounted, onBeforeUnmount, watch } from 'vue'
 import { ChevronDown, Check } from 'lucide-vue-next'
 
 export interface SelectOption {
@@ -60,6 +60,37 @@ const isOpen = ref(false)
 const triggerRef = ref<HTMLElement>()
 const listRef = ref<HTMLElement>()
 
+// Floating dropdown coords (Teleport to body to escape overflow/scroll containers)
+const dropdownTop = ref(0)
+const dropdownBottom = ref(0)
+const dropdownLeft = ref(0)
+const dropdownWidth = ref(0)
+const dropdownDirection = ref<'down' | 'up'>('down')
+
+const dropdownStyle = computed(() => ({
+  top: dropdownDirection.value === 'down' ? `${dropdownTop.value}px` : 'auto',
+  bottom: dropdownDirection.value === 'up' ? `${dropdownBottom.value}px` : 'auto',
+  left: `${dropdownLeft.value}px`,
+  width: `${dropdownWidth.value}px`,
+}))
+
+function updateDropdownPosition() {
+  const trigger = triggerRef.value
+  if (!trigger) return
+  const rect = trigger.getBoundingClientRect()
+  const spaceBelow = window.innerHeight - rect.bottom
+  const dropdownMaxHeight = 280
+  const wantUp = spaceBelow < dropdownMaxHeight + 16 && rect.top > spaceBelow
+  dropdownDirection.value = wantUp ? 'up' : 'down'
+  dropdownLeft.value = rect.left + window.scrollX
+  dropdownWidth.value = rect.width
+  if (wantUp) {
+    dropdownBottom.value = window.innerHeight - rect.top + 6
+  } else {
+    dropdownTop.value = rect.bottom + window.scrollY + 6
+  }
+}
+
 const normalizedOptions = computed<SelectOption[]>(() =>
   props.options.map((opt) =>
     typeof opt === 'string' ? { value: opt, label: opt } : opt,
@@ -74,7 +105,21 @@ const selectedLabel = computed(() => {
 function toggle() {
   if (props.disabled) return
   isOpen.value = !isOpen.value
+  if (isOpen.value) {
+    // Position is calculated AFTER opening so the dropdown can render at the right place
+    nextTick(updateDropdownPosition)
+  }
 }
+
+watch(isOpen, (open) => {
+  if (open) {
+    window.addEventListener('scroll', updateDropdownPosition, true)
+    window.addEventListener('resize', updateDropdownPosition)
+  } else {
+    window.removeEventListener('scroll', updateDropdownPosition, true)
+    window.removeEventListener('resize', updateDropdownPosition)
+  }
+})
 
 function select(opt: SelectOption) {
   if (opt.disabled) return
@@ -103,6 +148,8 @@ onMounted(() => {
 onBeforeUnmount(() => {
   document.removeEventListener('click', handleClickOutside)
   document.removeEventListener('keydown', handleKeydown)
+  window.removeEventListener('scroll', updateDropdownPosition, true)
+  window.removeEventListener('resize', updateDropdownPosition)
 })
 </script>
 
@@ -140,7 +187,8 @@ onBeforeUnmount(() => {
       />
     </button>
 
-    <!-- Dropdown -->
+    <!-- Dropdown (teleported to body to escape parent overflow/z-index stacking contexts) -->
+    <Teleport to="body">
     <Transition
       enter-active-class="transition duration-150 ease-out"
       enter-from-class="opacity-0 -translate-y-1"
@@ -154,7 +202,8 @@ onBeforeUnmount(() => {
         ref="listRef"
         role="listbox"
         :aria-label="placeholder"
-        class="p-select-dropdown absolute z-50 mt-1.5 w-full bg-surface rounded-xl shadow-lg overflow-auto max-h-[280px] py-1"
+        class="p-select-dropdown fixed z-[1000] bg-surface rounded-xl shadow-lg overflow-auto max-h-[280px] py-1"
+        :style="dropdownStyle"
       >
         <li
           v-for="opt in normalizedOptions"
@@ -185,6 +234,7 @@ onBeforeUnmount(() => {
         </li>
       </ul>
     </Transition>
+    </Teleport>
   </div>
 </template>
 
