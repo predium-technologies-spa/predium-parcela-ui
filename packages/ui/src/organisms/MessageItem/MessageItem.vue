@@ -2,8 +2,16 @@
 /**
  * Message list item with avatar, sender, preview, and unread indicator.
  *
+ * Use the optional `leading` slot to replace the default initials avatar
+ * with custom content (e.g., an icon).
+ *
  * @example
  * <PMessageItem from="K. Rivera" unit="4B · Harper Hall" preview="Sorry for delay…" time="08:42" unread />
+ *
+ * @example with custom leading icon
+ * <PMessageItem from="HVAC repair" preview="No heat" time="2h">
+ *   <template #leading><Zap /></template>
+ * </PMessageItem>
  */
 import { PAvatar } from '../../atoms/Avatar'
 
@@ -32,11 +40,13 @@ withDefaults(defineProps<MessageItemProps>(), {
       unread ? 'bg-hover' : 'bg-transparent',
     ]"
   >
-    <PAvatar
-      :initials="from.split(/[ .]/).filter(Boolean).slice(0, 2).map(s => s[0]).join('')"
-      size="md"
-      color="var(--color-chip-bg)"
-    />
+    <slot name="leading">
+      <PAvatar
+        :initials="from.split(/[ .]/).filter(Boolean).slice(0, 2).map(s => s[0]).join('')"
+        size="md"
+        color="var(--color-chip-bg)"
+      />
+    </slot>
     <div class="flex-1 min-w-0">
       <div class="flex justify-between">
         <span :class="['text-base text-ink', unread ? 'font-semibold' : 'font-medium']">
