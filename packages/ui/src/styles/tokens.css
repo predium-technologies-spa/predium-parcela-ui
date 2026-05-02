@@ -159,3 +159,38 @@
   --p-shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.55), 0 4px 12px rgba(0, 0, 0, 0.35);
   --p-shadow-sticky: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
+
+/*
+ * ── Motion tokens ──
+ * Single source of truth for animation timing/easing across the design system.
+ * All durations/distances are zeroed when the user requests reduced motion.
+ */
+:root {
+  --motion-duration-instant: 80ms;
+  --motion-duration-fast: 150ms;
+  --motion-duration-base: 220ms;
+  --motion-duration-slow: 320ms;
+  --motion-duration-xslow: 520ms;
+
+  --motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --motion-ease-decel: cubic-bezier(0, 0, 0, 1);
+  --motion-ease-accel: cubic-bezier(0.3, 0, 1, 1);
+  --motion-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --motion-distance-sm: 4px;
+  --motion-distance-md: 8px;
+  --motion-distance-lg: 16px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-instant: 0ms;
+    --motion-duration-fast: 0ms;
+    --motion-duration-base: 0ms;
+    --motion-duration-slow: 0ms;
+    --motion-duration-xslow: 0ms;
+    --motion-distance-sm: 0px;
+    --motion-distance-md: 0px;
+    --motion-distance-lg: 0px;
+  }
+}
