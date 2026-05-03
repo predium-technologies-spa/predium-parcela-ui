@@ -14,7 +14,7 @@ export default defineConfig({
       entryRoot: 'src',
       outDir: 'dist',
       include: ['src/**/*.ts', 'src/**/*.vue'],
-      exclude: ['src/**/*.test.ts', 'src/test-setup.ts'],
+      exclude: ['src/**/*.test.ts', 'src/**/*.stories.ts', 'src/test-setup.ts'],
       tsconfigPath: './tsconfig.json',
       rollupTypes: false,
     }),
