@@ -150,21 +150,23 @@ const headerSections = computed(() =>
         :key="meta.key"
         class="mb-3"
       >
-        <!-- Section header: clickable when collapsible (and sidebar expanded) -->
-        <component
-          :is="meta.collapsible && expanded ? 'button' : 'div'"
-          :type="meta.collapsible && expanded ? 'button' : undefined"
+        <!-- Section header: clickable div (role=button) when collapsible+expanded.
+             Kept as a div to preserve original visual rendering exactly; a11y
+             signals come from role/tabindex/aria attrs. -->
+        <div
+          :role="meta.collapsible && expanded ? 'button' : undefined"
+          :tabindex="meta.collapsible && expanded ? 0 : undefined"
           :aria-expanded="meta.collapsible ? meta.expanded : undefined"
           :aria-controls="meta.collapsible ? `sidebar-section-${meta.key}` : undefined"
           :class="[
-            'sidebar-section-title group w-full flex items-center text-xs uppercase tracking-widest text-ink4 font-medium px-2.5 mb-1.5 whitespace-nowrap overflow-hidden transition-all duration-300',
+            'sidebar-section-title flex items-center text-xs uppercase tracking-widest text-ink4 font-medium px-2.5 mb-1.5 whitespace-nowrap overflow-hidden transition-all duration-300 select-none',
             expanded ? 'opacity-100 h-auto' : 'opacity-0 h-0 mb-0',
             meta.collapsible && expanded ? 'cursor-pointer hover:text-ink2' : '',
           ]"
           @click="meta.collapsible && expanded && toggleSection(meta.section)"
           @keydown="meta.collapsible && expanded && onSectionKeydown($event, meta.section)"
         >
-          <span class="flex-1 text-left">{{ meta.section.title }}</span>
+          <span class="flex-1">{{ meta.section.title }}</span>
           <component
             v-if="meta.collapsible && expanded"
             :is="ChevronRight"
@@ -176,7 +178,7 @@ const headerSections = computed(() =>
             ]"
             aria-hidden="true"
           />
-        </component>
+        </div>
 
         <!-- Section items: collapse via grid-rows trick (smooth, no fixed height) -->
         <div

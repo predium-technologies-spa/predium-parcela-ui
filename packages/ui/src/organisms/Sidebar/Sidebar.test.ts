@@ -85,7 +85,7 @@ describe('PSidebar — collapsible sections', () => {
     expect(updates).toHaveLength(1)
   })
 
-  it('does not render header as a button when section is collapsible=false', () => {
+  it('does not expose role=button or tabindex when section is collapsible=false', () => {
     const wrapper = mount(Sidebar, {
       props: {
         sections: [
@@ -99,7 +99,8 @@ describe('PSidebar — collapsible sections', () => {
       },
     })
     const header = wrapper.find('.sidebar-section-title')
-    expect(header.element.tagName).toBe('DIV')
+    expect(header.attributes('role')).toBeUndefined()
+    expect(header.attributes('tabindex')).toBeUndefined()
     expect(header.attributes('aria-expanded')).toBeUndefined()
   })
 
