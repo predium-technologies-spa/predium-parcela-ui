@@ -101,16 +101,52 @@ export const Collapsed: Story = {
   }),
 }
 
+export const CollapsibleSections: Story = {
+  render: () => ({
+    components: { PSidebar },
+    setup() {
+      const expanded = ref(true)
+      const expandedSections = ref<Record<string, boolean>>({
+        Workspace: true,
+        Portfolio: true,
+        Operations: false,
+        System: false,
+      })
+      return { sections, expanded, expandedSections }
+    },
+    template: `
+      <div style="height: 100vh; display: flex;">
+        <PSidebar
+          :sections="sections"
+          active="property"
+          v-model:expanded="expanded"
+          v-model:expanded-sections="expandedSections"
+        />
+        <div class="flex-1 bg-bg p-6">
+          <p class="text-md text-ink2 mb-2">Click any section header (uppercase label) to toggle.</p>
+          <pre class="text-xs text-ink3 font-mono">{{ JSON.stringify(expandedSections, null, 2) }}</pre>
+        </div>
+      </div>
+    `,
+  }),
+}
+
 export const Playground: Story = {
   render: (args) => ({
     components: { PSidebar },
     setup() {
       const expanded = ref(args.expanded ?? true)
-      return { args, sections, expanded }
+      const expandedSections = ref<Record<string, boolean>>({})
+      return { args, sections, expanded, expandedSections }
     },
     template: `
       <div style="height: 100vh; display: flex;">
-        <PSidebar v-bind="args" :sections="sections" v-model:expanded="expanded" />
+        <PSidebar
+          v-bind="args"
+          :sections="sections"
+          v-model:expanded="expanded"
+          v-model:expanded-sections="expandedSections"
+        />
         <div class="flex-1 bg-bg p-6">
           <p class="text-md text-ink2">Use controls or the sidebar toggle button.</p>
         </div>
