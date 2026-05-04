@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PRightDrawer, PButton, PFormField, PInput } from '@eddwinpaz/predium-ui'
+import { PRightDrawer, PButton, PFormField, PInput } from '@predium-technologies-spa/predium-ui'
 import { ref } from 'vue'
 import { Plus } from 'lucide-vue-next'
 

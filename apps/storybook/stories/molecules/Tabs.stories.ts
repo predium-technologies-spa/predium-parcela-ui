@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PTabs } from '@eddwinpaz/predium-ui'
+import { PTabs } from '@predium-technologies-spa/predium-ui'
 import { ref } from 'vue'
 
 const meta: Meta<typeof PTabs> = {

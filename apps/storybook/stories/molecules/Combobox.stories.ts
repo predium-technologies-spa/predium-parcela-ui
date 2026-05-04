@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PCombobox } from '@eddwinpaz/predium-ui'
+import { PCombobox } from '@predium-technologies-spa/predium-ui'
 import { ref } from 'vue'
 
 const propertyTypes = [

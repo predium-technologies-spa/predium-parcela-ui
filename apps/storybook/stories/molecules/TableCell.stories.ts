@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PTableCell } from '@eddwinpaz/predium-ui'
+import { PTableCell } from '@predium-technologies-spa/predium-ui'
 
 const meta: Meta<typeof PTableCell> = {
   title: 'Molecules/TableCell',

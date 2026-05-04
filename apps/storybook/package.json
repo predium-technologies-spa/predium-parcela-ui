@@ -1,5 +1,5 @@
 {
-  "name": "@eddwinpaz/predium-ui-storybook",
+  "name": "@predium-technologies-spa/predium-ui-storybook",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -8,7 +8,7 @@
     "build": "storybook build"
   },
   "dependencies": {
-    "@eddwinpaz/predium-ui": "workspace:*",
+    "@predium-technologies-spa/predium-ui": "workspace:*",
     "lucide-vue-next": "^0.474.0"
   },
   "devDependencies": {

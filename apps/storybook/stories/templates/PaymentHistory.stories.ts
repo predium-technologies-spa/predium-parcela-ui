@@ -9,7 +9,7 @@ import {
   PBadge,
   PButton,
   PAvatar,
-} from '@eddwinpaz/predium-ui'
+} from '@predium-technologies-spa/predium-ui'
 import {
   LayoutDashboard,
   BarChart3,

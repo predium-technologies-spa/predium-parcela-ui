@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PTreeView } from '@eddwinpaz/predium-ui'
+import { PTreeView } from '@predium-technologies-spa/predium-ui'
 import { Folder, File, Image, FileText } from 'lucide-vue-next'
 import { markRaw } from 'vue'
 

@@ -1,4 +1,4 @@
-name: Publish @eddwinpaz/predium-ui
+name: Publish @predium-technologies-spa/predium-ui
 
 on:
   push:
@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: '20'
           registry-url: 'https://npm.pkg.github.com'
-          scope: '@eddwinpaz'
+          scope: '@predium-technologies-spa'
 
       - name: Set up pnpm
         uses: pnpm/action-setup@v3
@@ -32,10 +32,10 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run tests
-        run: pnpm --filter @eddwinpaz/predium-ui test
+        run: pnpm --filter @predium-technologies-spa/predium-ui test
 
       - name: Build library
-        run: pnpm --filter @eddwinpaz/predium-ui build
+        run: pnpm --filter @predium-technologies-spa/predium-ui build
 
       - name: Publish to GitHub Packages
         working-directory: packages/ui

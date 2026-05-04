@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PAgendaItem } from '@eddwinpaz/predium-ui'
+import { PAgendaItem } from '@predium-technologies-spa/predium-ui'
 
 const meta: Meta<typeof PAgendaItem> = {
   title: 'Organisms/AgendaItem',

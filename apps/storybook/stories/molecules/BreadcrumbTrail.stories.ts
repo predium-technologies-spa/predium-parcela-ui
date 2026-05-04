@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PBreadcrumbTrail } from '@eddwinpaz/predium-ui'
+import { PBreadcrumbTrail } from '@predium-technologies-spa/predium-ui'
 
 const meta: Meta<typeof PBreadcrumbTrail> = {
   title: 'Molecules/BreadcrumbTrail',

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PProgressSteps } from '@eddwinpaz/predium-ui'
+import { PProgressSteps } from '@predium-technologies-spa/predium-ui'
 
 const meta: Meta<typeof PProgressSteps> = {
   title: 'Molecules/ProgressSteps',

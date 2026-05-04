@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PChartBar } from '@eddwinpaz/predium-ui'
+import { PChartBar } from '@predium-technologies-spa/predium-ui'
 
 const meta: Meta<typeof PChartBar> = {
   title: 'Organisms/ChartBar',

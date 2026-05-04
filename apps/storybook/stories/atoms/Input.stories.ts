@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PInput } from '@eddwinpaz/predium-ui'
+import { PInput } from '@predium-technologies-spa/predium-ui'
 import { Search, Calendar } from 'lucide-vue-next'
 import { ref } from 'vue'
 

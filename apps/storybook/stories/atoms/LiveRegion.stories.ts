@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PLiveRegion } from '@eddwinpaz/predium-ui'
+import { PLiveRegion } from '@predium-technologies-spa/predium-ui'
 
 const meta: Meta<typeof PLiveRegion> = {
   title: 'Atoms/LiveRegion',

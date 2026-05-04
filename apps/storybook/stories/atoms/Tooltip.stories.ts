@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PTooltip, PButton } from '@eddwinpaz/predium-ui'
+import { PTooltip, PButton } from '@predium-technologies-spa/predium-ui'
 
 const meta: Meta<typeof PTooltip> = {
   title: 'Atoms/Tooltip',

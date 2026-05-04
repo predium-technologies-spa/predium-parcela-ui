@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PChatBubbleUser } from '@eddwinpaz/predium-ui'
+import { PChatBubbleUser } from '@predium-technologies-spa/predium-ui'
 
 const meta: Meta<typeof PChatBubbleUser> = {
   title: 'Chat/ChatBubbleUser',

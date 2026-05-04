@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PTopNav } from '@eddwinpaz/predium-ui'
+import { PTopNav } from '@predium-technologies-spa/predium-ui'
 
 const meta: Meta<typeof PTopNav> = {
   title: 'Organisms/TopNav',

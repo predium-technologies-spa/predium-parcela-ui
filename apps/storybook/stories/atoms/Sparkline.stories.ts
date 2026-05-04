@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PSparkline } from '@eddwinpaz/predium-ui'
+import { PSparkline } from '@predium-technologies-spa/predium-ui'
 
 const meta: Meta<typeof PSparkline> = {
   title: 'Atoms/Sparkline',
