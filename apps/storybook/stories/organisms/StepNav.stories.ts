@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PStepNav } from '@eddwinpaz/predium-ui'
+import { PStepNav } from '@predium-technologies-spa/predium-ui'
 import { ref } from 'vue'
 
 const steps = [

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PChatQuickReplies } from '@eddwinpaz/predium-ui'
+import { PChatQuickReplies } from '@predium-technologies-spa/predium-ui'
 
 const meta: Meta<typeof PChatQuickReplies> = {
   title: 'Chat/ChatQuickReplies',

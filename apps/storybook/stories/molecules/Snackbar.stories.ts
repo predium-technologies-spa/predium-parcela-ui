@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PSnackbar, useSnackbar } from '@eddwinpaz/predium-ui'
+import { PSnackbar, useSnackbar } from '@predium-technologies-spa/predium-ui'
 import { defineComponent } from 'vue'
 
 const SnackbarDemo = defineComponent({

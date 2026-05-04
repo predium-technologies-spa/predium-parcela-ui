@@ -4,7 +4,7 @@
  * `prefers-reduced-motion` setting (no-op when reduced).
  *
  * Usage:
- *   import { vAutoAnimate } from '@eddwinpaz/predium-ui'
+ *   import { vAutoAnimate } from '@predium-technologies-spa/predium-ui'
  *
  *   <tbody v-auto-animate>...</tbody>
  *   <ul v-auto-animate="{ duration: 180 }">...</ul>

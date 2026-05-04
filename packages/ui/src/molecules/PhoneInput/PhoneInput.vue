@@ -34,14 +34,14 @@ defineEmits<{
 }>()
 
 const countryCodes = [
-  { label: 'US +1', value: '+1' },
-  { label: 'MX +52', value: '+52' },
-  { label: 'UK +44', value: '+44' },
-  { label: 'DE +49', value: '+49' },
-  { label: 'CL +56', value: '+56' },
-  { label: 'AR +54', value: '+54' },
-  { label: 'CO +57', value: '+57' },
-  { label: 'PE +51', value: '+51' },
+  { label: '🇺🇸 +1', value: '+1' },
+  { label: '🇲🇽 +52', value: '+52' },
+  { label: '🇬🇧 +44', value: '+44' },
+  { label: '🇩🇪 +49', value: '+49' },
+  { label: '🇨🇱 +56', value: '+56' },
+  { label: '🇦🇷 +54', value: '+54' },
+  { label: '🇨🇴 +57', value: '+57' },
+  { label: '🇵🇪 +51', value: '+51' },
 ]
 </script>
 

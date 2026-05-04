@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PSidebar } from '@eddwinpaz/predium-ui'
+import { PSidebar } from '@predium-technologies-spa/predium-ui'
 import { ref } from 'vue'
 import {
   LayoutDashboard,

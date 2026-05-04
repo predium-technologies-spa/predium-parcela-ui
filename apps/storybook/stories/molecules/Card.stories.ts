@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PCard, PButton } from '@eddwinpaz/predium-ui'
+import { PCard, PButton } from '@predium-technologies-spa/predium-ui'
 
 const meta: Meta<typeof PCard> = {
   title: 'Molecules/Card',

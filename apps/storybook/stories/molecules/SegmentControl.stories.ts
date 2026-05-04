@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 import { ref } from 'vue'
-import { PSegmentControl } from '@eddwinpaz/predium-ui'
+import { PSegmentControl } from '@predium-technologies-spa/predium-ui'
 
 const meta: Meta<typeof PSegmentControl> = {
   title: 'Molecules/SegmentControl',

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PKanbanStageBar } from '@eddwinpaz/predium-ui'
+import { PKanbanStageBar } from '@predium-technologies-spa/predium-ui'
 
 const stages = [
   { label: 'New', count: 7, tone: 'neutral' as const },

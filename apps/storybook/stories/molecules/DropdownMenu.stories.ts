@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PDropdownMenu, PButton } from '@eddwinpaz/predium-ui'
+import { PDropdownMenu, PButton } from '@predium-technologies-spa/predium-ui'
 import { Pencil, Trash2 } from 'lucide-vue-next'
 
 const meta: Meta<typeof PDropdownMenu> = {

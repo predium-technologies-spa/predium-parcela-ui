@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PStepperItem } from '@eddwinpaz/predium-ui'
+import { PStepperItem } from '@predium-technologies-spa/predium-ui'
 
 const meta: Meta<typeof PStepperItem> = {
   title: 'Molecules/StepperItem',

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PStatusBadge } from '@eddwinpaz/predium-ui'
+import { PStatusBadge } from '@predium-technologies-spa/predium-ui'
 
 const meta: Meta<typeof PStatusBadge> = {
   title: 'Molecules/StatusBadge',

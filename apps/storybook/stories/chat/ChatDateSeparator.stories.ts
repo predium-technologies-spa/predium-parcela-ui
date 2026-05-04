@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PChatDateSeparator } from '@eddwinpaz/predium-ui'
+import { PChatDateSeparator } from '@predium-technologies-spa/predium-ui'
 
 const meta: Meta<typeof PChatDateSeparator> = {
   title: 'Chat/ChatDateSeparator',

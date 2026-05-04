@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PFormField, PInput, PSelect } from '@eddwinpaz/predium-ui'
+import { PFormField, PInput, PSelect } from '@predium-technologies-spa/predium-ui'
 import { ref } from 'vue'
 
 const meta: Meta<typeof PFormField> = {

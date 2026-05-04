@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PResizable } from '@eddwinpaz/predium-ui'
+import { PResizable } from '@predium-technologies-spa/predium-ui'
 
 const meta: Meta<typeof PResizable> = {
   title: 'Organisms/Resizable',

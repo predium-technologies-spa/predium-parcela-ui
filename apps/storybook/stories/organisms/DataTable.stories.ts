@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PDataTable, PBadge, PProgressBar } from '@eddwinpaz/predium-ui'
+import { PDataTable, PBadge, PProgressBar } from '@predium-technologies-spa/predium-ui'
 import { ref } from 'vue'
 
 const columns = [

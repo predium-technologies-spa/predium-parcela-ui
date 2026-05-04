@@ -4,7 +4,7 @@ import {
   PTopNav,
   PButton,
   PCheckbox,
-} from '@eddwinpaz/predium-ui'
+} from '@predium-technologies-spa/predium-ui'
 import { ref } from 'vue'
 import {
   LayoutDashboard,

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PCheckbox } from '@eddwinpaz/predium-ui'
+import { PCheckbox } from '@predium-technologies-spa/predium-ui'
 import { ref } from 'vue'
 
 const meta: Meta<typeof PCheckbox> = {

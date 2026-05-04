@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PFormSection, PFormField, PInput, PSelect } from '@eddwinpaz/predium-ui'
+import { PFormSection, PFormField, PInput, PSelect } from '@predium-technologies-spa/predium-ui'
 
 const meta: Meta<typeof PFormSection> = {
   title: 'Organisms/FormSection',

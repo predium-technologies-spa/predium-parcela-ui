@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { PKpiCard, PSparkline } from '@eddwinpaz/predium-ui'
+import { PKpiCard, PSparkline } from '@predium-technologies-spa/predium-ui'
 
 const meta: Meta<typeof PKpiCard> = {
   title: 'Molecules/KpiCard',

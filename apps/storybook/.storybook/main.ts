@@ -25,11 +25,11 @@ const config: StorybookConfig = {
 
     config.plugins.push(tailwindcss())
 
-    // Add a custom resolve plugin that maps @eddwinpaz/predium-ui to source
+    // Add a custom resolve plugin that maps @predium-technologies-spa/predium-ui to source
     config.plugins.push({
       name: 'parcela-ui-resolve',
       resolveId(id) {
-        if (id === '@eddwinpaz/predium-ui') {
+        if (id === '@predium-technologies-spa/predium-ui') {
           return resolve(uiSrc, 'index.ts')
         }
       },
