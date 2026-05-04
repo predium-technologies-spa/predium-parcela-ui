@@ -47,7 +47,7 @@ function dismiss() {
     dismissTimer = null
   }
   current.value = null
-  setTimeout(() => showNext(), 100)
+  setTimeout(() => showNext(), 220)
 }
 
 function enqueue(options: SnackbarOptions) {
@@ -74,12 +74,13 @@ provide(SNACKBAR_INJECTION_KEY, { enqueue })
       ]"
     >
       <Transition
-        :enter-active-class="'transition-all duration-300 ease-out'"
-        :leave-active-class="'transition-all duration-300 ease-in'"
-        :enter-from-class="placement === 'top' ? '-translate-y-4 opacity-0' : 'translate-y-4 opacity-0'"
-        :enter-to-class="'translate-y-0 opacity-100'"
-        :leave-from-class="'translate-y-0 opacity-100'"
-        :leave-to-class="placement === 'top' ? '-translate-y-4 opacity-0' : 'translate-y-4 opacity-0'"
+        mode="out-in"
+        :enter-active-class="'snackbar-enter-active'"
+        :leave-active-class="'snackbar-leave-active'"
+        :enter-from-class="placement === 'top' ? 'snackbar-enter-from-top' : 'snackbar-enter-from-bottom'"
+        :enter-to-class="'snackbar-to'"
+        :leave-from-class="'snackbar-to'"
+        :leave-to-class="placement === 'top' ? 'snackbar-enter-from-top' : 'snackbar-enter-from-bottom'"
       >
         <SnackbarElement
           v-if="current"
@@ -95,3 +96,23 @@ provide(SNACKBAR_INJECTION_KEY, { enqueue })
     </div>
   </Teleport>
 </template>
+
+<style scoped>
+.snackbar-enter-active,
+.snackbar-leave-active {
+  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1), opacity 200ms ease-out;
+  will-change: transform, opacity;
+}
+.snackbar-enter-from-top {
+  transform: translate3d(0, -12px, 0);
+  opacity: 0;
+}
+.snackbar-enter-from-bottom {
+  transform: translate3d(0, 12px, 0);
+  opacity: 0;
+}
+.snackbar-to {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+</style>
