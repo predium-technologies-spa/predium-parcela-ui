@@ -3,8 +3,11 @@
  * Font imports, resets, and base typography.
  */
 
-/* Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
+/* No custom Google Fonts. Usamos los stacks de sistema (San Francisco en
+ * macOS/iOS, Segoe UI en Windows, Roboto en Android) que vienen de los
+ * defaults de Tailwind v4 — definidos en tokens.css `--font-sans` y
+ * `--font-mono`. Beneficios: sin descarga de red, sin FOIT, sin acoplar
+ * la marca a una tipografía externa. */
 
 /* Base resets */
 *,
