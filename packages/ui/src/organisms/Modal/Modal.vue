@@ -81,7 +81,14 @@ defineEmits<{
                 </button>
               </div>
 
-              <div class="sm:flex sm:items-start">
+              <!--
+                Layout: el wrapper sm:flex existe sólo cuando hay icono
+                (variant destructive). En default/form el contenido del
+                slot body queda como bloque a ancho completo del panel —
+                indispensable para forms / tablas / previews que antes
+                se rompían dentro del flex item sin flex-1/min-w-0.
+              -->
+              <div :class="variant === 'destructive' ? 'sm:flex sm:items-start' : ''">
                 <div
                   v-if="variant === 'destructive'"
                   class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-danger-bg sm:mx-0 sm:size-10"
@@ -91,7 +98,7 @@ defineEmits<{
 
                 <div
                   class="mt-3 text-center sm:mt-0 sm:text-left"
-                  :class="variant === 'destructive' ? 'sm:ml-4' : ''"
+                  :class="variant === 'destructive' ? 'sm:ml-4 sm:flex-1 sm:min-w-0' : ''"
                 >
                   <DialogTitle as="h3" class="text-lg font-semibold text-ink tracking-tight">
                     {{ title }}
