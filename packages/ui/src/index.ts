@@ -193,8 +193,8 @@ export type { FormSectionProps } from './organisms/FormSection'
 export { PStepNav } from './organisms/StepNav'
 export type { StepNavProps, StepNavStep } from './organisms/StepNav'
 
-export { PRightDrawer } from './organisms/RightDrawer'
-export type { RightDrawerProps } from './organisms/RightDrawer'
+export { PDrawer } from './organisms/Drawer'
+export type { DrawerProps, DrawerSide } from './organisms/Drawer'
 
 export { PModal } from './organisms/Modal'
 export type { ModalProps } from './organisms/Modal'
