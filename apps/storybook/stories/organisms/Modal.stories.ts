@@ -30,15 +30,14 @@ export const Default: Story = {
           @close="open = false"
         >
           <template #body>
-            <p class="text-md text-ink2 leading-relaxed">
+            <p class="leading-relaxed">
               Archiving will stop rent collection, pause scheduled inspections, and mark the property as read-only.
               <strong class="text-ink">This cannot be undone without manager approval.</strong>
             </p>
           </template>
           <template #footer>
-            <div class="flex-1" />
-            <PButton variant="ghost" @click="open = false">Cancel</PButton>
-            <PButton variant="danger" @click="open = false">Archive property</PButton>
+            <PButton variant="danger" class="w-full sm:w-auto" @click="open = false">Archive property</PButton>
+            <PButton variant="ghost" class="w-full sm:w-auto" @click="open = false">Cancel</PButton>
           </template>
         </PModal>
       </div>
@@ -65,14 +64,13 @@ export const Confirmation: Story = {
           @close="open = false"
         >
           <template #body>
-            <p class="text-md text-ink2 leading-relaxed">
+            <p class="leading-relaxed">
               The report will be generated as a PDF and sent to your email. This may take a few minutes.
             </p>
           </template>
           <template #footer>
-            <div class="flex-1" />
-            <PButton variant="ghost" @click="open = false">Cancel</PButton>
-            <PButton variant="primary" @click="open = false">Export PDF</PButton>
+            <PButton variant="primary" class="w-full sm:w-auto" @click="open = false">Export PDF</PButton>
+            <PButton variant="ghost" class="w-full sm:w-auto" @click="open = false">Cancel</PButton>
           </template>
         </PModal>
       </div>
@@ -98,12 +96,11 @@ export const Playground: Story = {
           @close="open = false"
         >
           <template #body>
-            <p class="text-md text-ink2">Are you sure you want to proceed?</p>
+            <p>Are you sure you want to proceed?</p>
           </template>
           <template #footer>
-            <div class="flex-1" />
-            <PButton variant="ghost" @click="open = false">Cancel</PButton>
-            <PButton variant="danger" @click="open = false">Confirm</PButton>
+            <PButton variant="danger" class="w-full sm:w-auto" @click="open = false">Confirm</PButton>
+            <PButton variant="ghost" class="w-full sm:w-auto" @click="open = false">Cancel</PButton>
           </template>
         </PModal>
       </div>
