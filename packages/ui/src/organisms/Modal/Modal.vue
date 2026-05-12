@@ -17,7 +17,7 @@
  *   </template>
  * </PModal>
  */
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { onBeforeUnmount, watch } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { X, AlertTriangle } from 'lucide-vue-next'
 
@@ -47,27 +47,36 @@ const emit = defineEmits<{
   close: []
 }>()
 
-let isEscPress = false
+let closeReason: 'esc' | 'panel' | null = null
 
-// Track ESC key at document level BEFORE Headless UI processes it.
-// Headless UI's Dialog also listens for keydown on the document to handle
-// ESC. By registering in capture phase we run first and set the flag
-// before the @close handler fires.
+// ESC key tracking
 function onDocumentKeydown(e: KeyboardEvent) {
   if (e.key === 'Escape') {
-    isEscPress = true
+    closeReason = 'esc'
   }
 }
 
-// Register the keydown listener only when modal is open
+// Track pointerdown inside the modal panel (X button, body, footer, etc.)
+// The DialogPanel has role="dialog"; the backdrop does NOT.
+function onDocumentPointerdown(e: PointerEvent) {
+  const target = e.target as HTMLElement | null
+  if (target && target.closest('[role="dialog"]')) {
+    closeReason = 'panel'
+  }
+}
+
+// Register listeners only when modal is open
 watch(
   () => props.open,
   (isOpen) => {
     if (isOpen) {
+      closeReason = null
       document.addEventListener('keydown', onDocumentKeydown, true)
+      document.addEventListener('pointerdown', onDocumentPointerdown, true)
     } else {
       document.removeEventListener('keydown', onDocumentKeydown, true)
-      isEscPress = false
+      document.removeEventListener('pointerdown', onDocumentPointerdown, true)
+      closeReason = null
     }
   },
   { immediate: true },
@@ -75,6 +84,7 @@ watch(
 
 onBeforeUnmount(() => {
   document.removeEventListener('keydown', onDocumentKeydown, true)
+  document.removeEventListener('pointerdown', onDocumentPointerdown, true)
 })
 
 function onOverlayClick() {
@@ -84,17 +94,16 @@ function onOverlayClick() {
 }
 
 function onClose() {
-  // If ESC was pressed, always allow close
-  if (isEscPress) {
-    isEscPress = false
+  if (closeReason === 'esc' || closeReason === 'panel') {
+    closeReason = null
     emit('close')
     return
   }
-  // Otherwise it's an outside click — only close if closeOnOverlayClick
+  // Outside click — only close if closeOnOverlayClick
   if (props.closeOnOverlayClick) {
     emit('close')
   }
-  // If neither ESC nor closeOnOverlayClick, do nothing (modal stays open)
+  closeReason = null
 }
 </script>
 
