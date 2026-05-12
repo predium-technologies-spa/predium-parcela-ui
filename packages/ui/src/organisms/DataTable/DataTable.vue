@@ -83,6 +83,7 @@ const emit = defineEmits<{
   'update:selectedRows': [indices: number[]]
   'sort': [key: string, dir: 'asc' | 'desc']
   'page-change': [page: number]
+  'rowClick': [row: Record<string, unknown>]
 }>()
 
 // TanStack sorting state
@@ -265,6 +266,7 @@ function toggleAllRows() {
             row.getIsSelected() ? 'bg-hover' : 'bg-surface',
             'hover:bg-hover transition-colors',
           ]"
+          @click="emit('rowClick', row.original)"
         >
           <td v-if="selectable" class="px-3.5 py-3 border-b border-line-soft">
             <input

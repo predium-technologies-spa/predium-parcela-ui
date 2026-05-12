@@ -17,7 +17,7 @@
  *   </template>
  * </PModal>
  */
-import { ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { X, AlertTriangle } from 'lucide-vue-next'
 
@@ -47,23 +47,54 @@ const emit = defineEmits<{
   close: []
 }>()
 
-// Headless UI Dialog fires @close for both ESC and backdrop-click.
-// mousedown on the backdrop fires BEFORE @close, so we use it as a sentinel.
-const outsideClicked = ref(false)
+let isEscPress = false
 
-function onOutsideMousedown() {
-  outsideClicked.value = true
+// Track ESC key at document level BEFORE Headless UI processes it.
+// Headless UI's Dialog also listens for keydown on the document to handle
+// ESC. By registering in capture phase we run first and set the flag
+// before the @close handler fires.
+function onDocumentKeydown(e: KeyboardEvent) {
+  if (e.key === 'Escape') {
+    isEscPress = true
+  }
+}
+
+// Register the keydown listener only when modal is open
+watch(
+  () => props.open,
+  (isOpen) => {
+    if (isOpen) {
+      document.addEventListener('keydown', onDocumentKeydown, true)
+    } else {
+      document.removeEventListener('keydown', onDocumentKeydown, true)
+      isEscPress = false
+    }
+  },
+  { immediate: true },
+)
+
+onBeforeUnmount(() => {
+  document.removeEventListener('keydown', onDocumentKeydown, true)
+})
+
+function onOverlayClick() {
+  if (props.closeOnOverlayClick) {
+    emit('close')
+  }
 }
 
 function onClose() {
-  if (outsideClicked.value) {
-    outsideClicked.value = false
-    if (props.closeOnOverlayClick) {
-      emit('close')
-    }
+  // If ESC was pressed, always allow close
+  if (isEscPress) {
+    isEscPress = false
+    emit('close')
     return
   }
-  emit('close')
+  // Otherwise it's an outside click — only close if closeOnOverlayClick
+  if (props.closeOnOverlayClick) {
+    emit('close')
+  }
+  // If neither ESC nor closeOnOverlayClick, do nothing (modal stays open)
 }
 </script>
 
@@ -81,7 +112,8 @@ function onClose() {
       >
         <div
           class="fixed inset-0 bg-[rgba(23,20,15,0.55)] backdrop-blur-[1px] transition-opacity"
-          @mousedown="onOutsideMousedown"
+          :class="closeOnOverlayClick ? 'cursor-pointer' : 'cursor-default'"
+          @click="onOverlayClick"
         />
       </TransitionChild>
 
