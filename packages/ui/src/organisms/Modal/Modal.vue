@@ -13,6 +13,7 @@
  *   </template>
  * </PModal>
  */
+import { ref } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { X, AlertTriangle } from 'lucide-vue-next'
 
@@ -27,22 +28,40 @@ export interface ModalProps {
   variant?: 'default' | 'destructive' | 'form'
   /** Width in pixels */
   width?: number
+  /** Whether clicking the overlay closes the modal (default: false) */
+  closeOnOverlayClick?: boolean
 }
 
-withDefaults(defineProps<ModalProps>(), {
+const props = withDefaults(defineProps<ModalProps>(), {
   open: false,
   variant: 'default',
   width: 512,
+  closeOnOverlayClick: false,
 })
 
-defineEmits<{
+const emit = defineEmits<{
   close: []
 }>()
+
+const overlayClicked = ref(false)
+
+function onOverlayClick() {
+  if (props.closeOnOverlayClick) {
+    emit('close')
+  }
+}
+
+function onClose() {
+  if (!overlayClicked.value) {
+    emit('close')
+  }
+  overlayClicked.value = false
+}
 </script>
 
 <template>
   <TransitionRoot as="template" :show="open">
-    <Dialog class="relative z-50" @close="$emit('close')">
+    <Dialog class="relative z-50" @close="onClose">
       <TransitionChild
         as="template"
         enter="ease-out duration-300"
@@ -52,7 +71,10 @@ defineEmits<{
         leave-from="opacity-100"
         leave-to="opacity-0"
       >
-        <div class="fixed inset-0 bg-[rgba(23,20,15,0.55)] backdrop-blur-[1px] transition-opacity" />
+        <div
+          class="fixed inset-0 bg-[rgba(23,20,15,0.55)] backdrop-blur-[1px] transition-opacity cursor-pointer"
+          @click="overlayClicked = true"
+        />
       </TransitionChild>
 
       <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
