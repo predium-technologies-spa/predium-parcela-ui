@@ -17,7 +17,7 @@
  *   </template>
  * </PModal>
  */
-import { onBeforeUnmount, ref, watch } from 'vue'
+import { onBeforeUnmount, watch } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { X, AlertTriangle } from 'lucide-vue-next'
 
@@ -47,45 +47,33 @@ const emit = defineEmits<{
   close: []
 }>()
 
-const panelRef = ref<HTMLElement | null>(null)
-let closeReason: 'esc' | 'panel' | null = null
+let isOpen = false
 
-// ESC key tracking
-function onDocumentKeydown(e: KeyboardEvent) {
-  if (e.key === 'Escape') {
-    closeReason = 'esc'
-  }
-}
-
-// Track pointerdown inside the DialogPanel (X button, body, footer).
-// The backdrop div is OUTSIDE the DialogPanel, so clicks there won't
-// match panelRef.contains(target).
+// Headless UI detects outside clicks via a document-level pointerdown
+// listener in capture phase. We register our own capture-phase listener
+// BEFORE Headless UI's (by registering during setup, before children mount)
+// and call stopImmediatePropagation() when the click is on the backdrop
+// (outside the dialog panel with role="dialog").
 function onDocumentPointerdown(e: PointerEvent) {
+  if (!isOpen) return
   const target = e.target as HTMLElement | null
-  if (target && panelRef.value && panelRef.value.contains(target)) {
-    closeReason = 'panel'
+  if (target && !target.closest('[role="dialog"]')) {
+    e.stopImmediatePropagation()
   }
 }
 
-// Register listeners only when modal is open
+// Register immediately during setup (before Headless UI Dialog mounts)
+document.addEventListener('pointerdown', onDocumentPointerdown, true)
+
 watch(
   () => props.open,
-  (isOpen) => {
-    if (isOpen) {
-      closeReason = null
-      document.addEventListener('keydown', onDocumentKeydown, true)
-      document.addEventListener('pointerdown', onDocumentPointerdown, true)
-    } else {
-      document.removeEventListener('keydown', onDocumentKeydown, true)
-      document.removeEventListener('pointerdown', onDocumentPointerdown, true)
-      closeReason = null
-    }
+  (val) => {
+    isOpen = val
   },
   { immediate: true },
 )
 
 onBeforeUnmount(() => {
-  document.removeEventListener('keydown', onDocumentKeydown, true)
   document.removeEventListener('pointerdown', onDocumentPointerdown, true)
 })
 
@@ -96,16 +84,7 @@ function onOverlayClick() {
 }
 
 function onClose() {
-  if (closeReason === 'esc' || closeReason === 'panel') {
-    closeReason = null
-    emit('close')
-    return
-  }
-  // Outside click — only close if closeOnOverlayClick
-  if (props.closeOnOverlayClick) {
-    emit('close')
-  }
-  closeReason = null
+  emit('close')
 }
 </script>
 
@@ -140,7 +119,6 @@ function onClose() {
             leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
             <DialogPanel
-              ref="panelRef"
               class="relative transform overflow-hidden rounded-xl sm:rounded-2xl bg-surface px-4 pt-5 pb-4 text-left shadow-modal transition-all sm:my-8 sm:w-full sm:p-6"
               :style="{ maxWidth: `${width}px` }"
             >
