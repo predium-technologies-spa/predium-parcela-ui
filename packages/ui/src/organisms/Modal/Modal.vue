@@ -2,7 +2,6 @@
 /**
  * Modal dialog with backdrop, body, and footer.
  * Mobile-first: slides up from bottom on small screens, centered on desktop.
- * Uses Headless UI for focus trap, ESC handling, and scroll lock.
  *
  * By default, clicking outside the modal does NOT close it. Only ESC, the X
  * button, or explicit close/cancel buttons will close it. Set
@@ -17,8 +16,7 @@
  *   </template>
  * </PModal>
  */
-import { onBeforeUnmount, watch } from 'vue'
-import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
+import { onBeforeUnmount, ref, watch } from 'vue'
 import { X, AlertTriangle } from 'lucide-vue-next'
 
 export interface ModalProps {
@@ -47,133 +45,150 @@ const emit = defineEmits<{
   close: []
 }>()
 
-let isOpen = false
+const show = ref(false)
+const closing = ref(false)
 
-// Headless UI detects outside clicks via a document-level pointerdown
-// listener in capture phase. We register our own capture-phase listener
-// BEFORE Headless UI's (by registering during setup, before children mount)
-// and call stopImmediatePropagation() when the click is on the backdrop
-// (outside the dialog panel with role="dialog").
-function onDocumentPointerdown(e: PointerEvent) {
-  if (!isOpen) return
-  const target = e.target as HTMLElement | null
-  if (target && !target.closest('[role="dialog"]')) {
-    e.stopImmediatePropagation()
+function openModal() {
+  if (show.value) return
+  closing.value = false
+  show.value = true
+  document.body.style.overflow = 'hidden'
+  document.addEventListener('keydown', onKeydown)
+}
+
+function closeModal() {
+  if (closing.value || !show.value) return
+  closing.value = true
+  setTimeout(() => {
+    show.value = false
+    closing.value = false
+    document.body.style.overflow = ''
+    emit('close')
+  }, 200)
+}
+
+function onKeydown(e: KeyboardEvent) {
+  if (e.key === 'Escape') {
+    closeModal()
   }
 }
 
-// Register immediately during setup (before Headless UI Dialog mounts)
-document.addEventListener('pointerdown', onDocumentPointerdown, true)
+function onBackdropClick() {
+  if (props.closeOnOverlayClick) {
+    closeModal()
+  }
+}
 
 watch(
   () => props.open,
-  (val) => {
-    isOpen = val
+  (isOpen) => {
+    if (isOpen) openModal()
+    else if (show.value) closeModal()
   },
   { immediate: true },
 )
 
 onBeforeUnmount(() => {
-  document.removeEventListener('pointerdown', onDocumentPointerdown, true)
+  document.removeEventListener('keydown', onKeydown)
+  document.body.style.overflow = ''
 })
-
-function onOverlayClick() {
-  if (props.closeOnOverlayClick) {
-    emit('close')
-  }
-}
-
-function onClose() {
-  emit('close')
-}
 </script>
 
 <template>
-  <TransitionRoot as="template" :show="open">
-    <Dialog class="relative z-50" @close="onClose">
-      <TransitionChild
-        as="template"
-        enter="ease-out duration-300"
-        enter-from="opacity-0"
-        enter-to="opacity-100"
-        leave="ease-in duration-200"
-        leave-from="opacity-100"
-        leave-to="opacity-0"
+  <Teleport to="body">
+    <Transition
+      enter-active-class="ease-out duration-300"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="ease-in duration-200"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
+    >
+      <div
+        v-if="show"
+        class="relative z-50"
+        aria-labelledby="modal-title"
+        role="dialog"
+        aria-modal="true"
       >
+        <!-- Backdrop -->
         <div
           class="fixed inset-0 bg-[rgba(23,20,15,0.55)] backdrop-blur-[1px] transition-opacity"
-          :class="closeOnOverlayClick ? 'cursor-pointer' : 'cursor-default'"
-          @click="onOverlayClick"
+          :class="[
+            closing ? 'opacity-0' : 'opacity-100',
+            closeOnOverlayClick ? 'cursor-pointer' : 'cursor-default',
+          ]"
+          @click="onBackdropClick"
         />
-      </TransitionChild>
 
-      <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
-        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-          <TransitionChild
-            as="template"
-            enter="ease-out duration-300"
-            enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            enter-to="opacity-100 translate-y-0 sm:scale-100"
-            leave="ease-in duration-200"
-            leave-from="opacity-100 translate-y-0 sm:scale-100"
-            leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-          >
-            <DialogPanel
-              class="relative transform overflow-hidden rounded-xl sm:rounded-2xl bg-surface px-4 pt-5 pb-4 text-left shadow-modal transition-all sm:my-8 sm:w-full sm:p-6"
-              :style="{ maxWidth: `${width}px` }"
+        <!-- Modal panel -->
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+          <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <Transition
+              enter-active-class="ease-out duration-300"
+              enter-from-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              enter-to-class="opacity-100 translate-y-0 sm:scale-100"
+              leave-active-class="ease-in duration-200"
+              leave-from-class="opacity-100 translate-y-0 sm:scale-100"
+              leave-to-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <div class="absolute top-0 right-0 hidden pt-4 pr-4 sm:block">
-                <button
-                  type="button"
-                  class="rounded-md bg-surface text-ink4 hover:text-ink transition-colors cursor-pointer p-1 focus:outline-2 focus:outline-offset-2 focus:outline-ink"
-                  aria-label="Close"
-                  @click="emit('close')"
-                >
-                  <X :size="20" aria-hidden="true" />
-                </button>
-              </div>
-
-              <!--
-                Layout: el wrapper sm:flex existe sólo cuando hay icono
-                (variant destructive). En default/form el contenido del
-                slot body queda como bloque a ancho completo del panel —
-                indispensable para forms / tablas / previews que antes
-                se rompían dentro del flex item sin flex-1/min-w-0.
-              -->
-              <div :class="variant === 'destructive' ? 'sm:flex sm:items-start' : ''">
-                <div
-                  v-if="variant === 'destructive'"
-                  class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-danger-bg sm:mx-0 sm:size-10"
-                >
-                  <AlertTriangle :size="20" class="text-danger" aria-hidden="true" />
-                </div>
-
-                <div
-                  class="mt-3 text-center sm:mt-0 sm:text-left"
-                  :class="variant === 'destructive' ? 'sm:ml-4 sm:flex-1 sm:min-w-0' : ''"
-                >
-                  <DialogTitle as="h3" class="text-lg font-semibold text-ink tracking-tight">
-                    {{ title }}
-                  </DialogTitle>
-                  <div v-if="subtitle" class="mt-0.5 text-xs font-mono text-ink4">
-                    {{ subtitle }}
-                  </div>
-                  <div class="mt-2 text-sm text-ink2">
-                    <slot name="body" />
-                  </div>
-                </div>
-              </div>
-
               <div
-                v-if="$slots.footer"
-                class="mt-5 flex flex-col-reverse gap-2 sm:mt-4 sm:flex-row sm:flex-row-reverse sm:gap-3"
+                v-show="!closing"
+                class="relative transform overflow-hidden rounded-xl sm:rounded-2xl bg-surface px-4 pt-5 pb-4 text-left shadow-modal transition-all sm:my-8 sm:w-full sm:p-6"
+                :style="{ maxWidth: `${width}px` }"
               >
-                <slot name="footer" />
+                <!-- X button -->
+                <div class="absolute top-0 right-0 hidden pt-4 pr-4 sm:block">
+                  <button
+                    type="button"
+                    class="rounded-md bg-surface text-ink4 hover:text-ink transition-colors cursor-pointer p-1 focus:outline-2 focus:outline-offset-2 focus:outline-ink"
+                    aria-label="Close"
+                    @click="closeModal"
+                  >
+                    <X :size="20" aria-hidden="true" />
+                  </button>
+                </div>
+
+                <!-- Content -->
+                <div :class="variant === 'destructive' ? 'sm:flex sm:items-start' : ''">
+                  <div
+                    v-if="variant === 'destructive'"
+                    class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-danger-bg sm:mx-0 sm:size-10"
+                  >
+                    <AlertTriangle :size="20" class="text-danger" aria-hidden="true" />
+                  </div>
+
+                  <div
+                    class="mt-3 text-center sm:mt-0 sm:text-left"
+                    :class="variant === 'destructive' ? 'sm:ml-4 sm:flex-1 sm:min-w-0' : ''"
+                  >
+                    <h3
+                      id="modal-title"
+                      class="text-lg font-semibold text-ink tracking-tight"
+                    >
+                      {{ title }}
+                    </h3>
+                    <div v-if="subtitle" class="mt-0.5 text-xs font-mono text-ink4">
+                      {{ subtitle }}
+                    </div>
+                    <div class="mt-2 text-sm text-ink2">
+                      <slot name="body" />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Footer -->
+                <div
+                  v-if="$slots.footer"
+                  class="mt-5 flex flex-col-reverse gap-2 sm:mt-4 sm:flex-row sm:flex-row-reverse sm:gap-3"
+                >
+                  <slot name="footer" />
+                </div>
               </div>
-            </DialogPanel>
-          </TransitionChild>
+            </Transition>
+          </div>
         </div>
       </div>
-    </Dialog>
-  </TransitionRoot>
+    </Transition>
+  </Teleport>
 </template>
