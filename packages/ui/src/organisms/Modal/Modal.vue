@@ -17,7 +17,7 @@
  *   </template>
  * </PModal>
  */
-import { onBeforeUnmount, watch } from 'vue'
+import { onBeforeUnmount, ref, watch } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { X, AlertTriangle } from 'lucide-vue-next'
 
@@ -47,6 +47,7 @@ const emit = defineEmits<{
   close: []
 }>()
 
+const panelRef = ref<HTMLElement | null>(null)
 let closeReason: 'esc' | 'panel' | null = null
 
 // ESC key tracking
@@ -56,11 +57,12 @@ function onDocumentKeydown(e: KeyboardEvent) {
   }
 }
 
-// Track pointerdown inside the modal panel (X button, body, footer, etc.)
-// The DialogPanel has role="dialog"; the backdrop does NOT.
+// Track pointerdown inside the DialogPanel (X button, body, footer).
+// The backdrop div is OUTSIDE the DialogPanel, so clicks there won't
+// match panelRef.contains(target).
 function onDocumentPointerdown(e: PointerEvent) {
   const target = e.target as HTMLElement | null
-  if (target && target.closest('[role="dialog"]')) {
+  if (target && panelRef.value && panelRef.value.contains(target)) {
     closeReason = 'panel'
   }
 }
@@ -138,6 +140,7 @@ function onClose() {
             leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
             <DialogPanel
+              ref="panelRef"
               class="relative transform overflow-hidden rounded-xl sm:rounded-2xl bg-surface px-4 pt-5 pb-4 text-left shadow-modal transition-all sm:my-8 sm:w-full sm:p-6"
               :style="{ maxWidth: `${width}px` }"
             >
