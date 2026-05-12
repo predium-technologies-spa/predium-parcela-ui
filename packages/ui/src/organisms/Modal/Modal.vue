@@ -4,6 +4,10 @@
  * Mobile-first: slides up from bottom on small screens, centered on desktop.
  * Uses Headless UI for focus trap, ESC handling, and scroll lock.
  *
+ * By default, clicking outside the modal does NOT close it. Only ESC, the X
+ * button, or explicit close/cancel buttons will close it. Set
+ * `closeOnOverlayClick` to true to restore the classic backdrop-click-to-close.
+ *
  * @example
  * <PModal :open="showModal" title="Archive?" variant="destructive" @close="showModal = false">
  *   <template #body>Are you sure?</template>
@@ -43,19 +47,23 @@ const emit = defineEmits<{
   close: []
 }>()
 
-const overlayClicked = ref(false)
+// Headless UI Dialog fires @close for both ESC and backdrop-click.
+// mousedown on the backdrop fires BEFORE @close, so we use it as a sentinel.
+const outsideClicked = ref(false)
 
-function onOverlayClick() {
-  if (props.closeOnOverlayClick) {
-    emit('close')
-  }
+function onOutsideMousedown() {
+  outsideClicked.value = true
 }
 
 function onClose() {
-  if (!overlayClicked.value) {
-    emit('close')
+  if (outsideClicked.value) {
+    outsideClicked.value = false
+    if (props.closeOnOverlayClick) {
+      emit('close')
+    }
+    return
   }
-  overlayClicked.value = false
+  emit('close')
 }
 </script>
 
@@ -72,8 +80,8 @@ function onClose() {
         leave-to="opacity-0"
       >
         <div
-          class="fixed inset-0 bg-[rgba(23,20,15,0.55)] backdrop-blur-[1px] transition-opacity cursor-pointer"
-          @click="overlayClicked = true"
+          class="fixed inset-0 bg-[rgba(23,20,15,0.55)] backdrop-blur-[1px] transition-opacity"
+          @mousedown="onOutsideMousedown"
         />
       </TransitionChild>
 
@@ -97,7 +105,7 @@ function onClose() {
                   type="button"
                   class="rounded-md bg-surface text-ink4 hover:text-ink transition-colors cursor-pointer p-1 focus:outline-2 focus:outline-offset-2 focus:outline-ink"
                   aria-label="Close"
-                  @click="$emit('close')"
+                  @click="emit('close')"
                 >
                   <X :size="20" aria-hidden="true" />
                 </button>
