@@ -90,11 +90,11 @@ defineEmits<{
       :disabled="disabled"
       :class="[
         'flex-1 min-w-0 bg-transparent outline-none text-ink placeholder:text-ink4',
-        mono ? 'font-mono' : 'font-sans',
+        'font-sans',
       ]"
       @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
     />
-    <span v-if="suffix" class="text-ink4 font-mono text-sm shrink-0">
+    <span v-if="suffix" class="text-ink4 font-sans text-sm shrink-0">
       {{ suffix }}
     </span>
   </div>

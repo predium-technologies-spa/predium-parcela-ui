@@ -168,7 +168,7 @@ onBeforeUnmount(() => {
                     >
                       {{ title }}
                     </h3>
-                    <div v-if="subtitle" class="mt-0.5 text-xs font-mono text-ink4">
+                    <div v-if="subtitle" class="mt-0.5 text-xs font-sans text-ink4">
                       {{ subtitle }}
                     </div>
                     <div class="mt-2 text-sm text-ink2">

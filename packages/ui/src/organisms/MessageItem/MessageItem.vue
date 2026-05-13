@@ -115,7 +115,7 @@ const derivedInitials = computed(() =>
         <span :class="['text-base text-ink truncate', unread ? 'font-semibold' : 'font-medium']">
           {{ from }}
         </span>
-        <span v-if="time" class="font-mono text-xs text-ink4 shrink-0 ml-2">{{ time }}</span>
+        <span v-if="time" class="font-sans text-xs text-ink4 shrink-0 ml-2">{{ time }}</span>
       </div>
       <div v-if="unit" class="text-sm text-ink3 truncate">{{ unit }}</div>
       <div v-if="preview" class="text-base text-ink2 mt-0.5 truncate">{{ preview }}</div>

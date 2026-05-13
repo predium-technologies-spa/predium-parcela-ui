@@ -47,7 +47,7 @@ defineEmits<{
       aria-hidden="true"
     />
     {{ label }}
-    <span v-if="count !== undefined" class="font-mono text-xs text-ink4 ml-0.5">
+    <span v-if="count !== undefined" class="font-sans text-xs text-ink4 ml-0.5">
       {{ count }}
     </span>
   </button>

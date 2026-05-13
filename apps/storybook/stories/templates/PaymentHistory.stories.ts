@@ -187,7 +187,7 @@ export const Default: Story = {
               </div>
               <div class="flex items-center gap-1">
                 <span class="text-[13px] font-semibold text-ink3">Total visible:</span>
-                <span class="text-[13px] font-semibold font-mono text-ink">$31,800.00</span>
+                <span class="text-[13px] font-semibold font-sans text-ink">$31,800.00</span>
               </div>
             </div>
           </div>

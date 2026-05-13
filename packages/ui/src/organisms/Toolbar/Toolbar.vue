@@ -50,7 +50,7 @@ defineEmits<{
           {{ typeof tab === 'string' ? tab : tab.label }}
           <span
             v-if="typeof tab !== 'string' && tab.count !== undefined"
-            class="ml-1 font-mono text-xs text-ink4"
+            class="ml-1 font-sans text-xs text-ink4"
           >
             {{ tab.count }}
           </span>

@@ -102,7 +102,7 @@ function stepStatus(i: number): 'done' | 'current' | 'upcoming' {
       <div class="step-nav-divider my-4" />
       <div class="text-sm text-ink3 mb-1.5">{{ completionLabel }}</div>
       <PProgressBar :value="progress" tone="neutral" size="sm" />
-      <div class="font-mono text-sm text-ink2 mt-1.5">
+      <div class="font-sans text-sm text-ink2 mt-1.5">
         {{ completed.length }} / {{ steps.length }}
       </div>
     </template>
@@ -161,7 +161,7 @@ function stepStatus(i: number): 'done' | 'current' | 'upcoming' {
       <div class="w-16">
         <PProgressBar :value="progress" tone="neutral" size="sm" />
       </div>
-      <span class="font-mono text-xs text-ink3">{{ completed.length }}/{{ steps.length }}</span>
+      <span class="font-sans text-xs text-ink3">{{ completed.length }}/{{ steps.length }}</span>
     </div>
   </div>
 </template>

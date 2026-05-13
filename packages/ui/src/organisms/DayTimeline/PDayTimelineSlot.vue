@@ -13,7 +13,7 @@ defineEmits<{
 <template>
   <div class="flex border-b border-line-soft min-h-[60px]">
     <!-- Hour label column -->
-    <div class="w-16 shrink-0 px-2 pt-1 text-[11px] text-ink3 font-mono select-none border-r border-line-soft">
+    <div class="w-16 shrink-0 px-2 pt-1 text-[11px] text-ink3 font-sans select-none border-r border-line-soft">
       {{ slot.label }}
     </div>
     <!-- Clickable slot area -->

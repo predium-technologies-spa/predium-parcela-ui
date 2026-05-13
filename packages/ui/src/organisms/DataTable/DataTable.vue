@@ -283,7 +283,7 @@ function toggleAllRows() {
             :class="[
               'px-3.5 py-3 text-md border-b border-line-soft whitespace-nowrap',
               (cell.column.columnDef.meta as any)?.align === 'right' ? 'text-right' : 'text-left',
-              (cell.column.columnDef.meta as any)?.mono ? 'font-mono text-sm text-ink3' : 'text-ink2',
+              'text-ink2',
             ]"
           >
             <slot
@@ -333,7 +333,7 @@ function toggleAllRows() {
         :class="['px-4 py-2.5', ci < columns.length - 1 && 'border-b border-line-soft']"
       >
         <div class="text-xs font-medium text-ink4 uppercase tracking-wide mb-0.5">{{ col.label }}</div>
-        <div :class="['text-base', col.mono ? 'font-mono text-ink3' : 'text-ink']">
+        <div :class="['text-base', 'text-ink']">
           <slot :name="`cell-${col.key}`" :row="row.original" :value="row.original[col.key]" :index="row.index">
             {{ row.original[col.key] }}
           </slot>
@@ -349,8 +349,8 @@ function toggleAllRows() {
   <!-- ═══ Pagination (if provided) ═══ -->
   <div v-if="pagination" class="flex flex-col sm:flex-row items-center justify-between gap-3 px-1 py-3 text-sm text-ink3">
     <div>
-      {{ showingLabel }} <span class="font-mono text-ink2">{{ pageStart }}–{{ pageEnd }}</span>
-      {{ ofLabel }} <span class="font-mono text-ink2">{{ pagination.totalRows.toLocaleString() }}</span>
+      {{ showingLabel }} <span class="font-sans text-ink2">{{ pageStart }}–{{ pageEnd }}</span>
+      {{ ofLabel }} <span class="font-sans text-ink2">{{ pagination.totalRows.toLocaleString() }}</span>
     </div>
     <div class="flex items-center gap-1">
       <button
@@ -367,7 +367,7 @@ function toggleAllRows() {
           v-else
           type="button"
           :class="[
-            'w-8 h-8 rounded-lg font-mono text-sm cursor-pointer transition-colors',
+            'w-8 h-8 rounded-lg font-sans text-sm cursor-pointer transition-colors',
             p === pagination.page
               ? 'bg-accent text-white font-medium'
               : 'pagination-btn',

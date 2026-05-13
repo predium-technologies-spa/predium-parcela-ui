@@ -44,7 +44,7 @@ defineEmits<{
     </span>
     <span
       v-if="when"
-      :class="['font-mono text-xs', urgent ? 'text-warn' : 'text-ink4']"
+      :class="['font-sans text-xs', urgent ? 'text-warn' : 'text-ink4']"
     >
       {{ when }}
     </span>

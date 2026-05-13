@@ -354,7 +354,7 @@ defineProps<{
         <div class="text-[13px] font-medium" style="color: var(--color-ink);">{{ trial.companyName }}</div>
         <div class="text-[11px]" style="color: var(--color-ink3);">{{ trial.primaryUserEmail }}</div>
       </div>
-      <div class="text-[12px] font-mono" style="color: var(--color-ink2);">{{ trial.trialEndDate }}</div>
+      <div class="text-[12px] font-sans" style="color: var(--color-ink2);">{{ trial.trialEndDate }}</div>
       <PBadge :tone="trial.daysRemaining <= 2 ? 'danger' : 'warn'">{{ trial.daysRemaining }}d</PBadge>
     </div>
   </div>
@@ -414,7 +414,7 @@ onMounted(async () => {
         <section v-if="data.expiringTrials.length > 0">
           <div class="flex items-center justify-between mb-3">
             <div class="text-[13px] font-semibold" style="color: var(--color-ink);">Trials por expirar (&lt; 7 dias)</div>
-            <span class="text-[11px] font-mono" style="color: var(--color-warn);">{{ data.expiringTrials.length }} pendientes</span>
+            <span class="text-[11px] font-sans" style="color: var(--color-warn);">{{ data.expiringTrials.length }} pendientes</span>
           </div>
           <ExpiringTrials :trials="data.expiringTrials" />
         </section>
@@ -561,7 +561,7 @@ onMounted(() => fetchCustomers())
         @page-change="onPageChange"
       >
         <template #cell-primaryUserEmail="{ value }">
-          <span class="text-[12px] font-mono" style="color: var(--color-ink3);">{{ value }}</span>
+          <span class="text-[12px] font-sans" style="color: var(--color-ink3);">{{ value }}</span>
         </template>
         <template #cell-planType="{ value }">
           <PBadge v-if="value" tone="info">{{ value }}</PBadge>
@@ -700,8 +700,8 @@ const tokenTone = computed(() => {
     <div class="p-4 rounded-[var(--radius-xl)] border border-[var(--color-line)]" style="background: var(--color-surface);">
       <div class="text-[11px] font-medium uppercase tracking-wider mb-2" style="color: var(--color-ink3);">Uso de Tokens</div>
       <div class="flex items-center justify-between mb-2">
-        <span class="text-[13px] font-mono" style="color: var(--color-ink);">{{ customer.tokensUsed.toLocaleString() }} / {{ customer.monthlyTokenLimit.toLocaleString() }}</span>
-        <span class="text-[12px] font-mono" style="color: var(--color-ink2);">{{ tokenPercentage() }}%</span>
+        <span class="text-[13px] font-sans" style="color: var(--color-ink);">{{ customer.tokensUsed.toLocaleString() }} / {{ customer.monthlyTokenLimit.toLocaleString() }}</span>
+        <span class="text-[12px] font-sans" style="color: var(--color-ink2);">{{ tokenPercentage() }}%</span>
       </div>
       <PProgressBar :value="tokenPercentage()" :tone="tokenTone" />
     </div>
@@ -892,7 +892,7 @@ onMounted(async () => {
           <PAvatar :initials="customer.companyName.slice(0, 2).toUpperCase()" size="lg" />
           <div class="flex-1">
             <div class="flex items-center gap-2 mb-1">
-              <span class="text-[11px] font-mono" style="color: var(--color-ink3);">{{ customer.id }}</span>
+              <span class="text-[11px] font-sans" style="color: var(--color-ink3);">{{ customer.id }}</span>
               <PBadge :tone="customer.isActive ? 'good' : 'danger'">{{ customer.isActive ? 'Activo' : 'Inactivo' }}</PBadge>
               <PBadge v-if="customer.planType" tone="info">{{ customer.planType }}</PBadge>
             </div>
@@ -1397,7 +1397,7 @@ onMounted(() => fetchSubscriptions())
           {{ value ? dayjs(value as string).format('DD/MM/YYYY') : '-' }}
         </template>
         <template #cell-tokensUsed="{ value, row }">
-          <span class="font-mono text-[12px]">{{ (value as number).toLocaleString() }} / {{ (row as any).monthlyTokenLimit.toLocaleString() }}</span>
+          <span class="font-sans text-[12px]">{{ (value as number).toLocaleString() }} / {{ (row as any).monthlyTokenLimit.toLocaleString() }}</span>
         </template>
       </PDataTable>
     </div>

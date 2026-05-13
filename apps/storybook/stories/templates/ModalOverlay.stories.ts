@@ -77,7 +77,7 @@ export const Default: Story = {
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div v-for="[k, v] in [['Units', '36'], ['Occupancy', '78%'], ['Rent roll', '$68,100'], ['NOI', '$41,210']]" :key="k">
                     <div class="text-sm text-ink3">{{ k }}</div>
-                    <div class="text-xl font-mono text-ink mt-0.5">{{ v }}</div>
+                    <div class="text-xl font-sans text-ink mt-0.5">{{ v }}</div>
                   </div>
                 </div>
               </div>
@@ -99,7 +99,7 @@ export const Default: Story = {
                     <div class="flex justify-between items-start">
                       <div>
                         <div class="text-lg font-semibold text-ink tracking-tight">Archive Harper Hall?</div>
-                        <div class="text-xs font-mono text-ink4 mt-0.5">PRP-0126 · 36 units · 4 active leases</div>
+                        <div class="text-xs font-sans text-ink4 mt-0.5">PRP-0126 · 36 units · 4 active leases</div>
                       </div>
                       <button class="text-ink4 cursor-pointer hover:text-ink" @click="showModal = false">
                         <component :is="X" :size="16" />
@@ -126,14 +126,14 @@ export const Default: Story = {
                         <div class="text-base text-ink2">{{ k }}</div>
                         <div class="text-sm text-ink3">{{ note }}</div>
                       </div>
-                      <div class="font-mono text-md text-ink font-medium">{{ v }}</div>
+                      <div class="font-sans text-md text-ink font-medium">{{ v }}</div>
                     </div>
                   </div>
 
                   <div class="text-base text-ink2 mb-1.5">
-                    Type <span class="font-mono bg-chip-bg px-1.5 py-px rounded-sm text-ink">HARPER HALL</span> to confirm:
+                    Type <span class="bg-chip-bg px-1.5 py-px rounded-sm text-ink">HARPER HALL</span> to confirm:
                   </div>
-                  <div class="flex items-center bg-surface border border-ink rounded-lg px-2.5 py-2 font-mono text-md text-ink">
+                  <div class="flex items-center bg-surface border border-ink rounded-lg px-2.5 py-2 font-sans text-md text-ink">
                     HARPER HALL<span class="ml-0.5 w-px h-3.5 bg-ink inline-block" style="animation: blink 1s steps(1) infinite;" />
                   </div>
                 </div>

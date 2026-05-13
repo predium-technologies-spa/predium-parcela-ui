@@ -128,7 +128,7 @@ const headerSections = computed(() =>
     <!-- Brand -->
     <div class="h-[56px] flex items-center gap-2.5 px-4 border-b border-line">
       <div
-        class="w-[22px] h-[22px] bg-ink rounded-md grid place-items-center text-white font-mono text-base font-semibold shrink-0"
+        class="w-[22px] h-[22px] bg-ink rounded-md grid place-items-center text-white font-sans text-base font-semibold shrink-0"
       >
         {{ brand.charAt(0) }}
       </div>
@@ -224,7 +224,7 @@ const headerSections = computed(() =>
                 <span
                   v-if="item.badge !== undefined"
                   :class="[
-                    'font-mono text-xs text-ink3 px-1.5 py-px rounded-sm whitespace-nowrap transition-all duration-300',
+                    'font-sans text-xs text-ink3 px-1.5 py-px rounded-sm whitespace-nowrap transition-all duration-300',
                     active === item.key ? 'bg-surface' : 'bg-chip-bg',
                     expanded ? 'opacity-100' : 'opacity-0 w-0 overflow-hidden',
                   ]"
@@ -268,7 +268,7 @@ const headerSections = computed(() =>
     >
       <div class="flex justify-between text-sm text-ink3 mb-1.5">
         <span>{{ storageHeading }}</span>
-        <span class="font-mono">{{ storageLabel }}</span>
+        <span class="font-sans">{{ storageLabel }}</span>
       </div>
       <PProgressBar :value="storageUsed" tone="neutral" size="sm" />
     </div>

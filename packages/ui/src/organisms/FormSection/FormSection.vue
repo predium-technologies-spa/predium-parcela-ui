@@ -34,7 +34,7 @@ withDefaults(defineProps<FormSectionProps>(), {
       <!-- Left: description -->
       <div>
         <div class="flex items-center gap-2 mb-1">
-          <span v-if="number" class="font-mono text-sm text-ink4">{{ number }}</span>
+          <span v-if="number" class="font-sans text-sm text-ink4">{{ number }}</span>
           <span class="text-lg font-semibold text-ink tracking-tight">{{ title }}</span>
           <span
             v-if="current"

@@ -39,7 +39,7 @@ const toneColors = {
       />
       <div class="text-xs text-ink3 mt-1 tracking-wide truncate">
         {{ stage.label }}
-        <span class="font-mono text-ink2">{{ stage.count }}</span>
+        <span class="font-sans text-ink2">{{ stage.count }}</span>
       </div>
     </div>
   </div>

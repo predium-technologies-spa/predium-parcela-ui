@@ -97,7 +97,7 @@ const dashOffset = computed(() => CIRCUMFERENCE * (1 - progress.value))
               </svg>
               <!-- Time display -->
               <div class="absolute inset-0 flex flex-col items-center justify-center">
-                <span class="text-[20px] font-semibold font-mono tracking-tight" style="color: var(--color-ink);">{{ display }}</span>
+                <span class="text-[20px] font-semibold font-sans tracking-tight" style="color: var(--color-ink);">{{ display }}</span>
                 <span class="text-[9px] uppercase tracking-widest font-medium" style="color: var(--color-ink3);">{{ remainingLabel }}</span>
               </div>
             </div>

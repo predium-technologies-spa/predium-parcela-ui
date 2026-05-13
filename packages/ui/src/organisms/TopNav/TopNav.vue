@@ -58,7 +58,7 @@ defineEmits<{
         @keydown.enter="$emit('search', searchQuery)"
       />
       <span
-        class="hidden lg:inline font-mono text-[10px] text-ink4 bg-surface px-1 py-px rounded shrink-0 kbd-badge"
+        class="hidden lg:inline font-sans text-[10px] text-ink4 bg-surface px-1 py-px rounded shrink-0 kbd-badge"
       >⌘K</span>
     </div>
 

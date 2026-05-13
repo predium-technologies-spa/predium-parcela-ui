@@ -33,7 +33,7 @@ withDefaults(defineProps<TableCellProps>(), {
     :class="[
       'px-3.5 py-3 text-md text-ink2 border-b border-line-soft whitespace-nowrap',
       align === 'right' && 'text-right',
-      variant === 'mono' && 'font-mono text-sm text-ink3',
+      variant === 'mono' && 'text-sm text-ink3',
     ]"
   >
     <!-- Avatar variant -->

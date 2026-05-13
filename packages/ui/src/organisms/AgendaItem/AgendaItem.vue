@@ -40,8 +40,8 @@ withDefaults(defineProps<AgendaItemProps>(), {
   <div class="flex items-stretch gap-2.5 sm:gap-3.5 px-3 sm:px-4 py-3 border-b border-line-soft hover:bg-hover transition-colors min-h-[44px]">
     <!-- Time -->
     <div class="w-[48px] sm:w-[52px] shrink-0">
-      <div class="font-mono text-md text-ink font-medium">{{ time }}</div>
-      <div class="font-mono text-xs text-ink4">{{ duration }}</div>
+      <div class="font-sans text-md text-ink font-medium">{{ time }}</div>
+      <div class="font-sans text-xs text-ink4">{{ duration }}</div>
     </div>
 
     <!-- Color stripe -->

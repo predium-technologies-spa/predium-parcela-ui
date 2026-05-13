@@ -42,7 +42,7 @@ export const Default: Story = {
         <template #cell-occupancy="{ value }">
           <div class="flex items-center gap-2">
             <PProgressBar :value="value" :tone="value >= 90 ? 'good' : value >= 70 ? 'warn' : 'danger'" size="sm" style="width: 48px;" />
-            <span class="font-mono text-sm">{{ value }}%</span>
+            <span class="font-sans text-sm">{{ value }}%</span>
           </div>
         </template>
         <template #cell-status="{ row }">

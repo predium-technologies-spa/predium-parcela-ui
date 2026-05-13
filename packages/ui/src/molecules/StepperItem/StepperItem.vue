@@ -33,7 +33,7 @@ withDefaults(defineProps<StepperItemProps>(), {
     <div
       :class="[
         'w-[18px] h-[18px] rounded-full border-[1.5px] grid place-items-center shrink-0',
-        'font-mono text-[9px] font-semibold',
+        'font-sans text-[9px] font-semibold',
         status === 'done' && 'bg-good border-good text-white',
         status === 'current' && 'bg-ink border-ink text-white',
         status === 'upcoming' && 'bg-transparent border-line text-ink4',

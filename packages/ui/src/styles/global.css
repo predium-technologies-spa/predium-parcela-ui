@@ -6,7 +6,7 @@
 /* No custom Google Fonts. Usamos los stacks de sistema (San Francisco en
  * macOS/iOS, Segoe UI en Windows, Roboto en Android) que vienen de los
  * defaults de Tailwind v4 — definidos en tokens.css `--font-sans` y
- * `--font-mono`. Beneficios: sin descarga de red, sin FOIT, sin acoplar
+ * `--font-sans`. Beneficios: sin descarga de red, sin FOIT, sin acoplar
  * la marca a una tipografía externa. */
 
 /* Base resets */
@@ -37,7 +37,7 @@ code,
 kbd,
 pre,
 samp {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
 }
 
 /* Table resets */

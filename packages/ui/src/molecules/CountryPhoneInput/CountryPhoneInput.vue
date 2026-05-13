@@ -256,7 +256,7 @@ const sizeClasses = {
               {{ country.name }}
               <span v-if="country.nativeName" class="text-ink4 ml-1">({{ country.nativeName }})</span>
             </span>
-            <span class="text-ink3 font-mono shrink-0">{{ country.dialCode }}</span>
+            <span class="text-ink3 font-sans shrink-0">{{ country.dialCode }}</span>
             <Check
               v-if="props.countryCode === country.dialCode"
               :size="14"

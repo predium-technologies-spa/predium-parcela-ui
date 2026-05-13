@@ -124,7 +124,7 @@ export const CollapsibleSections: Story = {
         />
         <div class="flex-1 bg-bg p-6">
           <p class="text-md text-ink2 mb-2">Click any section header (uppercase label) to toggle.</p>
-          <pre class="text-xs text-ink3 font-mono">{{ JSON.stringify(expandedSections, null, 2) }}</pre>
+          <pre class="text-xs text-ink3 font-sans">{{ JSON.stringify(expandedSections, null, 2) }}</pre>
         </div>
       </div>
     `,

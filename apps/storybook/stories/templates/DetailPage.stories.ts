@@ -87,7 +87,7 @@ export const Default: Story = {
               </div>
               <div class="flex-1">
                 <div class="flex flex-wrap items-center gap-2 mb-1">
-                  <span class="text-xs font-mono text-ink3">PRP-0126</span>
+                  <span class="text-xs font-sans text-ink3">PRP-0126</span>
                   <PBadge tone="good">Active</PBadge>
                   <PBadge tone="neutral">Mixed-use</PBadge>
                 </div>
@@ -132,7 +132,7 @@ export const Default: Story = {
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 sm:gap-x-8 gap-y-4 sm:gap-y-5">
                   <div>
                     <div class="text-xs text-ink3 mb-1">Property ID</div>
-                    <div class="text-sm font-medium font-mono text-ink">PRP-0126</div>
+                    <div class="text-sm font-medium font-sans text-ink">PRP-0126</div>
                   </div>
                   <div>
                     <div class="text-xs text-ink3 mb-1">Type</div>
@@ -172,19 +172,19 @@ export const Default: Story = {
               <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                 <div class="bg-surface border border-line rounded-xl p-3 sm:p-4">
                   <div class="text-xs text-ink3 mb-1">Gross rent</div>
-                  <div class="text-lg sm:text-xl font-semibold font-mono text-ink">$68,100</div>
+                  <div class="text-lg sm:text-xl font-semibold font-sans text-ink">$68,100</div>
                 </div>
                 <div class="bg-surface border border-line rounded-xl p-3 sm:p-4">
                   <div class="text-xs text-ink3 mb-1">Collected</div>
-                  <div class="text-lg sm:text-xl font-semibold font-mono text-good">$64,420</div>
+                  <div class="text-lg sm:text-xl font-semibold font-sans text-good">$64,420</div>
                 </div>
                 <div class="bg-surface border border-line rounded-xl p-3 sm:p-4">
                   <div class="text-xs text-ink3 mb-1">Outstanding</div>
-                  <div class="text-lg sm:text-xl font-semibold font-mono text-warn">$3,680</div>
+                  <div class="text-lg sm:text-xl font-semibold font-sans text-warn">$3,680</div>
                 </div>
                 <div class="bg-surface border border-line rounded-xl p-3 sm:p-4">
                   <div class="text-xs text-ink3 mb-1">NOI</div>
-                  <div class="text-lg sm:text-xl font-semibold font-mono text-ink">$41,210</div>
+                  <div class="text-lg sm:text-xl font-semibold font-sans text-ink">$41,210</div>
                 </div>
               </div>
             </div>

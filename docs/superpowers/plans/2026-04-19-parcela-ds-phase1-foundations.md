@@ -282,7 +282,8 @@ All token values come from `1-design-tokens.md`. No invented values.
 
   /* ── Typography ── */
   --font-sans: "Inter", -apple-system, "Segoe UI", sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-mono: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+  "Segoe UI", sans-serif;
 
   /* ── Font sizes ── */
   --text-xs: 0.625rem;
@@ -618,7 +619,7 @@ export const Tokens: Story = {
             />
             <div>
               <div class="text-sm font-medium text-ink">{{ name }}</div>
-              <div class="text-xs font-mono text-ink3">{{ value }}</div>
+              <div class="text-xs font-sans text-ink3">{{ value }}</div>
             </div>
           </div>
         </div>
@@ -636,7 +637,7 @@ export const Tokens: Story = {
         </div>
 
         <h2 class="text-xl font-semibold text-ink mt-8 mb-4">Mono Font</h2>
-        <p class="font-mono text-md text-ink2">IBM Plex Mono — $68,100.00 · PRP-0126</p>
+        <p class="font-sans text-md text-ink2">IBM Plex Mono — $68,100.00 · PRP-0126</p>
 
         <h2 class="text-xl font-semibold text-ink mt-8 mb-4">Shadows</h2>
         <div style="display: flex; gap: 16px;">

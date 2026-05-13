@@ -249,7 +249,7 @@ export const Default: Story = {
           <div class="flex flex-wrap items-center gap-3 px-4 sm:px-6 py-3 bg-surface shrink-0 border-t border-line-soft">
             <PButton variant="ghost">Previous</PButton>
             <span class="hidden sm:inline text-sm text-ink3">
-              <span class="font-mono text-ink2">04</span> of <span class="font-mono text-ink2">06</span> · Financials
+              <span class="font-sans text-ink2">04</span> of <span class="font-sans text-ink2">06</span> · Financials
             </span>
             <div class="flex-1" />
             <span class="hidden md:inline text-sm text-ink4">Autosaved 12s ago</span>

@@ -43,7 +43,7 @@ withDefaults(defineProps<NavItemProps>(), {
     <span
       v-if="badge !== undefined"
       :class="[
-        'font-mono text-xs text-ink3 px-1.5 py-px rounded-sm',
+        'font-sans text-xs text-ink3 px-1.5 py-px rounded-sm',
         active ? 'bg-surface' : 'bg-chip-bg',
       ]"
     >
