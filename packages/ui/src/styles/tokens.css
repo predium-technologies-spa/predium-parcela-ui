@@ -18,10 +18,7 @@
    * Google Fonts. En macOS resuelve a San Francisco / SF Mono; en
    * Windows a Segoe UI / Cascadia/Consolas; en Android a Roboto / Roboto
    * Mono. Sin descargas de red, sin FOIT. */
-  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  "Segoe UI", sans-serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
   /* ── Font sizes (scaled up for readability) ── */
   --text-xs: 0.75rem;
