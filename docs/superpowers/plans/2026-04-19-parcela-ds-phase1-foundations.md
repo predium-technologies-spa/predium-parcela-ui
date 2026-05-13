@@ -4,8 +4,7 @@
 
 **Goal:** Set up the monorepo skeleton, design tokens, global styles, and Storybook so that Phase 2 (Atoms) can start building components immediately.
 
-**Architecture:** pnpm workspace monorepo with two packages — `packages/ui` (component library built with Vite) and `apps/storybook` (Storybook 8 using `@storybook/vue3-vite`). TailwindCSS v4 uses the CSS-first `@theme` directive (no `tailwind.config.js`). All design tokens live in `packages/ui/src/styles/tokens.css` and are consumed both by Tailwind utilities and raw CSS custom properties.
-
+**Architecture:** pnpm workspace monorepo with two packages — `packages/ui` (component library built with Vite) and `apps/storybook` (Storybook 8 using `@storybook/vue3-vite`). TailwindCSS v4 uses the CSS-first `@theme` directive (no `tailwind.config.js`). All design tokens live in `packages/ui/src/styles/tokens.css` and are consumed both by Tailwind utilities and raw CSS custom propertie
 **Tech Stack:** Vue 3, TypeScript (strict), TailwindCSS v4, Storybook 8, Vitest, pnpm workspaces, lucide-vue-next
 
 ---
