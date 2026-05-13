@@ -104,6 +104,9 @@ export type { TileProps } from './molecules/Tile'
 export { PPhoneInput } from './molecules/PhoneInput'
 export type { PhoneInputProps } from './molecules/PhoneInput'
 
+export { PCountryPhoneInput } from './molecules/CountryPhoneInput'
+export type { CountryPhoneInputProps, CountryOption } from './molecules/CountryPhoneInput'
+
 export { PToast } from './molecules/Toast'
 export type { ToastProps } from './molecules/Toast'
 
