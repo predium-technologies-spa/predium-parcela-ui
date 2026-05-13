@@ -282,7 +282,7 @@ All token values come from `1-design-tokens.md`. No invented values.
 
   /* ── Typography ── */
   --font-sans: "Inter", -apple-system, "Segoe UI", sans-serif;
-  --font-mono: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
   "Segoe UI", sans-serif;
 
   /* ── Font sizes ── */
@@ -376,7 +376,7 @@ code,
 kbd,
 pre,
 samp {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
 }
 
 /* Table resets */
