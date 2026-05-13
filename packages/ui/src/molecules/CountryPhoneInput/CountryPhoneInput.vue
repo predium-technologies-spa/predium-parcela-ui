@@ -27,7 +27,6 @@ export interface CountryPhoneInputProps {
 export interface CountryOption {
   code: string
   dialCode: string
-  flag: string
   name: string
   nativeName?: string
 }
@@ -46,39 +45,46 @@ const emit = defineEmits<{
   'update:countryCode': [value: string]
 }>()
 
-// Comprehensive country list with flags and dial codes
+// Generates flag emoji from ISO country code
+function flagEmoji(code: string): string {
+  return code
+    .toUpperCase()
+    .replace(/./g, (char) => String.fromCodePoint(char.charCodeAt(0) + 127397))
+}
+
+// Comprehensive country list with dial codes
 const countries: CountryOption[] = [
-  { code: 'AR', dialCode: '+54', flag: '🇦🇷', name: 'Argentina' },
-  { code: 'AU', dialCode: '+61', flag: '🇦🇺', name: 'Australia' },
-  { code: 'AT', dialCode: '+43', flag: '🇦🇹', name: 'Austria' },
-  { code: 'BR', dialCode: '+55', flag: '🇧🇷', name: 'Brasil' },
-  { code: 'CA', dialCode: '+1', flag: '🇨🇦', name: 'Canada' },
-  { code: 'CL', dialCode: '+56', flag: '🇨🇱', name: 'Chile' },
-  { code: 'CN', dialCode: '+86', flag: '🇨🇳', name: 'China', nativeName: '中国' },
-  { code: 'CO', dialCode: '+57', flag: '🇨🇴', name: 'Colombia' },
-  { code: 'CR', dialCode: '+506', flag: '🇨🇷', name: 'Costa Rica' },
-  { code: 'CU', dialCode: '+53', flag: '🇨🇺', name: 'Cuba' },
-  { code: 'EC', dialCode: '+593', flag: '🇪🇨', name: 'Ecuador' },
-  { code: 'SV', dialCode: '+503', flag: '🇸🇻', name: 'El Salvador' },
-  { code: 'ES', dialCode: '+34', flag: '🇪🇸', name: 'España' },
-  { code: 'US', dialCode: '+1', flag: '🇺🇸', name: 'United States' },
-  { code: 'FR', dialCode: '+33', flag: '🇫🇷', name: 'France' },
-  { code: 'DE', dialCode: '+49', flag: '🇩🇪', name: 'Deutschland' },
-  { code: 'GT', dialCode: '+502', flag: '🇬🇹', name: 'Guatemala' },
-  { code: 'HN', dialCode: '+504', flag: '🇭🇳', name: 'Honduras' },
-  { code: 'IN', dialCode: '+91', flag: '🇮🇳', name: 'India', nativeName: 'भारत' },
-  { code: 'IT', dialCode: '+39', flag: '🇮🇹', name: 'Italia' },
-  { code: 'JP', dialCode: '+81', flag: '🇯🇵', name: 'Japan', nativeName: '日本' },
-  { code: 'MX', dialCode: '+52', flag: '🇲🇽', name: 'México' },
-  { code: 'NI', dialCode: '+505', flag: '🇳🇮', name: 'Nicaragua' },
-  { code: 'PA', dialCode: '+507', flag: '🇵🇦', name: 'Panamá' },
-  { code: 'PY', dialCode: '+595', flag: '🇵🇾', name: 'Paraguay' },
-  { code: 'PE', dialCode: '+51', flag: '🇵🇪', name: 'Perú' },
-  { code: 'PT', dialCode: '+351', flag: '🇵🇹', name: 'Portugal' },
-  { code: 'DO', dialCode: '+1', flag: '🇩🇴', name: 'República Dominicana' },
-  { code: 'GB', dialCode: '+44', flag: '🇬🇧', name: 'United Kingdom' },
-  { code: 'UY', dialCode: '+598', flag: '🇺🇾', name: 'Uruguay' },
-  { code: 'VE', dialCode: '+58', flag: '🇻🇪', name: 'Venezuela' },
+  { code: 'AR', dialCode: '+54', name: 'Argentina' },
+  { code: 'AU', dialCode: '+61', name: 'Australia' },
+  { code: 'AT', dialCode: '+43', name: 'Austria' },
+  { code: 'BR', dialCode: '+55', name: 'Brasil' },
+  { code: 'CA', dialCode: '+1', name: 'Canada' },
+  { code: 'CL', dialCode: '+56', name: 'Chile' },
+  { code: 'CN', dialCode: '+86', name: 'China', nativeName: '中国' },
+  { code: 'CO', dialCode: '+57', name: 'Colombia' },
+  { code: 'CR', dialCode: '+506', name: 'Costa Rica' },
+  { code: 'CU', dialCode: '+53', name: 'Cuba' },
+  { code: 'EC', dialCode: '+593', name: 'Ecuador' },
+  { code: 'SV', dialCode: '+503', name: 'El Salvador' },
+  { code: 'ES', dialCode: '+34', name: 'España' },
+  { code: 'US', dialCode: '+1', name: 'United States' },
+  { code: 'FR', dialCode: '+33', name: 'France' },
+  { code: 'DE', dialCode: '+49', name: 'Deutschland' },
+  { code: 'GT', dialCode: '+502', name: 'Guatemala' },
+  { code: 'HN', dialCode: '+504', name: 'Honduras' },
+  { code: 'IN', dialCode: '+91', name: 'India', nativeName: 'भारत' },
+  { code: 'IT', dialCode: '+39', name: 'Italia' },
+  { code: 'JP', dialCode: '+81', name: 'Japan', nativeName: '日本' },
+  { code: 'MX', dialCode: '+52', name: 'México' },
+  { code: 'NI', dialCode: '+505', name: 'Nicaragua' },
+  { code: 'PA', dialCode: '+507', name: 'Panamá' },
+  { code: 'PY', dialCode: '+595', name: 'Paraguay' },
+  { code: 'PE', dialCode: '+51', name: 'Perú' },
+  { code: 'PT', dialCode: '+351', name: 'Portugal' },
+  { code: 'DO', dialCode: '+1', name: 'República Dominicana' },
+  { code: 'GB', dialCode: '+44', name: 'United Kingdom' },
+  { code: 'UY', dialCode: '+598', name: 'Uruguay' },
+  { code: 'VE', dialCode: '+58', name: 'Venezuela' },
 ].sort((a, b) => a.name.localeCompare(b.name))
 
 const dropdownOpen = ref(false)
@@ -167,7 +173,7 @@ const sizeClasses = {
       style="border-right: 1px solid var(--color-line-soft)"
       @click="toggleDropdown"
     >
-      <span class="text-lg leading-none">{{ selectedCountry.flag }}</span>
+      <span class="text-lg leading-none">{{ flagEmoji(selectedCountry.code) }}</span>
       <ChevronDown
         :size="size === 'sm' ? 12 : size === 'lg' ? 14 : 13"
         :class="[
@@ -245,7 +251,7 @@ const sizeClasses = {
             ]"
             @click="selectCountry(country)"
           >
-            <span class="text-lg leading-none shrink-0">{{ country.flag }}</span>
+            <span class="text-lg leading-none shrink-0">{{ flagEmoji(country.code) }}</span>
             <span class="flex-1 text-left truncate">
               {{ country.name }}
               <span v-if="country.nativeName" class="text-ink4 ml-1">({{ country.nativeName }})</span>
