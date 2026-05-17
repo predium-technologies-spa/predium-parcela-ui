@@ -16,12 +16,19 @@ export interface ChatBubbleAIProps {
   avatarColor?: string
   /** Show action buttons (like, dislike, copy, share) */
   showActions?: boolean
+  /**
+   * When true the bubble drops its 320px max-width cap so wide content
+   * (markdown tables, charts, multi-column blocks) can expand up to the
+   * container width instead of triggering an inner horizontal scroll.
+   */
+  fluid?: boolean
 }
 
 const props = withDefaults(defineProps<ChatBubbleAIProps>(), {
   sender: 'Nora',
   avatarColor: '#8B7355',
   showActions: true,
+  fluid: false,
 })
 
 const emit = defineEmits<{
@@ -47,7 +54,10 @@ const initial = props.sender.charAt(0).toUpperCase()
       <span class="text-sm text-ink3 mb-1">{{ sender }} · {{ time }}</span>
 
       <!-- Bubble -->
-      <div class="chat-bubble-ai bg-surface rounded-2xl rounded-tl-md p-4 max-w-[320px] text-base text-ink leading-relaxed">
+      <div
+        class="chat-bubble-ai bg-surface rounded-2xl rounded-tl-md p-4 text-base text-ink leading-relaxed"
+        :class="props.fluid ? 'max-w-full w-full' : 'max-w-[320px]'"
+      >
         <slot />
       </div>
 

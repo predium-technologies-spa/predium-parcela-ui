@@ -1,6 +1,6 @@
 {
   "name": "@predium-technologies-spa/predium-ui",
-  "version": "2.3.5",
+  "version": "2.4.0",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
